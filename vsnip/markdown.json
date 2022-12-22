@@ -1,0 +1,15 @@
+{
+  "Header": {
+    "prefix": ["header"],
+    "body": [
+      "---",
+      "title: '${1:${VIM:substitute(join(split(expand('%:r'),'-'), ' '), '\\<.', '\\u&', '')}}'",
+      "description: '$2'",
+      "tag: [ '$3' ]",
+      "date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      "draft: true",
+      "---"
+    ],
+    "description": "Header for Hugo blog"
+  }
+}

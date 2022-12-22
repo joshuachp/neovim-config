@@ -1,0 +1,11 @@
+{
+    "Start Uml": {
+        "prefix": ["start"],
+        "body": [
+            "@startuml",
+            "$1",
+            "@enduml"
+        ],
+        "description": "Start a new UML document"
+    }
+}

@@ -1,0 +1,17 @@
+{
+  "Main": {
+    "prefix": ["main"],
+    "body": [
+      "def main():",
+      "    \"\"\"",
+      "    Main function",
+      "    \"\"\"",
+      "    $0",
+      "",
+      "",
+      "if __name__ == \"__main__\":",
+      "    main()"
+    ],
+    "description": "Main function template"
+  }
+}
