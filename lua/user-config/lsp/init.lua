@@ -125,11 +125,9 @@ function M.setup_servers()
         on_attach = on_attach,
         capabilities = capabilities,
         cmd = { "lua-language-server" },
-        root_dir = lsp_config.util.root_pattern(".lua-project-root", ".git"),
         settings = {
             Lua = {
                 runtime = { version = "LuaJIT", path = lua_runtime },
-                diagnostics = { globals = { "vim", "awesome", "client", "root" } },
                 workspace = { library = lua_libraries },
                 telemetry = { enable = false },
             },

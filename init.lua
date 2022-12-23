@@ -4,6 +4,11 @@ end
 vim.g.user_init_loaded = true
 
 --
+-- Keymap
+--
+vim.g.mapleader = " "
+
+--
 -- Options
 --
 
@@ -75,11 +80,6 @@ vim.o.inccommand = "split"
 -- VimGrep
 vim.o.grepprg = "rg --color=never --vimgrep"
 vim.opt.wildignore:append({ "node_modules/**" })
-
---
--- Keymap
---
-vim.g.mapleader = "<Space>"
 
 --
 -- Movement
