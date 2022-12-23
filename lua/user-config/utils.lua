@@ -28,7 +28,7 @@ end
 
 --- Open a floating terminal with the command
 --- @param cmd string The command to execute
---- @param close_win boolean Boolean to close the window if the cmd returned 0
+--- @param close_win boolean? Boolean to close the window if the cmd returned 0
 --- @param callback function?
 --- @return number job-id
 function M.float_term_cmd(cmd, close_win, callback)

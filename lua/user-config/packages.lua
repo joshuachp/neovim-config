@@ -15,6 +15,7 @@ function M.setup()
     require('user-config.formatter').setup(use)
     require('user-config.telescope').setup(use)
     require('user-config.notify').setup(use)
+    require('user-config.git').setup(use)
 
     ---
     -- Editor
@@ -23,7 +24,15 @@ function M.setup()
     -- Editorconfig
     use('editorconfig/editorconfig-vim')
     -- Undotree
-    use({ 'mbbill/undotree', cmd = { 'UndotreeToggle' } })
+    use({
+      'mbbill/undotree',
+      cmd = { 'UndotreeToggle' },
+      setup = function()
+        vim.keymap.set('n', '<leader>tu', function()
+          vim.cmd.UndotreeToggle()
+        end)
+      end,
+    })
     -- Repeat - repeat plugins commands
     use('tpope/vim-repeat')
     -- Surround - change a surrounding text object
@@ -43,20 +52,15 @@ function M.setup()
         vim.g.emmet_install_only_plug = true
       end,
     })
-    -- Fugitive - Git wrapper
-    use({ 'tpope/vim-fugitive', cmd = { 'Git', 'Gvdiffsplit', 'Gclog' } })
-    -- Git-signs - Git diff in gutter
-    use({
-      'lewis6991/gitsigns.nvim',
-      requires = { 'nvim-lua/plenary.nvim' },
-      config = function()
-        require('gitsigns').setup()
-      end,
-    })
     -- Linting
     use({
       'mfussenegger/nvim-lint',
       module = 'lint',
+      setup = function()
+        vim.keymaps.set('n', '<leader>kl', function()
+          require('lint').try_lint()
+        end)
+      end,
       config = function()
         require('user-config.lint').setup()
       end,
@@ -66,6 +70,11 @@ function M.setup()
       'kyazdani42/nvim-tree.lua',
       requires = { 'kyazdani42/nvim-web-devicons' },
       cmd = { 'NvimTreeToggle' },
+      setup = function()
+        vim.keymap.set('n', '<leader>tt', function()
+          vim.cmd.NvimTreeToggle()
+        end)
+      end,
       config = function()
         require('nvim-tree').setup({
           disable_netrw = false,
@@ -237,6 +246,23 @@ function M.setup()
     use({
       'vim-test/vim-test',
       cmd = { 'TestNearest', 'TestFile', 'TestSuite', 'TestLast', 'TestVisit' },
+      setup = function()
+        vim.keymap.set('n', '<leader>etn', function()
+          vim.cmd.TestNearest()
+        end)
+        vim.keymap.set('n', '<leader>etf', function()
+          vim.cmd.TestFile()
+        end)
+        vim.keymap.set('n', '<leader>ets', function()
+          vim.cmd.TestSuite()
+        end)
+        vim.keymap.set('n', '<leader>etl', function()
+          vim.cmd.TestLast()
+        end)
+        vim.keymap.set('n', '<leader>etg', function()
+          vim.cmd.TestVisit()
+        end)
+      end,
     })
   end)
 end
