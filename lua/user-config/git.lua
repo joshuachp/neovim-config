@@ -40,6 +40,9 @@ function M.setup(use)
           diffview = true,
         },
       })
+
+      local ft_to_parser = require('nvim-treesitter.parsers').filetype_to_parsername
+      ft_to_parser.NeogitCommitMessage = 'gitcommit'
     end,
     requires = 'nvim-lua/plenary.nvim',
   })
