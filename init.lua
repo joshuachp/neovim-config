@@ -200,9 +200,13 @@ end)
 -- Date
 vim.keymap.set('n', '<leader>idd', [[a<C-r>=strftime("%Y-%m-%d")<CR><Esc>]])
 vim.keymap.set('n', '<leader>idt', [[a<C-r>=strftime("%H:%M")<CR><Esc>]])
+
+-- Yank to system clipboard
+vim.keymap.set('n', '<leader>Y', '"+Y')
+vim.keymap.set('v', '<leader>y', '"+y')
 --Paste yank
-vim.keymap.set('n', '<leader>ip', '"+p')
-vim.keymap.set('n', '<leader>iP', '"+P')
+vim.keymap.set('n', '<leader>p', '"+p')
+vim.keymap.set('n', '<leader>P', '"+P')
 
 --Files
 -- Save
@@ -239,9 +243,6 @@ vim.keymap.set('n', '<leader>t<CR>', '<cmd>ToggleCheckBox<CR>')
 -- Move selection
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
-
--- yank
--- vmap <leader>ys "+y
 
 --
 -- Magic
