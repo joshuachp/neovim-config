@@ -36,10 +36,15 @@ function M.setup(use)
           item = { '', '' },
           hunk = { '', '' },
         },
+        integrations = {
+          diffview = true,
+        },
       })
     end,
     requires = 'nvim-lua/plenary.nvim',
   })
+
+  use({ 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' })
 
   vim.keymap.set('n', '<leader>gg', function()
     vim.cmd.Git()
