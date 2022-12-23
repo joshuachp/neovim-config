@@ -236,6 +236,10 @@ vim.keymap.set('n', '<leader>te', '<cmd>Explore<CR>')
 -- Check box (- [ ])
 vim.keymap.set('n', '<leader>t<CR>', '<cmd>ToggleCheckBox<CR>')
 
+-- Move selection
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
 -- yank
 -- vmap <leader>ys "+y
 
