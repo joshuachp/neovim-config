@@ -28,13 +28,14 @@ function M.setup()
     use('wbthomason/packer.nvim')
 
     -- Completion
-    require('user-config.completion').setup(use)
-    require('user-config.lsp').setup(use)
+    require('user-config.theme').setup(use)
+    require('user-config.notify').setup(use)
     require('user-config.statusline').setup(use)
+    require('user-config.lsp').setup(use)
+    require('user-config.completion').setup(use)
     require('user-config.debug').setup(use)
     require('user-config.formatter').setup(use)
     require('user-config.telescope').setup(use)
-    require('user-config.notify').setup(use)
     require('user-config.git').setup(use)
 
     ---
@@ -227,14 +228,6 @@ function M.setup()
     ---
     -- UI - Improve the style of the editor
     --
-    -- Color-scheme
-    use({
-      'ellisonleao/gruvbox.nvim',
-      config = function()
-        vim.g.gruvbox_contrast_dark = 'hard'
-        vim.cmd('colorscheme gruvbox')
-      end,
-    })
     -- Lua-line
     use({
       'folke/trouble.nvim',

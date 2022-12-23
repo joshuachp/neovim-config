@@ -11,13 +11,10 @@ vim.g.mapleader = ' '
 --
 -- Options
 --
-
---
 -- UI
---
 vim.o.background = 'dark'
 -- Tab-line
--- set showtabline=1
+-- vim.o.showtabline = true
 -- Sign column
 vim.o.number = true
 vim.o.relativenumber = true
