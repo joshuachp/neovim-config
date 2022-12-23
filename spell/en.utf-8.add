@@ -505,3 +505,4 @@ zstd
 deserialize
 axum
 config
+neogit

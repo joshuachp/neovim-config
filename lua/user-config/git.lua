@@ -16,6 +16,31 @@ function M.setup(use)
     end,
   })
 
+  -- Magit clone
+  use({
+    'TimUntersberger/neogit',
+    cmd = { 'Neogit' },
+    module = 'neogit',
+    setup = function()
+      vim.keymap.set('n', '<leader>go', function()
+        require('neogit').open()
+      end)
+    end,
+    config = function()
+      require('neogit').setup({
+        disable_builtin_notifications = true,
+        -- customize displayed signs
+        signs = {
+          -- { CLOSED, OPENED }
+          section = { '', '' },
+          item = { '', '' },
+          hunk = { '', '' },
+        },
+      })
+    end,
+    requires = 'nvim-lua/plenary.nvim',
+  })
+
   vim.keymap.set('n', '<leader>gg', function()
     vim.cmd.Git()
   end)
