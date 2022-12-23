@@ -264,12 +264,6 @@ vim.keymap.set("i", "[", "[<C-g>u", { noremap = true })
 vim.keymap.set("i", "]", "]<C-g>u", { noremap = true })
 
 --
--- Plugins
---
-require("user-config").setup()
-vim.cmd.runtime("plugin/plugins.vim")
-
---
 -- Note taking configuration
 --
 -- TODO: port to lua
@@ -290,3 +284,9 @@ vim.api.nvim_create_autocmd("BufNewFile", {
         require("user-config.functions").note_template()
     end,
 })
+
+--
+-- Plugins
+--
+require("user-config").setup()
+vim.cmd.runtime("plugin/plugins.vim")
