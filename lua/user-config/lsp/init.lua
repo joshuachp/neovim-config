@@ -9,9 +9,7 @@ function M.setup(use)
   use({
     'neovim/nvim-lspconfig',
     config = function()
-      local lsp = require('user-config.lsp')
-      lsp.setup_servers()
-      lsp.register_auto_cmd()
+      require('user-config.lsp').setup_servers()
     end,
   })
 end
@@ -32,6 +30,7 @@ function M.setup_servers()
   --- LSP key maps and functions
   local function on_attach(_, bufnr)
     require('user-config.lsp').register_keymaps(bufnr)
+    require('user-config.lsp').register_auto_cmd(bufnr)
   end
 
   -- Client capabilities
@@ -179,11 +178,8 @@ function M.register_keymaps(bufnr)
   vim.keymap.set('n', 'gd', function()
     vim.lsp.buf.definition()
   end, { buffer = bufnr })
-  vim.keymap.set('n', 'gt', function()
+  vim.keymap.set('n', 'gtd', function()
     vim.lsp.buf.type_definition()
-  end, { buffer = bufnr })
-  vim.keymap.set('n', 'gi', function()
-    vim.lsp.buf.implementation()
   end, { buffer = bufnr })
   vim.keymap.set('n', '<leader>lgd', function()
     vim.lsp.buf.definition()
@@ -227,8 +223,9 @@ function M.register_keymaps(bufnr)
 end
 
 --- Register LSP autocmds
-function M.register_auto_cmd()
-  local group = vim.api.nvim_create_augroup('NeovimLSPUser', {})
+--- @param bufnr integer
+function M.register_auto_cmd(bufnr)
+  local group = vim.api.nvim_create_augroup('NeovimLSPUser', { clear = true })
 
   vim.api.nvim_create_autocmd('BufWritePre', {
     group = group,
@@ -236,6 +233,20 @@ function M.register_auto_cmd()
     callback = function()
       vim.lsp.buf.format({ async = false })
     end,
+  })
+  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+    group = group,
+    callback = function()
+      vim.lsp.buf.document_highlight()
+    end,
+    buffer = bufnr,
+  })
+  vim.api.nvim_create_autocmd('CursorMoved', {
+    group = group,
+    callback = function()
+      vim.lsp.buf.clear_references()
+    end,
+    buffer = bufnr,
   })
 end
 
