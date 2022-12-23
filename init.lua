@@ -243,15 +243,15 @@ vim.keymap.set('n', '<leader>t<CR>', '<cmd>ToggleCheckBox<CR>')
 -- Magic
 --
 -- Break undo sequence and start new change
-vim.keymap.set('i', ',', ',<C-g>u', { noremap = true })
-vim.keymap.set('i', '.', '.<C-g>u', { noremap = true })
-vim.keymap.set('i', '-', '-<C-g>u', { noremap = true })
-vim.keymap.set('i', '_', '_<C-g>u', { noremap = true })
-vim.keymap.set('i', '>', '><C-g>u', { noremap = true })
-vim.keymap.set('i', '{', '{<C-g>u', { noremap = true })
-vim.keymap.set('i', '}', '}<C-g>u', { noremap = true })
-vim.keymap.set('i', '[', '[<C-g>u', { noremap = true })
-vim.keymap.set('i', ']', ']<C-g>u', { noremap = true })
+vim.keymap.set('i', ',', ',<C-g>u', { remap = false })
+vim.keymap.set('i', '.', '.<C-g>u', { remap = false })
+vim.keymap.set('i', '-', '-<C-g>u', { remap = false })
+vim.keymap.set('i', '_', '_<C-g>u', { remap = false })
+vim.keymap.set('i', '>', '><C-g>u', { remap = false })
+vim.keymap.set('i', '{', '{<C-g>u', { remap = false })
+vim.keymap.set('i', '}', '}<C-g>u', { remap = false })
+vim.keymap.set('i', '[', '[<C-g>u', { remap = false })
+vim.keymap.set('i', ']', ']<C-g>u', { remap = false })
 
 --
 -- Note taking configuration

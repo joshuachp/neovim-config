@@ -11,7 +11,6 @@ function M.setup(use)
     config = function()
       local lsp = require('user-config.lsp')
       lsp.setup_servers()
-      lsp.register_keymaps()
       lsp.register_auto_cmd()
     end,
   })
@@ -31,8 +30,8 @@ function M.setup_servers()
   -- local lsp_util = require("lspconfig/util")
 
   --- LSP key maps and functions
-  local function on_attach(_)
-    -- Something
+  local function on_attach(_, bufnr)
+    require('user-config.lsp').register_keymaps(bufnr)
   end
 
   -- Client capabilities
@@ -145,73 +144,74 @@ function M.setup_servers()
 end
 
 --- Register LSP keymaps
-function M.register_keymaps()
+--- @param bufnr integer
+function M.register_keymaps(bufnr)
   local telescope = require('telescope.builtin')
   -- Code actions
   vim.keymap.set('n', '<leader>la', function()
     vim.lsp.buf.code_action()
-  end)
+  end, { buffer = bufnr })
   vim.keymap.set('v', '<leader>la', function()
     vim.lsp.buf.code_action()
-  end)
+  end, { buffer = bufnr })
 
   -- Symbols
   vim.keymap.set('n', '<leader>lk', function()
     vim.lsp.buf.hover()
-  end)
+  end, { buffer = bufnr })
   vim.keymap.set('n', '<leader>ls', function()
     vim.lsp.buf.signature_help()
-  end)
+  end, { buffer = bufnr })
   vim.keymap.set('n', '<leader>lS', function()
     vim.lsp.buf.document_symbol()
-  end)
+  end, { buffer = bufnr })
   vim.keymap.set('n', '<leader>lw', function()
     vim.lsp.buf.workspace_symbol()
-  end)
+  end, { buffer = bufnr })
   vim.keymap.set('n', '<leader>lx', function()
     vim.lsp.buf.references()
-  end)
+  end, { buffer = bufnr })
 
   -- Navigation
   vim.keymap.set('n', '<leader>lgd', function()
     vim.lsp.buf.definition()
-  end)
+  end, { buffer = bufnr })
   vim.keymap.set('n', '<leader>lgi', function()
     vim.lsp.buf.implementation()
-  end)
+  end, { buffer = bufnr })
   vim.keymap.set('n', '<leader>lgt', function()
     vim.lsp.buf.type_definition()
-  end)
+  end, { buffer = bufnr })
 
   -- Refactor
   vim.keymap.set('n', '<leader>lr', function()
     vim.lsp.buf.rename()
-  end)
+  end, { buffer = bufnr })
   vim.keymap.set('n', '<leader>lf', function()
-    vim.lsp.buf.format({ async = true })
-  end)
+    vim.lsp.buf.format({ async = bufnr })
+  end, { buffer = bufnr })
   vim.keymap.set('v', '<leader>lf', function()
     vim.lsp.buf.range_formatting()
-  end)
+  end, { buffer = bufnr })
 
   -- Diagnostic
   vim.keymap.set('n', '<leader>ldd', function()
     vim.diagnostic.setqflist()
-  end)
+  end, { buffer = bufnr })
   vim.keymap.set('n', '<leader>ldp', function()
     vim.diagnostic.goto_next()
-  end)
+  end, { buffer = bufnr })
   vim.keymap.set('n', '<leader>ldn', function()
     vim.diagnostic.goto_prev()
-  end)
+  end, { buffer = bufnr })
 
   -- LSP search
   vim.keymap.set('n', '<leader>slr', function()
     telescope.lsp_references()
-  end)
+  end, { buffer = bufnr })
   vim.keymap.set('n', '<leader>sld', function()
     telescope.lsp_document_symbols()
-  end)
+  end, { buffer = bufnr })
 end
 
 --- Register LSP autocmds
