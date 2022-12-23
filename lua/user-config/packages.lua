@@ -239,6 +239,11 @@ function M.setup()
     use({
       'folke/trouble.nvim',
       requires = 'kyazdani42/nvim-web-devicons',
+      setup = function()
+        vim.keymap.set('n', '<leader>tl', function()
+          require('trouble').toggle()
+        end)
+      end,
       config = function()
         require('trouble').setup({})
       end,
