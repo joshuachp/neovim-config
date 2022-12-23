@@ -74,6 +74,7 @@ function M.setup(use)
       })
       telescope.load_extension('fzf')
     end,
+    cmd = { 'Telescope' },
     module = { 'telescope', 'telescope.actions', 'telescope.builtin' },
     requires = {
       { 'nvim-lua/plenary.nvim' },

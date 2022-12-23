@@ -12,10 +12,12 @@ end
 
 --- Setup Lua config
 function M.setup()
+  vim.diagnostic.config({ virtual_text = { spacing = 8 }, signs = true, update_in_insert = true })
+  -- Diagnostic
+  diagnostic_signs()
+
   -- Packages configuration
   require('user-config.packages').setup()
-
-  diagnostic_signs()
 end
 
 return M

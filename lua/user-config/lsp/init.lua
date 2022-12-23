@@ -17,20 +17,14 @@ end
 --- Setup LPS servers
 -- Install an configures the packages needed for completion and LSP
 function M.setup_servers()
-  -- Diagnostic
-  vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
-    { virtual_text = { spacing = 8 }, signs = true, update_in_insert = true }
-  )
-
   -- LSP
   local lsp_config = require('lspconfig')
   -- local lsp_util = require("lspconfig/util")
 
   --- LSP key maps and functions
-  local function on_attach(_, bufnr)
+  local function on_attach(client, bufnr)
     require('user-config.lsp').register_keymaps(bufnr)
-    require('user-config.lsp').register_auto_cmd(bufnr)
+    require('user-config.lsp').register_auto_cmd(bufnr, client)
   end
 
   -- Client capabilities
@@ -224,7 +218,8 @@ end
 
 --- Register LSP autocmds
 --- @param bufnr integer
-function M.register_auto_cmd(bufnr)
+--- @param client table
+function M.register_auto_cmd(bufnr, client)
   local group = vim.api.nvim_create_augroup('NeovimLSPUser', { clear = true })
 
   vim.api.nvim_create_autocmd('BufWritePre', {
@@ -234,30 +229,33 @@ function M.register_auto_cmd(bufnr)
       vim.lsp.buf.format({ async = false })
     end,
   })
-  vim.api.nvim_create_autocmd('CursorHold', {
-    group = group,
-    callback = function()
-      -- The references where cleared on move.
-      vim.lsp.buf.document_highlight()
-    end,
-    buffer = bufnr,
-  })
-  vim.api.nvim_create_autocmd('CursorHoldI', {
-    group = group,
-    callback = function()
-      -- In insert mode we need to clear the references since we cloud have changed one.
-      vim.lsp.buf.clear_references()
-      vim.lsp.buf.document_highlight()
-    end,
-    buffer = bufnr,
-  })
-  vim.api.nvim_create_autocmd('CursorMoved', {
-    group = group,
-    callback = function()
-      vim.lsp.buf.clear_references()
-    end,
-    buffer = bufnr,
-  })
+
+  if client.server_capabilities.documentHighlightProvider then
+    vim.api.nvim_create_autocmd('CursorHold', {
+      group = group,
+      callback = function()
+        -- The references where cleared on move.
+        vim.lsp.buf.document_highlight()
+      end,
+      buffer = bufnr,
+    })
+    vim.api.nvim_create_autocmd('CursorHoldI', {
+      group = group,
+      callback = function()
+        -- In insert mode we need to clear the references since we cloud have changed one.
+        vim.lsp.buf.clear_references()
+        vim.lsp.buf.document_highlight()
+      end,
+      buffer = bufnr,
+    })
+    vim.api.nvim_create_autocmd('CursorMoved', {
+      group = group,
+      callback = function()
+        vim.lsp.buf.clear_references()
+      end,
+      buffer = bufnr,
+    })
+  end
 end
 
 return M
