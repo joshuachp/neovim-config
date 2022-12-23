@@ -79,7 +79,7 @@ vim.opt.wildignore:append({ "node_modules/**" })
 --
 -- Keymap
 --
-vim.o.mapleader = "<Space>"
+vim.g.mapleader = "<Space>"
 
 --
 -- Movement
@@ -87,7 +87,7 @@ vim.o.mapleader = "<Space>"
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 5
 -- Mouse
-vim.o.mouse = a
+vim.o.mouse = "a"
 
 --
 -- Spell check
@@ -160,12 +160,22 @@ vim.api.nvim_create_autocmd("BufEnter", {
 --
 -- Templates
 --
--- TODO: move to lua
--- aug UserTemplates
---     au BufNewFile *.sh 0r $XDG_CONFIG_HOME/nvim/templates/bash.sh
---     au BufNewFile CMakeLists.txt 0r $XDG_CONFIG_HOME/nvim/templates/CMakeLists.txt
---     au BufNewFile Makefile 0r $XDG_CONFIG_HOME/nvim/templates/Makefile
--- aug END
+local userTemplates = vim.api.nvim_create_augroup("UserTemplates", { clear = true })
+vim.api.nvim_create_autocmd("BufNewFile", {
+    pattern = "*.sh",
+    group = userTemplates,
+    command = [[0r $XDG_CONFIG_HOME/nvim/templates/bash.sh]],
+})
+vim.api.nvim_create_autocmd("BufNewFile", {
+    pattern = "CMakeLists.txt",
+    group = userTemplates,
+    command = [[0r $XDG_CONFIG_HOME/nvim/templates/CMakeLists.txt]],
+})
+vim.api.nvim_create_autocmd("BufNewFile", {
+    pattern = "Makefile",
+    group = userTemplates,
+    command = [[0r $XDG_CONFIG_HOME/nvim/templates/Makefile]],
+})
 
 --
 -- Map
@@ -266,11 +276,17 @@ vim.cmd.runtime("plugin/plugins.vim")
 vim.cmd("command -nargs=* -bang NoteSearch call utils#NoteSearch(<q-args>, <bang>0)")
 
 -- Open the Inbox note in a new tab, use drop to jump to an already open tab
--- nmap <leader>nn <cmd>tab drop $NOTE_PATH/inbox.md<CR>
--- nmap <leader>np <cmd>lua require("user-config/utils").float_term_cmd("note --sync")<CR>
--- nmap <leader>ns <cmd>NoteSearch<CR>
+vim.keymap.set("n", "<leader>nn", [[<cmd>tab drop $NOTE_PATH/inbox.md<CR>]])
+vim.keymap.set("n", "<leader>np", [[<cmd>lua require("user-config/utils").float_term_cmd("note --sync")<CR>]])
+vim.keymap.set("n", "<leader>ns", function()
+    vim.cmd.NoteSearch()
+end)
 
--- aug NoteGroup
--- " Set header template for new files
--- au BufNewFile $NOTE_PATH/*.md lua require('user-config/functions').note_template()
--- aug END
+local noteGroup = vim.api.nvim_create_augroup("NoteGroup", { clear = true })
+vim.api.nvim_create_autocmd("BufNewFile", {
+    pattern = os.getenv("NOTE_PATH") .. "*/.md",
+    group = noteGroup,
+    callback = function()
+        require("user-config.functions").note_template()
+    end,
+})
