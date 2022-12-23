@@ -137,25 +137,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank()
     end,
 })
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "*",
-    group = initVimGroup,
-    callback = function()
-        if not vim.bo.modifiable then
-            vim.bo.spell = false
-        end
-    end,
-})
--- aug InitVim
---     " Use Lua on last neovim to highlight text
---     au TextYankPost * silent! lua vim.highlight.on_yank()
---     " Disable spelling if the buffer isn't modifiable (help, man, ...)
---     au BufEnter * if !&modifiable | setl nospell | endif
---     " Equalize splitts when vim is resized
---     au VimResized * wincmd =
---     " TODO: Make the split textwidth on buffer enter
---     "au BufEnter * resize &textwidth
--- aug END
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--     pattern = "*",
+--     group = initVimGroup,
+--     callback = function()
+--         if not vim.bo.modifiable then
+--             vim.wo.spell = false
+--         end
+--     end,
+-- })
 
 --
 -- Templates
