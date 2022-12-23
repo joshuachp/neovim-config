@@ -12,7 +12,7 @@ end
 
 --- Setup Lua config
 function M.setup()
-    -- Packages comfiguration
+    -- Packages configuration
     require("user-config.packages").setup()
 
     diagnostic_signs()
