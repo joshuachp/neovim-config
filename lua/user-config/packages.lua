@@ -99,8 +99,11 @@ function M.setup()
         require('nvim-tree').setup({
           disable_netrw = false,
           hijack_netrw = false,
-          filters = { dotfiles = true },
+          filters = { dotfiles = false },
           git = { ignore = false },
+          renderer = {
+            highlight_git = true,
+          },
         })
       end,
     })
