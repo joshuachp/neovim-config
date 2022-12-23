@@ -4,9 +4,6 @@ if exists("b:did_after_ftplugin")
 endif
 let b:did_after_ftplugin = 1
 
-" Mappings
-nmap <buffer> <leader>kp <Plug>MarkdownPreviewToggle
-
 imap <buffer> <M-l> $$<Left>
 imap <buffer> <M-b> ****<Left><Left>
 imap <buffer> <M-i> __<Left>

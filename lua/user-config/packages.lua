@@ -160,14 +160,6 @@ function M.setup()
       requires = { { 'nvim-treesitter/playground', cmd = { 'TSPlaygroundToggle' } } },
     })
     -- Markdown
-    use({
-      'iamcco/markdown-preview.nvim',
-      run = function()
-        vim.fn['mkdp#util#install_sync']()
-      end,
-      ft = { 'markdown' },
-      cmd = { 'MarkdownPreview', 'MarkdownPreviewToggle' },
-    })
     use({ 'dkarter/bullets.vim', ft = { 'markdown', 'markdown.pandoc' } })
     -- Golang
     use({ 'ray-x/go.nvim', ft = { 'go', 'gomod', 'gotmpl' } })

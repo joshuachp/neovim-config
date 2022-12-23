@@ -44,7 +44,19 @@ function M.setup(use)
     requires = 'nvim-lua/plenary.nvim',
   })
 
-  use({ 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' })
+  use({
+    'sindrets/diffview.nvim',
+    module = 'diffview',
+    cmd = {
+      'DiffviewClose',
+      'DiffviewFileHistory',
+      'DiffviewFocusFiles',
+      'DiffviewOpen',
+      'DiffviewRefresh',
+      'DiffviewToggleFiles',
+    },
+    requires = 'nvim-lua/plenary.nvim',
+  })
 
   vim.keymap.set('n', '<leader>gg', function()
     vim.cmd.Git()
