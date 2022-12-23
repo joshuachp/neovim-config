@@ -52,7 +52,7 @@ function M.formatter_config()
         function()
           return {
             exe = 'stylua',
-            args = { string.format('--config-path=%s/stylua/stylua.toml', config_path), '-' },
+            args = { '-' },
             stdin = true,
           }
         end,
