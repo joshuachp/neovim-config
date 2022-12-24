@@ -11,3 +11,6 @@ repos:
     rev: 0.1.19
     hooks:
       - id: lua-stylua
+      - id: nix-nixpkgs-fmt
+      - id: nix-statix
+      - id: nix-flake-check
