@@ -180,16 +180,22 @@ function M.setup()
       requires = { { 'tyru/open-browser.vim', ft = { 'plantuml' } } },
     })
     -- Rust
-    use({ 'rust-lang/rust.vim', disable = true, ft = 'rust' })
     use({
       'simrat39/rust-tools.nvim',
       filetypes = { 'rust' },
       config = function()
+        local lsp = require('user-config.lsp')
+
         require('rust-tools').setup({
           -- all the opts to send to nvim-lspconfig
           -- these override the defaults set by rust-tools.nvim
           -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
           server = {
+            on_attach = lsp.on_attach,
+            capabilities = lsp.default_capabilities(),
+            settings = {
+              ['rust-analyzer'] = { procMacro = { enable = true }, cargo = { loadOutDirsFromCheck = true } },
+            },
             -- standalone file support
             -- setting it to false may improve startup time
             standalone = false,

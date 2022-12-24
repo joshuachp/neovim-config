@@ -14,6 +14,25 @@ function M.setup(use)
   })
 end
 
+--- Default on_attach for the lsp servers
+--- @param client unknown
+---@param bufnr integer
+function M.on_attach(client, bufnr)
+  require('user-config.lsp').register_keymaps(bufnr)
+  require('user-config.lsp').register_auto_cmd(bufnr, client)
+end
+
+--- Generates the LSP client capabilities
+--- @return unknown
+function M.default_capabilities()
+  -- Client capabilities
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  -- Setup capabilities for nvim-cmp
+  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+  return capabilities
+end
+
 --- Setup LPS servers
 -- Install an configures the packages needed for completion and LSP
 function M.setup_servers()
@@ -21,16 +40,8 @@ function M.setup_servers()
   local lsp_config = require('lspconfig')
   -- local lsp_util = require("lspconfig/util")
 
-  --- LSP key maps and functions
-  local function on_attach(client, bufnr)
-    require('user-config.lsp').register_keymaps(bufnr)
-    require('user-config.lsp').register_auto_cmd(bufnr, client)
-  end
-
-  -- Client capabilities
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  -- Setup capabilities for nvim-cmp
-  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+  local on_attach = M.on_attach
+  local capabilities = M.default_capabilities()
 
   ---
   -- Language servers
@@ -80,14 +91,6 @@ function M.setup_servers()
     capabilities = capabilities,
     cmd = { '/usr/bin/jdtls' },
     cmd_env = {},
-  })
-
-  lsp_config.rust_analyzer.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-      ['rust-analyzer'] = { procMacro = { enable = true }, cargo = { loadOutDirsFromCheck = true } },
-    },
   })
 
   lsp_config.jsonls.setup({
