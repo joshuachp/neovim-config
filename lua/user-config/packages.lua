@@ -183,6 +183,7 @@ function M.setup()
     use({ 'rust-lang/rust.vim', disable = true, ft = 'rust' })
     use({
       'simrat39/rust-tools.nvim',
+      filetypes = { 'rust' },
       config = function()
         require('rust-tools').setup({
           -- all the opts to send to nvim-lspconfig
