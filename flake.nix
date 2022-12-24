@@ -27,7 +27,6 @@
         aarch64-darwin
       ];
       eachSystemMap = flake-utils.lib.eachSystemMap supportedSystems;
-      nixpkgsFor = system: import nixpkgs { inherit system; };
     in
     {
       nixosModules = rec {
@@ -57,7 +56,7 @@
 
       devShells = eachSystemMap (system:
         let
-          pkgs = nixpkgsFor system;
+          pkgs = nixpkgs.legacyPackages.${system};
         in
         {
           default = pkgs.mkShell {
