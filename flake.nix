@@ -27,6 +27,7 @@
         aarch64-darwin
       ];
       eachSystemMap = flake-utils.lib.eachSystemMap supportedSystems;
+      nixpkgsFor = system: import nixpkgs { inherit system; };
     in
     {
       nixosModules = rec {
@@ -43,7 +44,7 @@
               };
             };
             config = {
-              nixpkgs.overlays = [ neovim-nightly-overlay.overlays.default ];
+              nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
               environment.systemPackages = with pkgs; [
                 (neovim.overrideAttrs (oas: {
                   wrapRc = false;
@@ -56,7 +57,7 @@
 
       devShells = eachSystemMap (system:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = nixpkgsFor system;
         in
         {
           default = pkgs.mkShell {
