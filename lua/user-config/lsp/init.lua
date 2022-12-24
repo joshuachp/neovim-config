@@ -36,7 +36,6 @@ function M.setup_servers()
   -- Language servers
   --  List of the servers that only need to attach the process
   local server_list = {
-    -- "angularls",
     'bashls',
     'cmake',
     'cssls',
@@ -44,14 +43,16 @@ function M.setup_servers()
     'gopls',
     'hls',
     'html',
+    'nil_ls',
     'phpactor',
     'pyright',
-    'rnix',
     'svelte',
     'tailwindcss',
     'texlab',
     'tsserver',
     'vimls',
+    -- "angularls",
+    -- 'rnix',
   }
   for _, lsp in ipairs(server_list) do
     lsp_config[lsp].setup({ on_attach = on_attach, capabilities = capabilities })
