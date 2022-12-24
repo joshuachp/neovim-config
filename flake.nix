@@ -37,8 +37,9 @@
           , ...
           }: {
             options = {
-              neovimWrapRc = lib.options.mkEnableOptions {
+              neovimWrapRc = lib.mkOption {
                 default = false;
+                type = lib.types.bool;
                 description = "Option to wrap the init.{vim,lua} file with the nix one.";
               };
             };
