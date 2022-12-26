@@ -20,7 +20,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = 'yes'
 -- Mode (use statusline instead)
-vim.o.noshowmode = true
+vim.o.showmode = false
 -- Split
 vim.o.splitbelow = true
 vim.o.splitright = true
