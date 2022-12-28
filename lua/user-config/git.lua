@@ -27,20 +27,36 @@ function M.setup(use)
       end)
     end,
     config = function()
+      local signs = {
+        -- { CLOSED, OPENED }
+        section = { '', '' },
+        item = { '', '' },
+        hunk = { '', '' },
+      }
+
       require('neogit').setup({
         disable_builtin_notifications = true,
         -- customize displayed signs
-        signs = {
-          -- { CLOSED, OPENED }
-          section = { '', '' },
-          item = { '', '' },
-          hunk = { '', '' },
-        },
+        signs = signs,
         integrations = {
           diffview = true,
         },
       })
 
+      -- Set color to the signs
+      for key, value in pairs(signs) do
+        vim.fn.sign_define('NeogitClosed:' .. key, {
+          text = value[1],
+          texthl = 'GruvboxYellowSign',
+        })
+        vim.fn.sign_define('NeogitOpen:' .. key, {
+          text = value[2],
+          texthl = 'GruvboxYellowSign',
+        })
+      end
+
+      -- Set the parser for NeogitCommitMessage to gitcommit to have syntax
+      -- highlight for Common Commit messages.
       local ft_to_parser = require('nvim-treesitter.parsers').filetype_to_parsername
       ft_to_parser.NeogitCommitMessage = 'gitcommit'
     end,

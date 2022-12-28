@@ -508,3 +508,4 @@ config
 neogit
 journald
 Base64
+gitcommit
