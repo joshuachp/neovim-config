@@ -268,14 +268,17 @@ vim.keymap.set('n', '<leader>ns', function()
   vim.cmd.NoteSearch()
 end)
 
-local noteGroup = vim.api.nvim_create_augroup('NoteGroup', { clear = true })
-vim.api.nvim_create_autocmd('BufNewFile', {
-  pattern = os.getenv('NOTE_PATH') .. '*/.md',
-  group = noteGroup,
-  callback = function()
-    require('user-config.functions').note_template()
-  end,
-})
+local note_path = os.getenv('NOTE_PATH')
+if note_path ~= nil then
+  local noteGroup = vim.api.nvim_create_augroup('NoteGroup', { clear = true })
+  vim.api.nvim_create_autocmd('BufNewFile', {
+    pattern = note_path .. '*/.md',
+    group = noteGroup,
+    callback = function()
+      require('user-config.functions').note_template()
+    end,
+  })
+end
 
 --
 -- Plugins
