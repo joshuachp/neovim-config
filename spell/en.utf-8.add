@@ -509,3 +509,6 @@ neogit
 journald
 Base64
 gitcommit
+aarch64
+Grafana
+wireguard
