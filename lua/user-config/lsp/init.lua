@@ -200,17 +200,6 @@ function M.register_keymaps(bufnr)
     vim.lsp.buf.range_formatting()
   end, { buffer = bufnr })
 
-  -- Diagnostic
-  vim.keymap.set('n', '<leader>ldd', function()
-    vim.diagnostic.setqflist()
-  end, { buffer = bufnr })
-  vim.keymap.set('n', '<leader>ldp', function()
-    vim.diagnostic.goto_next()
-  end, { buffer = bufnr })
-  vim.keymap.set('n', '<leader>ldn', function()
-    vim.diagnostic.goto_prev()
-  end, { buffer = bufnr })
-
   -- LSP search
   vim.keymap.set('n', '<leader>slr', function()
     telescope.lsp_references()
