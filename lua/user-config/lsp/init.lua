@@ -49,7 +49,8 @@ function M.setup_servers()
   local server_list = {
     'bashls',
     'cmake',
-    'cssls',
+    -- 'cssls',
+    'clangd',
     'emmet_ls',
     'gopls',
     'hls',
@@ -76,15 +77,15 @@ function M.setup_servers()
   --   -- handlers = lsp_status.extensions.clangd.setup(),
   -- }
 
-  lsp_config.ccls.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    init_options = {
-      compilationDatabaseDirectory = 'build',
-      index = { threads = 0 },
-      cache = { directory = '/tmp/ccls-cache' },
-    },
-  })
+  -- lsp_config.ccls.setup({
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  --   init_options = {
+  --     compilationDatabaseDirectory = 'build',
+  --     index = { threads = 0 },
+  --     cache = { directory = '/tmp/ccls-cache' },
+  --   },
+  -- })
 
   lsp_config.jdtls.setup({
     on_attach = on_attach,
