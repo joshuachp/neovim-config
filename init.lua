@@ -270,10 +270,10 @@ end)
 
 local note_path = os.getenv('NOTE_PATH')
 if note_path ~= nil then
-  local noteGroup = vim.api.nvim_create_augroup('NoteGroup', { clear = true })
+  local note_group = vim.api.nvim_create_augroup('MyNoteGroup', { clear = true })
   vim.api.nvim_create_autocmd('BufNewFile', {
-    pattern = note_path .. '*/.md',
-    group = noteGroup,
+    pattern = note_path .. '/*.md',
+    group = note_group,
     callback = function()
       require('user-config.functions').note_template()
     end,
