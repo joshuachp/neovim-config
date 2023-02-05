@@ -51,7 +51,7 @@ function M.setup_servers()
     'cmake',
     -- 'cssls',
     'clangd',
-    'emmet_ls',
+    -- 'emmet_ls',
     'gopls',
     'hls',
     'html',
