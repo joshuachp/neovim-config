@@ -38,6 +38,8 @@ function M.setup()
     require('user-config.telescope').setup(use)
     require('user-config.git').setup(use)
 
+    use('github/copilot.vim')
+
     ---
     -- Editor
     --   Improves the existing editor functionality.
