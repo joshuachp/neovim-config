@@ -118,7 +118,7 @@ function M.setup_servers()
   table.insert(lua_runtime, 'lua/?.lua')
   table.insert(lua_runtime, 'lua/?/init.lua')
 
-  lsp_config.sumneko_lua.setup({
+  lsp_config.lua_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { 'lua-language-server' },
