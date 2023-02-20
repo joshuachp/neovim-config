@@ -38,7 +38,13 @@ function M.setup()
     require('user-config.telescope').setup(use)
     require('user-config.git').setup(use)
 
-    use('github/copilot.vim')
+    use({
+      'zbirenbaum/copilot.lua',
+      event = 'InsertEnter',
+      config = function()
+        require('copilot').setup({})
+      end,
+    })
 
     ---
     -- Editor
