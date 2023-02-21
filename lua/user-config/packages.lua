@@ -38,14 +38,6 @@ function M.setup()
     require('user-config.telescope').setup(use)
     require('user-config.git').setup(use)
 
-    use({
-      'zbirenbaum/copilot.lua',
-      event = 'InsertEnter',
-      config = function()
-        require('copilot').setup({})
-      end,
-    })
-
     ---
     -- Editor
     --   Improves the existing editor functionality.

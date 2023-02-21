@@ -33,12 +33,31 @@ function M.setup(use)
       'onsails/lspkind.nvim',
     },
   })
+
+  -- Copilot
+  use({
+    'zbirenbaum/copilot.lua',
+    event = 'InsertEnter',
+    cmd = { 'Copilot' },
+    module = { 'copilot', 'copilot.suggestion' },
+    config = function()
+      require('copilot').setup({
+        suggestion = {
+          auto_trigger = true,
+        },
+        filetypes = {
+          gitcommit = true,
+        },
+      })
+    end,
+  })
 end
 
 function M.configure_cmp()
   local cmp = require('cmp')
   local lsp_kind = require('lspkind')
   local luasnip = require('luasnip')
+  local copilot = require('copilot.suggestion')
 
   cmp.setup({
     snippet = {
@@ -61,9 +80,16 @@ function M.configure_cmp()
       end),
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
-          cmp.select_next_item()
+          local entry = cmp.get_selected_entry()
+          if not entry then
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+          else
+            cmp.confirm()
+          end
         elseif luasnip.expand_or_jump() then
           luasnip.expand_or_jump()
+        elseif copilot.is_visible() then
+          copilot.accept()
         elseif has_words_before() then
           cmp.complete()
         else
@@ -85,6 +111,7 @@ function M.configure_cmp()
       { name = 'nvim_lsp' },
       { name = 'nvim_lsp_signature_help' },
       { name = 'luasnip' },
+    }, {
       { name = 'path' },
       { name = 'buffer' },
     }),
@@ -99,6 +126,14 @@ function M.configure_cmp()
       }),
     },
   })
+  -- Hide copilot suggestion when menu is opened
+  cmp.event:on('menu_opened', function()
+    vim.b.copilot_suggestion_hidden = true
+  end)
+
+  cmp.event:on('menu_closed', function()
+    vim.b.copilot_suggestion_hidden = false
+  end)
 end
 
 return M
