@@ -15,8 +15,6 @@ return {
   -- Editor
   --   Improves the existing editor functionality.
   --
-  -- Editorconfig
-  'editorconfig/editorconfig-vim',
   -- Undotree
   {
     'mbbill/undotree',
