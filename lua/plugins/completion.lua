@@ -6,7 +6,7 @@ return {
     config = function()
       require('user-config.completion').configure_cmp()
     end,
-    requires = {
+    dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lsp-signature-help',
       'saadparwaiz1/cmp_luasnip',

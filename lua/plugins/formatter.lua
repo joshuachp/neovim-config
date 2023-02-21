@@ -80,6 +80,12 @@ return {
   cmd = { 'Format' },
   config = formatter_config,
   keys = {
-    { '<leader>kf', '<cmd>Format<CR>', mode = 'n' },
+    {
+      '<leader>kf',
+      function()
+        vim.cmd.Format()
+      end,
+      mode = 'n',
+    },
   },
 }

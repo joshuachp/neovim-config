@@ -11,17 +11,6 @@ local auto_tag_ft = {
 }
 
 return {
-  -- Completion
-  -- require('user-config.theme').setup(use)
-  -- require('user-config.notify').setup(use)
-  -- require('user-config.statusline').setup(use)
-  -- require('user-config.lsp').setup(use)
-  -- require('user-config.completion').setup(use)
-  -- require('user-config.debug').setup(use)
-  -- require('user-config.formatter').setup(use)
-  -- require('user-config.telescope').setup(use)
-  -- require('user-config.git').setup(use)
-
   ---
   -- Editor
   --   Improves the existing editor functionality.
@@ -43,9 +32,9 @@ return {
     },
   },
   -- Repeat - repeat plugins commands
-  'tpope/vim-repeat',
+  { 'tpope/vim-repeat' },
   -- Surround - change a surrounding text object
-  'tpope/vim-surround',
+  { 'tpope/vim-surround' },
   -- Colorize
   { 'norcalli/nvim-colorizer.lua', cmd = { 'ColorizerToggle' } },
 
@@ -82,11 +71,15 @@ return {
     'nvim-tree/nvim-tree.lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     cmd = { 'NvimTreeToggle' },
-    init = function()
-      vim.keymap.set('n', '<leader>tt', function()
-        vim.cmd.NvimTreeToggle()
-      end)
-    end,
+    keys = {
+      {
+        '<leader>tt',
+        function()
+          vim.cmd.NvimTreeToggle()
+        end,
+        mode = 'n',
+      },
+    },
     config = function()
       require('nvim-tree').setup({
         disable_netrw = false,
@@ -162,32 +155,8 @@ return {
   },
   -- Rust
   {
-    'simrat39/rust-tools.nvim',
-    enabled = false,
-    filetypes = { 'rust' },
-    config = function()
-      local lsp = require('user-config.lsp')
-
-      require('rust-tools').setup({
-        -- all the opts to send to nvim-lspconfig
-        -- these override the defaults set by rust-tools.nvim
-        -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
-        server = {
-          on_attach = lsp.on_attach,
-          capabilities = lsp.default_capabilities(),
-          settings = {
-            ['rust-analyzer'] = { procMacro = { enable = true }, cargo = { loadOutDirsFromCheck = true } },
-          },
-          -- standalone file support
-          -- setting it to false may improve startup time
-          standalone = false,
-        }, -- rust-analyzer options
-      })
-    end,
-    dependencies = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap' },
-  },
-  {
     'joshuachp/rust-coverage.nvim',
+    ft = { 'rust' },
     cmd = { 'RustCoverage', 'RustCoverageClear' },
     config = function()
       require('rust-coverage').setup()
