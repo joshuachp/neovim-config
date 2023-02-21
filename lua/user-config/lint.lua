@@ -13,7 +13,7 @@ function M.setup()
     parser = function(output_json, bufnr)
       local output = vim.fn.json_decode(output_json)
 
-      if #output == 0 then
+      if output == nil or #output == 0 then
         return {}
       end
 

@@ -1,26 +1,7 @@
 --- Formatter configuration for each file tipe
--- Used in the plugins.lua file as the configuration function, moved here to simplify the code while
--- the file types are growing
-local M = {}
-
---- Setup formatting packages.
---- @param use function
-function M.setup(use)
-  -- Format files
-  use({
-    'mhartington/formatter.nvim',
-    cmd = { 'Format' },
-    config = function()
-      require('user-config.formatter').formatter_config()
-    end,
-  })
-
-  --- Keymaps
-  vim.keymap.set('n', '<leader>kf', '<cmd>Format<CR>')
-end
 
 --- Prettier formatter function
-function M.prettier()
+local function prettier()
   return {
     exe = 'prettier',
     args = { '--stdin-filepath', vim.api.nvim_buf_get_name(0) },
@@ -29,17 +10,17 @@ function M.prettier()
 end
 
 -- Clang format
-function M.clang_format()
+local function clang_format()
   return { exe = 'clang-format', args = {}, stdin = true }
 end
 
 -- Shell format
-function M.shell_format()
+local function shell_format()
   return { exe = 'shfmt', args = { '-i', '4', '-ci' }, stdin = true }
 end
 
 --- Pass to formatter.nvim plugin config
-function M.formatter_config()
+local function formatter_config()
   local config_path = os.getenv('XDG_CONFIG_HOME')
 
   if config_path == nil then
@@ -57,8 +38,8 @@ function M.formatter_config()
           }
         end,
       },
-      sh = { M.shell_format },
-      zsh = { M.shell_format },
+      sh = { shell_format },
+      zsh = { shell_format },
       rust = {
         function()
           return { exe = 'rustfmt', args = { '--emit=stdout' }, stdin = true }
@@ -69,17 +50,17 @@ function M.formatter_config()
           return { exe = 'gofmt', args = {}, stdin = true }
         end,
       },
-      c = { M.clang_format },
-      cpp = { M.clang_format },
-      php = { M.prettier },
-      markdown = { M.prettier },
-      yaml = { M.prettier },
-      javascript = { M.prettier },
-      typescript = { M.prettier },
-      javascriptreact = { M.prettier },
-      typescriptreact = { M.prettier },
-      json = { M.prettier },
-      jsonc = { M.prettier },
+      c = { clang_format },
+      cpp = { clang_format },
+      php = { prettier },
+      markdown = { prettier },
+      yaml = { prettier },
+      javascript = { prettier },
+      typescript = { prettier },
+      javascriptreact = { prettier },
+      typescriptreact = { prettier },
+      json = { prettier },
+      jsonc = { prettier },
       sql = {
         function()
           return { exe = 'sqlfluff', args = { 'fix', '-f', '-' }, stdin = true }
@@ -94,4 +75,11 @@ function M.formatter_config()
   })
 end
 
-return M
+return {
+  'mhartington/formatter.nvim',
+  cmd = { 'Format' },
+  config = formatter_config,
+  keys = {
+    { '<leader>kf', '<cmd>Format<CR>', mode = 'n' },
+  },
+}

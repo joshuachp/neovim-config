@@ -1,19 +1,6 @@
 --- LSP configuration
 local M = {}
 
---- Setup LSP packages.
--- Install an configures the packages needed for completion and LSP
---- @param use function
-function M.setup(use)
-  -- Lsp Configuration
-  use({
-    'neovim/nvim-lspconfig',
-    config = function()
-      require('user-config.lsp').setup_servers()
-    end,
-  })
-end
-
 --- Default on_attach for the lsp servers
 --- @param client unknown
 ---@param bufnr integer
@@ -23,7 +10,7 @@ function M.on_attach(client, bufnr)
 end
 
 --- Generates the LSP client capabilities
---- @return unknown
+--- @return table
 function M.default_capabilities()
   -- Client capabilities
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -36,9 +23,11 @@ end
 --- Setup LPS servers
 -- Install an configures the packages needed for completion and LSP
 function M.setup_servers()
-  -- LSP
+  --- Setup nvim development help
+  require('neodev').setup({})
+
+  -- LSP configuration
   local lsp_config = require('lspconfig')
-  -- local lsp_util = require("lspconfig/util")
 
   local on_attach = M.on_attach
   local capabilities = M.default_capabilities()
@@ -111,30 +100,22 @@ function M.setup_servers()
     },
   })
 
-  -- Configure lua completions for libraries
-  local lua_runtime = vim.split(package.path, ';')
-  local lua_libraries = vim.api.nvim_get_runtime_file('', true)
-  -- Neovim lua plugin paths
-  table.insert(lua_runtime, 'lua/?.lua')
-  table.insert(lua_runtime, 'lua/?/init.lua')
-
   lsp_config.lua_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
-    cmd = { 'lua-language-server' },
     settings = {
       Lua = {
         format = {
           enable = true,
-          -- NOTE: the value should be STRING!!
           defaultConfig = {
             indent_style = 'space',
             indent_size = '4',
           },
         },
-        runtime = { version = 'LuaJIT', path = lua_runtime },
-        diagnostics = { globals = { 'vim' } },
-        workspace = { library = lua_libraries },
+        runtime = { version = 'LuaJIT' },
+        completion = {
+          callSnippet = 'Replace',
+        },
         telemetry = { enable = false },
       },
     },
