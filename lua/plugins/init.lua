@@ -29,8 +29,6 @@ return {
       },
     },
   },
-  -- Repeat - repeat plugins commands
-  { 'tpope/vim-repeat' },
   -- Surround - change a surrounding text object
   { 'tpope/vim-surround' },
   -- Colorize
