@@ -57,11 +57,11 @@
 
       devShells = eachSystemMap (system:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs { inherit system; };
         in
         {
           default = pkgs.mkShell {
-            buidInputs = with pkgs; [
+            packages = with pkgs; [
               pre-commit
               # Language server for lua and vim config
               sumneko-lua-language-server
