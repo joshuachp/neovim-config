@@ -145,31 +145,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- })
 
 --
--- Templates
---
-local userTemplates = vim.api.nvim_create_augroup('UserTemplates', { clear = true })
-vim.api.nvim_create_autocmd('BufNewFile', {
-  pattern = '*.sh',
-  group = userTemplates,
-  command = [[0r $XDG_CONFIG_HOME/nvim/templates/bash.sh]],
-})
-vim.api.nvim_create_autocmd('BufNewFile', {
-  pattern = 'CMakeLists.txt',
-  group = userTemplates,
-  command = [[0r $XDG_CONFIG_HOME/nvim/templates/CMakeLists.txt]],
-})
-vim.api.nvim_create_autocmd('BufNewFile', {
-  pattern = 'Makefile',
-  group = userTemplates,
-  command = [[0r $XDG_CONFIG_HOME/nvim/templates/Makefile]],
-})
-vim.api.nvim_create_autocmd('BufNewFile', {
-  pattern = '.envrc',
-  group = userTemplates,
-  command = [[0r $XDG_CONFIG_HOME/nvim/templates/direnv.envrc]],
-})
-
---
 -- Map
 --
 
@@ -272,18 +247,6 @@ vim.keymap.set('n', '<leader>np', [[<cmd>lua require("user-config/utils").float_
 vim.keymap.set('n', '<leader>ns', function()
   vim.cmd.NoteSearch()
 end)
-
-local note_path = os.getenv('NOTE_PATH')
-if note_path ~= nil then
-  local note_group = vim.api.nvim_create_augroup('MyNoteGroup', { clear = true })
-  vim.api.nvim_create_autocmd('BufNewFile', {
-    pattern = note_path .. '/*.md',
-    group = note_group,
-    callback = function()
-      require('user-config.functions').note_template()
-    end,
-  })
-end
 
 --
 -- Plugins

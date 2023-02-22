@@ -513,3 +513,6 @@ aarch64
 Grafana
 wireguard
 ESP32
+CMake
+direnv
+envrc

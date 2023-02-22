@@ -1,9 +1,10 @@
 ---
 title: "$1"
 description: "$2"
-date: "{{date}}"
+date: "$3"
 tags: []
-language: "$2"
+language: "en"
+draft: true
 ---
 
-#
+# $1
