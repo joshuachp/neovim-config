@@ -124,6 +124,12 @@ function M.setup_servers()
       },
     },
   })
+
+  lsp_config.elixirls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { 'elixir-ls' },
+  })
 end
 
 --- Register LSP keymaps
