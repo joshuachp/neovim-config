@@ -35,6 +35,7 @@ return {
         },
         filetypes = {
           gitcommit = true,
+          markdown = true,
         },
       })
     end,
