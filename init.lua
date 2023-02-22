@@ -163,6 +163,11 @@ vim.api.nvim_create_autocmd('BufNewFile', {
   group = userTemplates,
   command = [[0r $XDG_CONFIG_HOME/nvim/templates/Makefile]],
 })
+vim.api.nvim_create_autocmd('BufNewFile', {
+  pattern = '.envrc',
+  group = userTemplates,
+  command = [[0r $XDG_CONFIG_HOME/nvim/templates/direnv.envrc]],
+})
 
 --
 -- Map
