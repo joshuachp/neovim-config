@@ -3,7 +3,7 @@ local M = {}
 
 --- Default on_attach for the lsp servers
 --- @param client unknown
----@param bufnr integer
+--- @param bufnr integer
 function M.on_attach(client, bufnr)
   require('user-config.lsp').register_keymaps(bufnr)
   require('user-config.lsp').register_auto_cmd(bufnr, client)
@@ -39,7 +39,6 @@ function M.setup_servers()
     'bashls',
     'cmake',
     -- 'cssls',
-    'clangd',
     -- 'emmet_ls',
     'gopls',
     'hls',
@@ -59,12 +58,17 @@ function M.setup_servers()
     lsp_config[lsp].setup({ on_attach = on_attach, capabilities = capabilities })
   end
 
+  -- Replace the offsetEncoding in the table with offsetEncoding = { 'utf-16' },
+  -- to fix the issue with multiple language servers encodings
+  local utf16Cap = vim.tbl_extend('force', capabilities, {
+    offsetEncoding = { 'utf-16' },
+  })
+
   -- Server specific settings
-  -- lsp_config.clangd.setup {
-  --   on_attach = on_attach,
-  --   capabilities = capabilities,
-  --   -- handlers = lsp_status.extensions.clangd.setup(),
-  -- }
+  lsp_config.clangd.setup({
+    on_attach = on_attach,
+    capabilities = utf16Cap,
+  })
 
   -- lsp_config.ccls.setup({
   --   on_attach = on_attach,
