@@ -3,7 +3,10 @@ return {
   'ellisonleao/gruvbox.nvim',
   priority = 100,
   config = function()
-    vim.g.gruvbox_contrast_dark = 'hard'
+    require('gruvbox').setup({
+      contrast = 'hard',
+    })
+
     vim.cmd.colorscheme('gruvbox')
 
     vim.api.nvim_set_hl(0, 'LspReferenceText', { link = 'SignColumn' })
