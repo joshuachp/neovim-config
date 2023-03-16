@@ -265,7 +265,7 @@ i8
 img
 impl
 inbox
-init
+#nit
 initramfs
 initrd
 inotify
@@ -516,3 +516,10 @@ ESP32
 CMake
 direnv
 envrc
+Kubernetes
+Generate/!
+cli/!
+match/!
+init/!
+#/!
+U/!

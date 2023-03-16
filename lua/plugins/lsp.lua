@@ -35,7 +35,7 @@ return {
           on_attach = lsp.on_attach,
           capabilities = lsp.default_capabilities(),
           settings = {
-            ['rust-analyzer'] = { procMacro = { enable = true }, cargo = { loadOutDirsFromCheck = true } },
+            ['rust-analyzer'] = { procMacro = { enable = true }, cargo = { buildScripts = { enable = true } } },
           },
           -- standalone file support
           -- setting it to false may improve startup time
