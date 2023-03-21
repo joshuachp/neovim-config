@@ -104,6 +104,15 @@ return {
       'nvim-treesitter/nvim-treesitter',
       {
         'sindrets/diffview.nvim',
+        keys = {
+          {
+            '<leader>gdo',
+            function()
+              vim.cmd.DiffviewOpen()
+            end,
+            mode = 'n',
+          },
+        },
         cmd = {
           'DiffviewClose',
           'DiffviewFileHistory',
