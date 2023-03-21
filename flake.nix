@@ -60,6 +60,32 @@
           };
         default = neovim-config;
       };
+      homeManagerModules = rec {
+        neovim-config =
+          { config
+          , pkgs
+          , lib
+          , ...
+          }: {
+            options = {
+              neovimWrapRc = lib.mkOption {
+                default = false;
+                type = lib.types.bool;
+                description = "Option to wrap the init.{vim,lua} file with the nix one.";
+              };
+            };
+            config = {
+              nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
+              programs.neovim = {
+                enable = true;
+                plugins = [
+                  { plugin = pkgs.vimPlugins.nvim-treesitter.withAllGrammars; }
+                ];
+              };
+            };
+          };
+        default = neovim-config;
+      };
 
       devShells = eachSystemMap (system:
         let
