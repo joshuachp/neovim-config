@@ -81,7 +81,7 @@ return {
   },
   {
     'rcarriga/nvim-dap-ui',
-    dependenvies = { 'mfussenegger/nvim-dap' },
+    dependencies = { 'mfussenegger/nvim-dap' },
     keys = {
       {
         '<leader>td',
