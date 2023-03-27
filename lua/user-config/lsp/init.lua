@@ -32,6 +32,10 @@ function M.setup_servers()
   local on_attach = M.on_attach
   local capabilities = M.default_capabilities()
 
+  -- Handlers
+  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+
   ---
   -- Language servers
   --  List of the servers that only need to attach the process
