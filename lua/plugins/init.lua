@@ -71,7 +71,7 @@ return {
       {
         '<leader>tt',
         function()
-          vim.cmd.NvimTreeToggle()
+          vim.cmd.NvimTreeFindFileToggle()
         end,
         mode = 'n',
       },
