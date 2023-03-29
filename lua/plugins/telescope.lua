@@ -36,7 +36,7 @@ return {
       mode = 'n',
     },
     {
-      '<leader>sz',
+      '<leader>sk',
       function()
         require('telescope.builtin').keymaps()
       end,
@@ -89,7 +89,7 @@ return {
     },
     -- Marks
     {
-      '<leader>sk',
+      "<leader>s'",
       function()
         require('telescope.builtin').marks()
       end,
