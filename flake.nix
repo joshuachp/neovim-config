@@ -52,7 +52,11 @@
                     source $XDG_CONFIG_HOME/nvim/init.lua
                   '';
                   packages = {
-                    nvim-treesitter = pkgs.vimPlugins.nvim-treesitter.withAllGrammars;
+                    nvim-treesitter = {
+                      start = [
+                        pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+                      ];
+                    };
                   };
                 };
               };
