@@ -525,3 +525,5 @@ init/!
 U/!
 return_once
 vendoring
+proc
+Qemu
