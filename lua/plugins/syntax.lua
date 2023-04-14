@@ -59,9 +59,13 @@ return {
             include_surrounding_whitespace = true,
           },
         },
+        -- Update the comment string options for embedded languages
+        context_commentstring = {
+          enable = true,
+        },
       })
     end,
-    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects', 'JoosepAlviste/nvim-ts-context-commentstring' },
   },
   {
     'nvim-treesitter/playground',

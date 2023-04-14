@@ -24,7 +24,15 @@ function M.configure_cmp()
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete({}),
       ['<C-q>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<CR>'] = cmp.mapping(function(fallback)
+        if luasnip.choice_active() then
+          luasnip.jump(1)
+        elseif cmp.visible() then
+          cmp.confirm({ select = true })
+        else
+          fallback()
+        end
+      end),
       ['<C-e>'] = cmp.mapping(function(fallback)
         if luasnip.choice_active() then
           luasnip.change_choice(1)
@@ -35,8 +43,10 @@ function M.configure_cmp()
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
+        elseif luasnip.choice_active() then
+          luasnip.change_choice(1)
         elseif luasnip.expand_or_jump() then
-          luasnip.expand_or_jump()
+          luasnip.expand_or_locally_jumpable()
         elseif copilot.is_visible() then
           copilot.accept()
         elseif has_words_before() then
