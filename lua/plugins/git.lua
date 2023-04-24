@@ -102,8 +102,7 @@ return {
 
       -- Set the parser for NeogitCommitMessage to gitcommit to have syntax
       -- highlight for Common Commit messages.
-      local ft_to_parser = require('nvim-treesitter.parsers').filetype_to_parsername
-      ft_to_parser.NeogitCommitMessage = 'gitcommit'
+      vim.treesitter.language.register('gitcommit', 'NeogitCommitMessage')
     end,
     dependencies = {
       'nvim-lua/plenary.nvim',
