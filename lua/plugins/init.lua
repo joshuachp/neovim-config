@@ -26,6 +26,7 @@ return {
           vim.cmd.UndotreeToggle()
         end,
         mode = 'n',
+        desc = 'Toggle undo-tree',
       },
     },
   },
@@ -56,6 +57,7 @@ return {
           require('lint').try_lint()
         end,
         mode = 'n',
+        desc = 'Lint file',
       },
     },
     config = function()
@@ -74,6 +76,7 @@ return {
           vim.cmd.NvimTreeFindFileToggle()
         end,
         mode = 'n',
+        desc = 'Toggle file tree',
       },
     },
     config = function()
@@ -117,6 +120,7 @@ return {
           require('trouble').toggle()
         end,
         mode = 'n',
+        desc = 'Toggle diagnostics',
       },
     },
     config = function()

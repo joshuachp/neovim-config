@@ -5,74 +5,84 @@ return {
     'mfussenegger/nvim-dap',
     keys = {
       {
-        '<leader>db',
+        '<leader>eb',
         function()
           require('dap').toggle_breakpoint()
         end,
         mode = 'n',
+        desc = 'Toggle breakpoint',
       },
       {
-        '<leader>dc',
+        '<leader>ec',
         function()
           require('dap').continue()
         end,
         mode = 'n',
+        desc = 'Debug continue',
       },
       {
-        '<leader>ds',
+        '<leader>es',
         function()
           require('dap').step_into()
         end,
         mode = 'n',
+        desc = 'Debug step into',
       },
       {
-        '<leader>dso',
+        '<leader>eso',
         function()
           require('dap').step_out()
         end,
         mode = 'n',
+        desc = 'Debug step out',
       },
       {
-        '<leader>dsb',
+        '<leader>esb',
         function()
           require('dap').step_back()
         end,
         mode = 'n',
+        desc = 'Debug step back',
       },
       {
-        '<leader>do',
+        '<leader>eo',
         function()
           require('dap').step_over({})
         end,
         mode = 'n',
+        desc = 'Debug step over',
       },
       {
-        '<leader>dp',
+        '<leader>ep',
         function()
           require('dap').pause()
         end,
         mode = 'n',
+        desc = 'Debug pause',
       },
       {
-        '<leader>drc',
+        '<leader>erc',
         function()
           require('dap').run_to_cursor()
         end,
         mode = 'n',
+        desc = 'Debug run to cursor',
       },
       {
-        '<leader>dur',
+        '<leader>eur',
         function()
           require('dap.repl').open()
         end,
         mode = 'n',
+        desc = 'Debug open repl',
       },
       {
-        '<leader>drl',
+        '<leader>erl',
         function()
           require('dap').run_last()
         end,
         mode = 'n',
+        desc = 'Debug run last',
       },
     },
     config = function()
@@ -89,6 +99,7 @@ return {
           require('dapui').toggle({})
         end,
         mode = 'n',
+        desc = 'Toggle debug ui',
       },
     },
     config = function()

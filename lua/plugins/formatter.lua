@@ -86,6 +86,7 @@ return {
         vim.cmd.Format()
       end,
       mode = 'n',
+      desc = 'Format file',
     },
   },
 }

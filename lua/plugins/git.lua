@@ -4,13 +4,14 @@ return {
   {
     'tpope/vim-fugitive',
     cmd = { 'Git', 'Gvdiffsplit', 'Gclog' },
-    keys = {
+    Keys = {
       {
         '<leader>gg',
         function()
           vim.cmd.Git()
         end,
         mode = 'n',
+        desc = 'Open vim fuggitive',
       },
       {
         '<leader>gd',
@@ -18,6 +19,7 @@ return {
           vim.cmd.Gvdiffsplit()
         end,
         mode = 'n',
+        desc = 'Open git diff',
       },
       {
         '<leader>gm',
@@ -25,6 +27,7 @@ return {
           vim.cmd.Git('mergetool')
         end,
         mode = 'n',
+        desc = 'Open git merge-tool',
       },
       {
         '<leader>gl',
@@ -32,6 +35,7 @@ return {
           vim.cmd.Git('log')
         end,
         mode = 'n',
+        desc = 'Open git log',
       },
       {
         '<leader>glg',
@@ -39,6 +43,7 @@ return {
           vim.cmd.Gclog()
         end,
         mode = 'n',
+        desc = 'Open git commit log',
       },
     },
   },
@@ -63,6 +68,7 @@ return {
           require('neogit').open()
         end,
         mode = 'n',
+        desc = 'Open neogit',
       },
     },
     config = function()
@@ -111,6 +117,7 @@ return {
               vim.cmd.DiffviewOpen()
             end,
             mode = 'n',
+            desc = 'Open diff-view',
           },
         },
         cmd = {

@@ -64,6 +64,12 @@ return {
           enable = true,
         },
       })
+
+      -- Fold based on treesitter
+      -- https://github.com/nvim-treesitter/nvim-treesitter#folding
+      vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+      vim.o.foldmethod = 'expr'
+      vim.o.foldenable = false
     end,
     dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects', 'JoosepAlviste/nvim-ts-context-commentstring' },
   },

@@ -10,9 +10,12 @@ return {
     {
       '<leader>sf',
       function()
-        require('telescope.builtin').git_files()
+        require('telescope.builtin').git_files({
+          show_untracked = true,
+        })
       end,
       mode = 'n',
+      desc = 'Find files in git repo',
     },
     {
       '<leader>saf',
@@ -20,6 +23,7 @@ return {
         require('telescope.builtin').find_files()
       end,
       mode = 'n',
+      desc = 'Find in all files',
     },
     {
       '<leader>sr',
@@ -27,6 +31,7 @@ return {
         require('telescope.builtin').live_grep()
       end,
       mode = 'n',
+      desc = 'Grep in all files',
     },
     {
       '<leader>sb',
@@ -34,6 +39,7 @@ return {
         require('telescope.builtin').buffers()
       end,
       mode = 'n',
+      desc = 'Search buffers',
     },
     {
       '<leader>sk',
@@ -41,6 +47,7 @@ return {
         require('telescope.builtin').keymaps()
       end,
       mode = 'n',
+      desc = 'Search keymaps',
     },
     {
       '<leader>sh',
@@ -48,6 +55,7 @@ return {
         require('telescope.builtin').help_tags()
       end,
       mode = 'n',
+      desc = 'Search help tags',
     },
     {
       '<leader>sm',
@@ -55,6 +63,7 @@ return {
         require('telescope.builtin').man_pages({ sections = { 'ALL' } })
       end,
       mode = 'n',
+      desc = 'Search man pages',
     },
     -- Git
     {
@@ -63,6 +72,7 @@ return {
         require('telescope.builtin').git_commits()
       end,
       mode = 'n',
+      desc = 'Search git commits',
     },
     {
       '<leader>sgb',
@@ -70,6 +80,7 @@ return {
         require('telescope.builtin').git_branches()
       end,
       mode = 'n',
+      desc = 'Search git branches',
     },
     -- Lsp
     {
@@ -78,6 +89,7 @@ return {
         require('telescope.builtin').lsp_document_symbols()
       end,
       mode = 'n',
+      desc = 'Search lsp document symbols',
     },
     -- Quick fix list
     {
@@ -86,6 +98,7 @@ return {
         require('telescope.builtin').quickfix()
       end,
       mode = 'n',
+      desc = 'Search quick fix list',
     },
     -- Marks
     {
@@ -94,6 +107,7 @@ return {
         require('telescope.builtin').marks()
       end,
       mode = 'n',
+      desc = 'Search marks',
     },
   },
   config = function()
