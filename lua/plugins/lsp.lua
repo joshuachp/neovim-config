@@ -33,13 +33,7 @@ return {
         -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
         server = {
           on_init = function(client)
-            local path = client.workspace_folders[1].name
-
-            if path == '/home/joshuachp/share/repos/seco/edgehog-device-runtime-wrapped/edgehog-device-runtime' then
-              client.config.settings['rust-analyzer'].cargo.features = { 'docker', 'mock' }
-            end
-
-            client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+            require('user-config.lsp.utils').on_init_custom_settings(client)
 
             return true
           end,

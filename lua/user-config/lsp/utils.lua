@@ -32,4 +32,30 @@ function M.in_range(position, range)
   return true
 end
 
+--- Custom settings for paths
+--
+-- Given a JSON of table\<path, settings\> will merge the custom settings with
+-- the current client one if the server is started in the given path
+--
+--- @param client table
+function M.on_init_custom_settings(client)
+  local config_path = vim.fn.stdpath('config')
+  local settings_file = string.format('%s/lsp-settings.json', config_path)
+
+  --- Read the settings file
+  local json = require('user-config.utils').read_json(settings_file)
+
+  local path = client.workspace_folders[1].name
+
+  --- Check if present
+  if json[path] == nil then
+    return
+  end
+
+  --- Merge the settings
+  local settings = vim.tbl_deep_extend('force', client.config.settings, json[path])
+
+  client.notify('workspace/didChangeConfiguration', { settings = settings })
+end
+
 return M

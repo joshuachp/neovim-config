@@ -51,4 +51,47 @@ function M.float_term_cmd(cmd, close_win, callback)
   return vim.fn.termopen(cmd, options)
 end
 
+--- Read file using plenary and libuv
+--- @param path string
+--- @return string
+function M.read_file(path)
+  local a = require('plenary.async')
+
+  local err, fd = a.uv.fs_open(path, 'r', 438)
+  assert(not err, err)
+
+  ---@diagnostic disable-next-line: redefined-local
+  local err, stat = a.uv.fs_fstat(fd)
+  assert(not err, err)
+
+  ---@diagnostic disable-next-line: redefined-local
+  local err, data = a.uv.fs_read(fd, stat.size, 0)
+  assert(not err, err)
+
+  ---@diagnostic disable-next-line: redefined-local
+  local err = a.uv.fs_close(fd)
+  assert(not err, err)
+
+  return data
+end
+
+--- Decodes a json string
+--- @param json string
+--- @return unknown
+function M.json_decode(json)
+  --- @type string
+  local stripped_json = require('plenary.json').json_strip_comments(json, {})
+
+  return vim.json.decode(stripped_json, { luanil = { object = true, array = true } })
+end
+
+--- Read a json file into a table
+--- @param path string
+--- @return unknown
+function M.read_json(path)
+  local file_content = M.read_file(path)
+
+  return M.json_decode(file_content)
+end
+
 return M

@@ -3,3 +3,4 @@
 /spell/*.sug
 /.luarc.json
 /.direnv/
+/lsp-settings.json
