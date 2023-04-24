@@ -14,24 +14,24 @@ function M.key_bindings()
   -- Diagnostic
   vim.keymap.set('n', '<leader>dd', function()
     vim.diagnostic.setqflist()
-  end)
+  end, { desc = 'Send diagnostics to quickfix list' })
   -- Switch between
   vim.keymap.set('n', '<leader>dj', function()
     vim.diagnostic.goto_next()
-  end)
+  end, { desc = 'Go to next diagnostic' })
   vim.keymap.set('n', '<leader>dk', function()
     vim.diagnostic.goto_prev()
-  end)
+  end, { desc = 'Go to previous diagnostic' })
   vim.keymap.set('n', '<leader>dn', function()
     vim.diagnostic.goto_next()
-  end)
+  end, { desc = 'Go to next diagnostic' })
   vim.keymap.set('n', '<leader>dN', function()
     vim.diagnostic.goto_prev()
-  end)
+  end, { desc = 'Go to previous diagnostic' })
   --- Open the diagnostic into a floating window
   vim.keymap.set('n', '<leader>df', function()
     vim.diagnostic.open_float()
-  end)
+  end, { desc = 'Open diagnostic floating window' })
 end
 
 --- Setup the diagnostics signs and configuration

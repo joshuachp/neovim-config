@@ -151,89 +151,89 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Buffer
 vim.keymap.set('n', '<leader>bd', function()
   vim.cmd.bdel()
-end)
+end, { desc = 'Delete the current buffer' })
 vim.keymap.set('n', '<leader>bn', function()
   vim.cmd.bnext()
-end)
+end, { desc = 'Go to next buffer' })
 vim.keymap.set('n', '<leader>bp', function()
   vim.cmd.bprevious()
-end)
+end, { desc = 'Go to previous buffer' })
 
 -- Code
 vim.keymap.set('n', '<leader>kt', function()
   vim.cmd.TrimEndSpaces()
-end)
+end, { desc = 'Trim end spaces' })
 
 -- Diff
 -- Two way diff
 vim.keymap.set('n', '<leader>dh', function()
   vim.cmd.diffget()
-end)
+end, { desc = 'Remove differences in current buffer' })
 vim.keymap.set('n', '<leader>dl', function()
   vim.cmd.diffput()
-end)
+end, { desc = 'Remove differences in other buffer' })
 
 -- Insert
 -- Date
-vim.keymap.set('n', '<leader>idd', [[a<C-r>=strftime("%Y-%m-%d")<CR><Esc>]])
-vim.keymap.set('n', '<leader>idt', [[a<C-r>=strftime("%H:%M")<CR><Esc>]])
+vim.keymap.set('n', '<leader>idd', [[a<C-r>=strftime("%Y-%m-%d")<CR><Esc>]], { desc = 'Insert date' })
+vim.keymap.set('n', '<leader>idt', [[a<C-r>=strftime("%H:%M")<CR><Esc>]], { desc = 'Insert time' })
 
 -- Yank to system clipboard
-vim.keymap.set('n', '<leader>Y', '"+Y')
-vim.keymap.set('v', '<leader>y', '"+y')
+vim.keymap.set('n', '<leader>Y', '"+Y', { desc = 'Yank till end of line into system clipboard' })
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Yank into system clipboard' })
 --Paste yank
-vim.keymap.set('n', '<leader>p', '"+p')
-vim.keymap.set('n', '<leader>P', '"+P')
+vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste below from system clipboard' })
+vim.keymap.set('n', '<leader>P', '"+P', { desc = 'Paste above from system clipboard' })
 
 --Files
 -- Save
 vim.keymap.set('n', '<leader>fs', function()
   vim.cmd.write()
-end)
+end, { desc = 'Save file' })
 vim.keymap.set('n', '<leader>fsa', function()
   vim.cmd.wall()
-end)
+end, { desc = 'Save all files' })
 -- Populate quick fix list
-vim.keymap.set('n', '<leader>mm', '<cmd>make!<CR>')
-vim.keymap.set('n', '<leader>mM', '<cmd>make! --always-make<CR>')
-vim.keymap.set('n', '<leader>ml', '<cmd>lmake!<CR>')
-vim.keymap.set('n', '<leader>mL', '<cmd>lmake! --always-make<CR>')
+vim.keymap.set('n', '<leader>mm', '<cmd>make!<CR>', { desc = 'Populate quick fix list' })
+vim.keymap.set('n', '<leader>mM', '<cmd>make! --always-make<CR>', { desc = 'Run make with --always-make' })
+vim.keymap.set('n', '<leader>ml', '<cmd>lmake!<CR>', { desc = 'Populate location list' })
+vim.keymap.set('n', '<leader>mL', '<cmd>lmake! --always-make<CR>', { desc = 'Run lmake with --always-make' })
 -- Manage quick fix list
-vim.keymap.set('n', '<leader>qq', '<cmd>copen<CR>')
-vim.keymap.set('n', '<leader>qp', '<cmd>colder<CR>')
-vim.keymap.set('n', '<leader>qqc', '<cmd>cclose<CR>')
-vim.keymap.set('n', '<leader>ql', '<cmd>lopen<CR>')
-vim.keymap.set('n', '<leader>qlc', '<cmd>lclose<CR>')
+vim.keymap.set('n', '<leader>qq', '<cmd>copen<CR>', { desc = 'Open quick fix list' })
+vim.keymap.set('n', '<leader>qp', '<cmd>colder<CR>', { desc = 'Previous quick fix list' })
+vim.keymap.set('n', '<leader>qqc', '<cmd>cclose<CR>', { desc = 'Close quick fix list' })
+vim.keymap.set('n', '<leader>ql', '<cmd>lopen<CR>', { desc = 'Open location list' })
+vim.keymap.set('n', '<leader>qlc', '<cmd>lclose<CR>', { desc = 'Close location list' })
 
 -- Navigation
-vim.keymap.set('n', '<C-k>', '<cmd>cprev<CR>')
-vim.keymap.set('n', '<C-j>', '<cmd>cnext<CR>')
-vim.keymap.set('n', '<C-S-k>', '<cmd>lprev<CR>')
-vim.keymap.set('n', '<C-S-j>', '<cmd>lnext<CR>')
-vim.keymap.set('n', '<leader>st', '<cmd>TodoSearch<CR>')
+vim.keymap.set('n', '<C-k>', '<cmd>cprev<CR>', { desc = 'Go to previous quick fix' })
+vim.keymap.set('n', '<C-j>', '<cmd>cnext<CR>', { desc = 'Go to next quick fix' })
+vim.keymap.set('n', '<C-S-k>', '<cmd>lprev<CR>', { desc = 'Go to previous location list' })
+vim.keymap.set('n', '<C-S-j>', '<cmd>lnext<CR>', { desc = 'Go to next location list' })
+vim.keymap.set('n', '<leader>st', '<cmd>TodoSearch<CR>', { desc = 'Search TODOs' })
 
 -- File manager
-vim.keymap.set('n', '<leader>te', '<cmd>Explore<CR>')
+vim.keymap.set('n', '<leader>te', '<cmd>Explore<CR>', { desc = 'Open file explorer' })
 -- Check box (- [ ])
-vim.keymap.set('n', '<leader>t<CR>', '<cmd>ToggleCheckBox<CR>')
+vim.keymap.set('n', '<leader>t<CR>', '<cmd>ToggleCheckBox<CR>', { desc = 'Toggle checkbox' })
 
 -- Move selection
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection down' })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
 
 --
 -- Magic
 --
 -- Break undo sequence and start new change
-vim.keymap.set('i', ',', ',<C-g>u', { remap = false })
-vim.keymap.set('i', '.', '.<C-g>u', { remap = false })
-vim.keymap.set('i', '-', '-<C-g>u', { remap = false })
-vim.keymap.set('i', '_', '_<C-g>u', { remap = false })
-vim.keymap.set('i', '>', '><C-g>u', { remap = false })
-vim.keymap.set('i', '{', '{<C-g>u', { remap = false })
-vim.keymap.set('i', '}', '}<C-g>u', { remap = false })
-vim.keymap.set('i', '[', '[<C-g>u', { remap = false })
-vim.keymap.set('i', ']', ']<C-g>u', { remap = false })
+vim.keymap.set('i', ',', ',<C-g>u', { remap = false, desc = 'Break undo sequence for coma' })
+vim.keymap.set('i', '.', '.<C-g>u', { remap = false, desc = 'Break undo sequence for dot' })
+vim.keymap.set('i', '-', '-<C-g>u', { remap = false, desc = 'Break undo sequence for dash' })
+vim.keymap.set('i', '_', '_<C-g>u', { remap = false, desc = 'Break undo sequence for underscore' })
+vim.keymap.set('i', '>', '><C-g>u', { remap = false, desc = 'Break undo sequence for greater than' })
+vim.keymap.set('i', '{', '{<C-g>u', { remap = false, desc = 'Break undo sequence for curly braces' })
+vim.keymap.set('i', '}', '}<C-g>u', { remap = false, desc = 'Break undo sequence for curly braces' })
+vim.keymap.set('i', '[', '[<C-g>u', { remap = false, desc = 'Break undo sequence for square braces' })
+vim.keymap.set('i', ']', ']<C-g>u', { remap = false, desc = 'Break undo sequence for square braces' })
 
 --
 -- Note taking configuration
@@ -242,14 +242,15 @@ vim.keymap.set('i', ']', ']<C-g>u', { remap = false })
 vim.cmd('command -nargs=* -bang NoteSearch call utils#NoteSearch(<q-args>, <bang>0)')
 
 -- Open the Inbox note in a new tab, use drop to jump to an already open tab
-vim.keymap.set('n', '<leader>nn', [[<cmd>tab drop $NOTE_PATH/inbox.md<CR>]])
-vim.keymap.set('n', '<leader>np', [[<cmd>lua require("user-config/utils").float_term_cmd("note --sync")<CR>]])
+vim.keymap.set('n', '<leader>nn', [[<cmd>tab drop $NOTE_PATH/inbox.md<CR>]], { desc = 'Open inbox note' })
+vim.keymap.set('n', '<leader>np', function()
+  require('user-config/utils').float_term_cmd('note --sync')
+end, { desc = 'Sync notes' })
 vim.keymap.set('n', '<leader>ns', function()
   vim.cmd.NoteSearch()
-end)
+end, { desc = 'Search notes' })
 
 --
 -- Plugins
 --
 require('user-config').setup()
-vim.cmd.runtime('plugin/plugins.vim')
