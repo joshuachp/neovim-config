@@ -53,9 +53,9 @@ function M.on_init_custom_settings(client)
   end
 
   --- Merge the settings
-  local settings = vim.tbl_deep_extend('force', client.config.settings, json[path])
+  client.config.settings = vim.tbl_deep_extend('force', client.config.settings, json[path])
 
-  client.notify('workspace/didChangeConfiguration', { settings = settings })
+  client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
 end
 
 return M

@@ -52,6 +52,7 @@ function M.float_term_cmd(cmd, close_win, callback)
 end
 
 --- Read file using plenary and libuv
+-- TODO: fix this
 --- @param path string
 --- @return string
 function M.read_file(path)
@@ -89,9 +90,11 @@ end
 --- @param path string
 --- @return unknown
 function M.read_json(path)
-  local file_content = M.read_file(path)
+  local utils = require('user-config.utils')
 
-  return M.json_decode(file_content)
+  local file_content = io.open(path, 'r'):read('*a')
+
+  return utils.json_decode(file_content)
 end
 
 return M

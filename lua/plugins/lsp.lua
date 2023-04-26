@@ -40,7 +40,14 @@ return {
           on_attach = lsp.on_attach,
           capabilities = lsp.default_capabilities(),
           settings = {
-            ['rust-analyzer'] = { procMacro = { enable = true }, cargo = { buildScripts = { enable = true } } },
+            ['rust-analyzer'] = {
+              procMacro = { enable = true },
+              cargo = { buildScripts = { enable = true }, features = {} },
+              check = {
+                command = 'clippy',
+                extraArgs = { '--', '-W', 'clippy::all' },
+              },
+            },
           },
           -- standalone file support
           -- setting it to false may improve startup time
