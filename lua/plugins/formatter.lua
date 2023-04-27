@@ -9,6 +9,14 @@ local function prettier()
   }
 end
 
+local function dprint()
+  return {
+    exe = 'dprint',
+    args = { 'fmt', '--stdin', "'" .. vim.api.nvim_buf_get_name(0) .. "'" },
+    stdin = true,
+  }
+end
+
 -- Clang format
 local function clang_format()
   return { exe = 'clang-format', args = {}, stdin = true }
@@ -52,15 +60,21 @@ local function formatter_config()
       },
       c = { clang_format },
       cpp = { clang_format },
+
+      -- Prettier
       php = { prettier },
-      markdown = { prettier },
-      yaml = { prettier },
       javascript = { prettier },
       typescript = { prettier },
       javascriptreact = { prettier },
       typescriptreact = { prettier },
-      json = { prettier },
-      jsonc = { prettier },
+
+      -- dprint
+      json = { dprint },
+      jsonc = { dprint },
+      markdown = { dprint },
+      toml = { dprint },
+      yaml = { dprint },
+
       sql = {
         function()
           return { exe = 'sqlfluff', args = { 'fix', '-f', '-' }, stdin = true }
