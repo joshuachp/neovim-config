@@ -11,11 +11,18 @@ return {
   {
     'rcarriga/nvim-notify',
     config = function()
-      vim.notify = require('notify')
+      local notify = require('notify')
 
-      vim.lsp.handlers['window/showMessage'] = function(_, method, params, _)
+      notify.setup({
+        timeout = 2000,
+        render = 'compact',
+      })
+
+      vim.notify = notify
+
+      vim.lsp.handlers['window/showMessage'] = vim.lsp.with(function(_, method, params, _)
         vim.notify(method.message, severity[params.type])
-      end
+      end, {})
     end,
   },
 }
