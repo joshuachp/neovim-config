@@ -4,7 +4,7 @@ return {
   {
     'tpope/vim-fugitive',
     cmd = { 'Git', 'Gvdiffsplit', 'Gclog' },
-    Keys = {
+    keys = {
       {
         '<leader>gg',
         function()
