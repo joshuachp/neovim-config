@@ -10,9 +10,11 @@ local function prettier()
 end
 
 local function dprint()
+  local util = require('formatter.util')
+
   return {
     exe = 'dprint',
-    args = { 'fmt', '--stdin', "'" .. vim.api.nvim_buf_get_name(0) .. "'" },
+    args = { 'fmt', '--stdin', util.escape_path(util.get_current_buffer_file_path()) },
     stdin = true,
   }
 end
@@ -29,13 +31,9 @@ end
 
 --- Pass to formatter.nvim plugin config
 local function formatter_config()
-  local config_path = os.getenv('XDG_CONFIG_HOME')
-
-  if config_path == nil then
-    error('XDG_CONFIG_HOME not set')
-  end
-
   require('formatter').setup({
+    logging = true,
+    log_level = vim.log.levels.TRACE,
     filetype = {
       lua = {
         function()
@@ -69,7 +67,7 @@ local function formatter_config()
       typescriptreact = { prettier },
 
       -- dprint
-      json = { dprint },
+      json = { dprint, require('formatter.filetypes.json') },
       jsonc = { dprint },
       markdown = { dprint },
       toml = { dprint },
