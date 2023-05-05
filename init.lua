@@ -44,11 +44,12 @@ vim.opt.shortmess:append('c')
 --
 -- Files
 --
-vim.o.backup = false
-vim.o.swapfile = false
--- Undo
-vim.o.undodir = '/tmp/nvim/undo' -- save the undo file for until reboot
+-- Keep a swap file in the state directory as a backup if everything crashes
+vim.o.swapfile = true
+-- Keep a undo file as an alternative history in the state directory
 vim.o.undofile = true
+-- Do not keep a backup since we already have a swap file and a undo file
+vim.o.backup = false
 
 --
 -- Text
