@@ -2,9 +2,11 @@
 
 --- Prettier formatter function
 local function prettier()
+  local util = require('formatter.util')
+
   return {
     exe = 'prettier',
-    args = { '--stdin-filepath', "'" .. vim.api.nvim_buf_get_name(0) .. "'" },
+    args = { '--stdin-filepath', util.escape_path(util.get_current_buffer_file_path()) },
     stdin = true,
   }
 end
@@ -87,10 +89,25 @@ local function formatter_config()
   })
 end
 
+--- Sets up autoformat on save
+local function setup_autoformat()
+  local augroup = vim.api.nvim_create_augroup('FormatAugroup', { clear = true })
+
+  vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+    pattern = { '*.md' },
+    callback = function()
+      vim.cmd.FormatWrite()
+    end,
+  })
+end
+
 return {
   'mhartington/formatter.nvim',
   cmd = { 'Format' },
-  config = formatter_config,
+  config = function()
+    formatter_config()
+    setup_autoformat()
+  end,
   keys = {
     {
       '<leader>kf',

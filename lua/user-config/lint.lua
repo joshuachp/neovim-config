@@ -47,6 +47,16 @@ function M.setup()
     nix = { 'nix' },
     markdown = { 'vale' },
   }
+
+  vim.api.nvim_create_augroup('LintAugroup', {
+    clear = true,
+  })
+  vim.api.nvim_create_autocmd('BufWritePost', {
+    pattern = { '*.md' },
+    callback = function()
+      require('lint').try_lint()
+    end,
+  })
 end
 
 return M
