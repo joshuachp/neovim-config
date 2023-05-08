@@ -3,7 +3,7 @@ local M = {}
 local in_range = require('user-config.lsp.utils').in_range
 local SymbolKind = vim.lsp.protocol.SymbolKind
 
-local KindIcons = require('lspkind').presets.default
+local KindIcons = require('lspkind').presets.codicons
 
 --- Recursively visits a value and it children
 --- @param position table
