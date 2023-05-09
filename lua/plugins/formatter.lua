@@ -14,9 +14,20 @@ end
 local function dprint()
   local util = require('formatter.util')
 
+  -- fix for Cargo.toml formatting with an absolute path
+  local wd = vim.fn.getcwd() .. '/'
+  local path = util.get_current_buffer_file_path()
+  local prefix = path:sub(1, #wd)
+  if prefix == wd then
+    path = path:sub(#wd + 1)
+  else
+    local msg = ("Prefix doesn't match, expected `%s` but got `%s`"):format(wd, prefix)
+    vim.notify(msg, vim.log.levels.ERROR, { title = 'dprint' })
+  end
+
   return {
     exe = 'dprint',
-    args = { 'fmt', '--stdin', util.escape_path(util.get_current_buffer_file_path()) },
+    args = { 'fmt', '--stdin', util.escape_path(path) },
     stdin = true,
   }
 end
@@ -34,8 +45,6 @@ end
 --- Pass to formatter.nvim plugin config
 local function formatter_config()
   require('formatter').setup({
-    logging = true,
-    log_level = vim.log.levels.TRACE,
     filetype = {
       lua = {
         function()
