@@ -10,9 +10,15 @@ return {
     {
       '<leader>sf',
       function()
-        require('telescope.builtin').git_files({
+        local builtin = require('telescope.builtin')
+
+        local success = pcall(builtin.git_files, {
           show_untracked = true,
         })
+
+        if not success then
+          builtin.find_files()
+        end
       end,
       mode = 'n',
       desc = 'Find files in git repo',
