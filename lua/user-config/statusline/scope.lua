@@ -12,7 +12,7 @@ local KindIcons = require('lspkind').presets.codicons
 local function visit_value(scope, position, value)
   local range
   -- Check for deprecated SymbolInformation
-  if value['deprecated'] == true or value['location'] ~= nil then
+  if value['deprecated'] == true and value['location'] ~= nil then
     range = value['location']['range']
   else
     range = value['range']
