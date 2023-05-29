@@ -1,14 +1,6 @@
 --- UI-related plugins
 return {
   {
-    'folke/noice.nvim',
-    event = 'VeryLazy',
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-      'rcarriga/nvim-notify',
-    },
-  },
-  {
     'folke/trouble.nvim',
     dependencies = 'nvim-tree/nvim-web-devicons',
     keys = {
