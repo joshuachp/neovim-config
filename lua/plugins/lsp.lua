@@ -42,6 +42,7 @@ return {
             ['rust-analyzer'] = {
               procMacro = { enable = true },
               cargo = { buildScripts = { enable = true }, features = {} },
+              check = { command = { 'clippy' } },
             },
           },
           -- standalone file support
