@@ -38,6 +38,7 @@ return {
           end,
           on_attach = lsp.on_attach,
           capabilities = lsp.default_capabilities(),
+          offset_encoding = 'utf-16',
           settings = {
             ['rust-analyzer'] = {
               procMacro = { enable = true },
