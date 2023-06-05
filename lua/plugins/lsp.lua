@@ -38,6 +38,7 @@ return {
           end,
           on_attach = lsp.on_attach,
           capabilities = lsp.default_capabilities(),
+          -- Force offset_encoding to utf-16 to be compatible with copilot
           offset_encoding = 'utf-16',
           settings = {
             ['rust-analyzer'] = {

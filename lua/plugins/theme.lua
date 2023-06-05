@@ -5,6 +5,12 @@ return {
   config = function()
     require('gruvbox').setup({
       contrast = 'hard',
+      overrides = {
+        NormalFloat = {
+          bg = '#1d2021',
+          default = true,
+        },
+      },
     })
 
     vim.cmd.colorscheme('gruvbox')
