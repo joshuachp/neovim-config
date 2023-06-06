@@ -75,6 +75,7 @@ function M.configure_cmp()
       { name = 'nvim_lsp' },
       { name = 'nvim_lsp_signature_help' },
       { name = 'luasnip' },
+      { name = 'copilot' },
     }, {
       { name = 'path' },
       { name = 'buffer' },
@@ -83,6 +84,7 @@ function M.configure_cmp()
       format = lsp_kind.cmp_format({
         mode = 'symbol', -- show only symbol annotations
         maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+        symbol_map = { Copilot = '' },
 
         -- The function below will be called before any actual modifications from lspkind
         -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
