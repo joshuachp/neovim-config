@@ -26,7 +26,11 @@ function M.setup()
   end
 
   --- Packer.nvim configuration
-  lazy.setup('plugins')
+  lazy.setup('plugins', {
+    ui = {
+      border = 'rounded',
+    },
+  })
 end
 
 return M
