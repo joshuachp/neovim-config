@@ -58,7 +58,7 @@ vim.o.backup = false
 vim.o.conceallevel = 2
 vim.o.concealcursor = 'c'
 -- Text width
-vim.o.colorcolumn = 100
+vim.o.colorcolumn = '100'
 vim.o.textwidth = 100
 vim.o.wrap = false
 -- Tab length
