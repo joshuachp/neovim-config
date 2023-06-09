@@ -36,7 +36,11 @@ end
 
 --- Setup the diagnostics signs and configuration
 function M.setup()
-  vim.diagnostic.config({ virtual_text = { spacing = 8, source = 'if_many' }, signs = true, update_in_insert = true })
+  vim.diagnostic.config({
+    virtual_text = { spacing = 8, source = 'if_many' },
+    signs = true,
+    update_in_insert = true,
+  })
 
   M.signs()
   M.key_bindings()
