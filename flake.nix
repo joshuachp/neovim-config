@@ -18,18 +18,8 @@
     , nixpkgs
     , flake-utils
     , neovim-nightly-overlay
-    }:
-    let
-      supportedSystems = with flake-utils.lib.system; [
-        x86_64-linux
-        x86_64-darwin
-        aarch64-linux
-        aarch64-darwin
-      ];
-      eachSystemMap = flake-utils.lib.eachSystemMap supportedSystems;
-    in
-    {
-      nixosModules = rec {
+    }: {
+      nixosModules = {
         neovim-config =
           { config
           , pkgs
@@ -62,50 +52,42 @@
               };
             };
           };
-        default = neovim-config;
+        default = self.nixosModules.neovim-config;
       };
-      homeManagerModules = rec {
+      homeManagerModules = {
         neovim-config =
           { config
           , pkgs
           , lib
           , ...
           }: {
-            options = {
-              neovimWrapRc = lib.mkOption {
-                default = false;
-                type = lib.types.bool;
-                description = "Option to wrap the init.{vim,lua} file with the nix one.";
-              };
-            };
             config = {
               nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
               programs.neovim = {
-                enable = true;
                 plugins = [
-                  { plugin = pkgs.vimPlugins.nvim-treesitter.withAllGrammars; }
+                  pkgs.vimPlugins.nvim-treesitter.withAllGrammars
                 ];
               };
             };
           };
-        default = neovim-config;
+        default = self.homeManagerModules.neovim-config;
       };
-
-      devShells = eachSystemMap (system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-        in
-        {
-          default = pkgs.mkShell {
-            packages = with pkgs; [
-              pre-commit
-              # Language server for lua and vim config
-              sumneko-lua-language-server
-              nodePackages.vim-language-server
-              stylua
-            ];
-          };
-        }
-      );
-    };
+    } //
+    # Dev shells
+    flake-utils.lib.eachDefaultSystem (system:
+    let
+      pkgs = import nixpkgs { inherit system; };
+    in
+    {
+      devShells.default = pkgs.mkShell {
+        packages = with pkgs; [
+          pre-commit
+          # Language server for lua and vim config
+          sumneko-lua-language-server
+          nodePackages.vim-language-server
+          stylua
+        ];
+      };
+    }
+    );
 }
