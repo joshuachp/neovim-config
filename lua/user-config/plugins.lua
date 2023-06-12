@@ -25,10 +25,32 @@ function M.setup()
     lazy = require('lazy')
   end
 
-  --- Packer.nvim configuration
+  --- Include nix runtime paths
+  local nix_pkgs = {}
+  --- Load all the tree-sitter parsers
+  for s in vim.o.rtp:gmatch('([^,]+vim%-pack%-dir),') do
+    local path = s .. '/pack/myNeovimPackages/start'
+
+    for dir in vim.fs.dir(path) do
+      if dir ~= 'nvim-treesitter' then
+        table.insert(nix_pkgs, path .. '/' .. dir)
+      end
+    end
+  end
+
+  if nix_pkgs == nil then
+    vim.notify('Expected nix vim plugins path', vim.log.levels.ERROR, {})
+  end
+
+  --- Lazy.nvim configuration
   lazy.setup('plugins', {
     ui = {
       border = 'rounded',
+    },
+    performance = {
+      rtp = {
+        paths = nix_pkgs,
+      },
     },
   })
 end

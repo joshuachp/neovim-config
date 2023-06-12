@@ -106,7 +106,6 @@ return {
     end,
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
       {
         'sindrets/diffview.nvim',
         keys = {
