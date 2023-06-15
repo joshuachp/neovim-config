@@ -104,6 +104,31 @@ function M.setup()
   ls.add_snippets('rust', { s('test', { t({ '#[cfg(test)]', 'mod test {', '' }), i(1), t('', '}') }) })
   ls.add_snippets('rust', { s('pubfn', { t('pub fn '), i(1), t('() {'), i(2), t('}') }) })
 
+  -- Bash
+  ls.add_snippets('sh', {
+    s('prompt', {
+      t({
+        [[p='']],
+        'function prompt() {',
+        '    read -rp "$1 (y/n) " p',
+        '    if [ "$p" == "y" ]; then',
+        '        p="y"',
+        '    else',
+        '        p="n"',
+        '    fi',
+        '}',
+        'function run() {',
+        '    local cmd',
+        [[    cmd=$(echo "$1" | paste -sd' ' | sed 's/ \{2,\}/ /g')]],
+        [[    printf '\n$ %s\n' "$cmd"]],
+        '    echo "==="',
+        '    $cmd',
+        '    echo "==="',
+        '}',
+      }),
+    }),
+  })
+
   -- Configuration
   ls.config.setup({
     ext_opts = {
