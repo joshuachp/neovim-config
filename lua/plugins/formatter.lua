@@ -86,7 +86,7 @@ local function formatter_config()
 
       sql = {
         function()
-          return { exe = 'sqlfluff', args = { 'fix', '-f', '-' }, stdin = true }
+          return { exe = 'sqlfluff', args = { 'fix', '--dialect', 'sqlite', '-' }, stdin = true }
         end,
       },
       nix = {
