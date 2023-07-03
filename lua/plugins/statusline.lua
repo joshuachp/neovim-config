@@ -27,7 +27,7 @@ return {
       lua_line.setup({
         options = {
           globalstatus = true,
-          theme = 'gruvbox-material',
+          theme = 'gruvbox',
           component_separators = { left = '|', right = '|' },
           section_separators = { left = '', right = '' },
         },
