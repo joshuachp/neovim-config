@@ -26,7 +26,7 @@ return {
   -- Copilot
   {
     'zbirenbaum/copilot.lua',
-    event = 'InsertEnter',
+    event = 'UIEnter',
     cmd = { 'Copilot' },
     config = function()
       require('copilot').setup({

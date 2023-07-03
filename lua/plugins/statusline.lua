@@ -24,10 +24,14 @@ return {
         end
       end
 
+      local gruvbox = require('lualine.themes.gruvbox_dark')
+      gruvbox.insert.c.bg = gruvbox.normal.c.bg
+      gruvbox.insert.c.fg = gruvbox.normal.c.fg
+
       lua_line.setup({
         options = {
           globalstatus = true,
-          theme = 'gruvbox',
+          theme = gruvbox,
           component_separators = { left = '|', right = '|' },
           section_separators = { left = '', right = '' },
         },
