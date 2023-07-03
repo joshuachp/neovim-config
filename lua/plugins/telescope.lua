@@ -141,7 +141,7 @@ return {
           -- False will only do exact matching
           fuzzy = true,
           -- Override the generic sorter
-          override_generic_sorter = false,
+          override_generic_sorter = true,
           -- Use the fzf native extension as file sorter
           override_file_sorter = true,
           -- Make case sensitive only if uppercase letters are used
