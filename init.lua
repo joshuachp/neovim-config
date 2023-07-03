@@ -99,7 +99,7 @@ vim.opt.spelloptions:append({ 'camel' })
 --
 vim.o.termguicolors = true
 vim.o.title = true
--- set cmdheight=0
+vim.o.cmdheight = 0
 
 --
 -- Time
