@@ -59,7 +59,7 @@ return {
 
   -- Magit clone
   {
-    'TimUntersberger/neogit',
+    'NeogitOrg/neogit',
     cmd = { 'Neogit' },
     keys = {
       {
