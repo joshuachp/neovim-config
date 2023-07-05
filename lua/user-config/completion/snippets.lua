@@ -22,7 +22,7 @@ function M.setup()
 
   local seco_copyright = {
     t('This file is part of '),
-    c(1, { t('Astarte'), t('Hedgehog') }),
+    c(1, { t('Astarte'), t('Edgehog') }),
     t({ '.', ' ', 'Copyright ' }),
     f(function()
       return os.date('%Y')
