@@ -14,8 +14,10 @@ local function visit_value(scope, position, value)
   -- Check for deprecated SymbolInformation
   if value['deprecated'] == true and value['location'] ~= nil then
     range = value['location']['range']
-  else
+  elseif value['range'] ~= nil then
     range = value['range']
+  else
+    return {}
   end
 
   if in_range(position, range) then
