@@ -23,21 +23,4 @@ return {
       require('user-config.completion.snippets').setup()
     end,
   },
-  -- Copilot
-  {
-    'zbirenbaum/copilot.lua',
-    event = 'UIEnter',
-    cmd = { 'Copilot' },
-    config = function()
-      require('copilot').setup({
-        suggestion = {
-          auto_trigger = true,
-        },
-        filetypes = {
-          gitcommit = true,
-          markdown = true,
-        },
-      })
-    end,
-  },
 }

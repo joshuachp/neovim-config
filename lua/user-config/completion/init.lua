@@ -12,7 +12,6 @@ function M.configure_cmp()
   local cmp = require('cmp')
   local lsp_kind = require('lspkind')
   local luasnip = require('luasnip')
-  local copilot = require('copilot.suggestion')
 
   cmp.setup({
     snippet = {
@@ -64,8 +63,6 @@ function M.configure_cmp()
           luasnip.change_choice(1)
         elseif luasnip.expand_or_jump() then
           luasnip.expand_or_locally_jumpable()
-        elseif copilot.is_visible() then
-          copilot.accept()
         elseif has_words_before() then
           cmp.complete()
         else
@@ -102,14 +99,6 @@ function M.configure_cmp()
       }),
     },
   })
-  -- Hide copilot suggestion when menu is opened
-  cmp.event:on('menu_opened', function()
-    vim.b.copilot_suggestion_hidden = true
-  end)
-
-  cmp.event:on('menu_closed', function()
-    vim.b.copilot_suggestion_hidden = false
-  end)
 end
 
 return M
