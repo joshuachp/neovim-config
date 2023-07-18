@@ -134,6 +134,25 @@ function M.setup_servers()
     capabilities = capabilities,
     cmd = { 'elixir-ls' },
   })
+
+  lsp_config.rust_analyzer.setup({
+    on_init = function(client)
+      require('user-config.lsp.utils').on_init_custom_settings(client)
+
+      return true
+    end,
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+      ['rust-analyzer'] = {
+        procMacro = { enable = true },
+        cargo = { buildScripts = { enable = true }, features = {} },
+      },
+    },
+    -- standalone file support
+    -- setting it to false may improve startup time
+    standalone = false,
+  })
 end
 
 --- Register LSP keymaps
