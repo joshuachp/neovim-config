@@ -30,7 +30,9 @@ function M.key_bindings()
   end, { desc = 'Go to previous diagnostic' })
   --- Open the diagnostic into a floating window
   vim.keymap.set('n', '<leader>df', function()
-    vim.diagnostic.open_float()
+    vim.diagnostic.open_float({
+      border = 'rounded',
+    })
   end, { desc = 'Open diagnostic floating window' })
 end
 
