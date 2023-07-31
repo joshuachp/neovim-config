@@ -14,6 +14,7 @@ return {
   { 'folke/neodev.nvim' },
   -- Language server status
   {
+    enabled = false,
     'j-hui/fidget.nvim',
     tag = 'legacy',
     config = function()

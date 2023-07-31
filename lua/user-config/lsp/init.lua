@@ -2,9 +2,17 @@
 local M = {}
 
 --- Default on_attach for the lsp servers
---- @param client unknown
+---
+--- @param client lsp.Client
 --- @param bufnr integer
 function M.on_attach(client, bufnr)
+  --- @type lsp.ServerCapabilities
+  local server_capabilities = client.server_capabilities
+
+  if server_capabilities.inlayHintProvider then
+    vim.lsp.inlay_hint(bufnr, true)
+  end
+
   require('user-config.lsp').register_keymaps(bufnr)
   require('user-config.lsp').register_auto_cmd(bufnr, client)
 end

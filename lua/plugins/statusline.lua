@@ -27,6 +27,8 @@ return {
       local gruvbox = require('lualine.themes.gruvbox_dark')
       gruvbox.insert.c.bg = gruvbox.normal.c.bg
       gruvbox.insert.c.fg = gruvbox.normal.c.fg
+      gruvbox.command.c.bg = gruvbox.normal.c.bg
+      gruvbox.command.c.fg = gruvbox.normal.c.fg
 
       lua_line.setup({
         options = {
@@ -37,11 +39,19 @@ return {
         },
         sections = {
           lualine_a = { 'mode', { 'b:gitsigns_head', icon = '' } },
-          lualine_b = { 'filename', 'b:current_scope' },
+          lualine_b = { 'filename' },
           lualine_c = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
           lualine_x = { { 'diff', source = diff_source }, 'encoding', 'fileformat', 'filetype' },
           lualine_y = { 'progress' },
           lualine_z = { 'location' },
+        },
+        tabline = {
+          lualine_a = { 'buffers' },
+          lualine_b = { 'b:current_scope' },
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = { 'tabs' },
         },
         inactive_section = {
           lualine_a = {},
@@ -51,7 +61,15 @@ return {
           lualine_y = {},
           lualine_z = {},
         },
-        extensions = { 'fzf', 'fugitive', 'quickfix' },
+        extensions = {
+          'fugitive',
+          'lazy',
+          'man',
+          'nvim-dap-ui',
+          'nvim-tree',
+          'quickfix',
+          'trouble',
+        },
       })
     end,
   },

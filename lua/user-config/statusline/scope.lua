@@ -2,40 +2,31 @@ local M = {}
 
 local in_range = require('user-config.lsp.utils').in_range
 local SymbolKind = vim.lsp.protocol.SymbolKind
+local textDocumentSymbol = 'textDocument/documentSymbol'
 
 local KindIcons = require('lspkind').presets.codicons
 
 --- Recursively visits a value and it children
---- @param position table
---- @param value table
+--- @param position lsp.TextDocumentPositionParams
+--- @param value lsp.SymbolInformation|lsp.DocumentSymbol
 --- @return table
 local function visit_value(scope, position, value)
-  local range
-  -- Check for deprecated SymbolInformation
-  if value['deprecated'] == true and value['location'] ~= nil then
-    range = value['location']['range']
-  elseif value['range'] ~= nil then
-    range = value['range']
-  else
-    return {}
-  end
+  local range = value.range or value.location.range
 
   if in_range(position, range) then
-    local name = value['name']
-    local kind = SymbolKind[value['kind']]
+    local name = value.name
+    local kind = SymbolKind[value.kind]
     local icon = KindIcons[kind]
 
     local part
     if icon ~= nil then
       part = icon .. ' ' .. name
-    else
-      part = name
     end
 
     table.insert(scope, part)
 
-    if value['children'] ~= nil then
-      for _, child in pairs(value['children']) do
+    if value.children then
+      for _, child in pairs(value.children) do
         scope = visit_value(scope, position, child)
       end
     end
@@ -45,9 +36,13 @@ local function visit_value(scope, position, value)
 end
 
 --- Handler for the document symbol
-local function handler(position, err, result, _, _)
+--- @param position lsp.TextDocumentPositionParams
+--- @param err lsp.ResponseError|nil
+--- @param result lsp.SymbolInformation[]|lsp.DocumentSymbol[] document symbol is preferred
+local function handler(position, err, result)
   if err ~= nil then
-    return nil, err
+    vim.notify(err.message, vim.log.levels.ERROR, {})
+    return
   end
 
   local scope = {}
@@ -57,28 +52,37 @@ local function handler(position, err, result, _, _)
 
   local current_scope = table.concat(scope, '  ')
   vim.b.current_scope = current_scope
-
-  return scope
 end
 
-local function get_lsp_scope()
+--- Get the lsp_scope from the client
+--- @param client lsp.Client
+--- @return boolean
+local function get_lsp_scope(client)
   local params = vim.lsp.util.make_position_params()
 
   local position = params['position']
 
-  vim.lsp.buf_request(0, 'textDocument/documentSymbol', params, function(...)
-    handler(position, ...)
-  end)
+  local status, _ = client.request(textDocumentSymbol, params, function(err, result)
+    handler(position, err, result)
+  end, 0)
+
+  return status
 end
 
---- Check for documentSymbol
--- Check that there is at least one server with documentSymbolProvider
+--- Get the first client symbol
 --- @return boolean
-local function check_lsp_document_symbols()
-  local capabilities = vim.lsp.get_active_clients({ bufnr = 0 })
+local function first_client_lsp_document_symbols()
+  local capabilities = vim.lsp.get_clients({ bufnr = 0, method = textDocumentSymbol })
+
   for _, client in pairs(capabilities) do
-    if client.server_capabilities.documentSymbolProvider ~= nil then
-      return true
+    --- @type lsp.ServerCapabilities
+    local server_capabilities = client.server_capabilities
+
+    if server_capabilities.documentSymbolProvider then
+      -- Return if we successfully got the scope
+      if get_lsp_scope(client) then
+        return true
+      end
     end
   end
 
@@ -87,9 +91,13 @@ end
 
 --- Update the current scope
 function M.update_current_scope()
-  if check_lsp_document_symbols() then
-    get_lsp_scope()
+  local lsp_scope = first_client_lsp_document_symbols()
+
+  if lsp_scope then
+    return
   end
+
+  --- TODO: tree sitter scope
 end
 
 --- Register the CursorHold autocmd
