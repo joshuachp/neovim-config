@@ -18,76 +18,16 @@
     , nixpkgs
     , flake-utils
     , neovim-nightly-overlay
-    }: {
-      nixosModules = {
-        neovim-config =
-          { config
-          , pkgs
-          , lib
-          , ...
-          }: {
-            options = {
-              neovimWrapRc = lib.mkOption {
-                default = false;
-                type = lib.types.bool;
-                description = "Option to wrap the init.{vim,lua} file with the nix one.";
-              };
-            };
-            config = {
-              nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
-              programs.neovim = {
-                enable = true;
-                configure = {
-                  customRC = ''
-                    source $XDG_CONFIG_HOME/nvim/init.lua
-                  '';
-                  packages = {
-                    nvim-treesitter = {
-                      start = [
-                        pkgs.vimPlugins.nvim-treesitter.withAllGrammars
-                      ];
-                    };
-                  };
-                };
-              };
-            };
-          };
-        default = self.nixosModules.neovim-config;
-      };
-      homeManagerModules = {
-        neovim-config =
-          { config
-          , pkgs
-          , lib
-          , ...
-          }: {
-            config = {
-              nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
-              programs.neovim = {
-                plugins = [
-                  pkgs.vimPlugins.nvim-treesitter.withAllGrammars
-                ];
-              };
-            };
-          };
-        default = self.homeManagerModules.neovim-config;
-      };
-    } //
-    # Dev shells
-    flake-utils.lib.eachDefaultSystem (system:
+    }@inputs: {
+      nixosModules = import ./nix/nixosModules.nix inputs;
+      homeManagerModules = import ./nix/homeManagerModules.nix inputs;
+    } // flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = import nixpkgs { inherit system; };
+      inherit (pkgs) callPackage;
     in
     {
-      devShells.default = pkgs.mkShell {
-        packages = with pkgs; [
-          pre-commit
-          # Language server for lua and vim config
-          sumneko-lua-language-server
-          nodePackages.vim-language-server
-          stylua
-        ];
-      };
-    }
-    );
+      checks.check = callPackage ./nix/check.nix { };
+      devShells.default = callPackage ./nix/shell.nix { };
+    });
 }

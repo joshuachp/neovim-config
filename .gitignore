@@ -4,3 +4,4 @@
 /.luarc.json
 /.direnv/
 /lsp-settings.json
+/result
