@@ -27,6 +27,8 @@ return {
       local gruvbox = require('lualine.themes.gruvbox_dark')
       gruvbox.insert.c.bg = gruvbox.normal.c.bg
       gruvbox.insert.c.fg = gruvbox.normal.c.fg
+      gruvbox.command.c.bg = gruvbox.normal.c.bg
+      gruvbox.command.c.fg = gruvbox.normal.c.fg
 
       lua_line.setup({
         options = {
