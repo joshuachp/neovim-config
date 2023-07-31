@@ -115,6 +115,16 @@ return {
       mode = 'n',
       desc = 'Search marks',
     },
+    --- Spell suggest
+    --- Overwrite the default suggest with the telescope menu
+    {
+      'z=',
+      function()
+        require('telescope.builtin').spell_suggest()
+      end,
+      mode = 'n',
+      desc = 'Fix spell suggestion',
+    },
   },
   config = function()
     local telescope = require('telescope')
