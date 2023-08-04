@@ -14,6 +14,7 @@ return {
 
         local success = pcall(builtin.git_files, {
           show_untracked = true,
+          git_command = { 'git', 'ls-files', '--exclude-standard', '--cached', '--deduplicate' },
         })
 
         if not success then
