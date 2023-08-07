@@ -59,7 +59,6 @@ function M.setup_servers()
     'phpactor',
     'pyright',
     'svelte',
-    'tailwindcss',
     'texlab',
     'tsserver',
     'vimls',
@@ -141,6 +140,13 @@ function M.setup_servers()
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { 'elixir-ls' },
+  })
+
+  lsp_config.tailwindcss.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    -- Tailwind tend to lag wile editing simple markdown files
+    autostart = false,
   })
 
   lsp_config.rust_analyzer.setup({
