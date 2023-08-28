@@ -3,6 +3,7 @@ return {
   -- Tree-sitter
   {
     'nvim-treesitter/nvim-treesitter',
+    dir = vim.g.tree_sitter_path or nil,
     config = function()
       require('user-config.tree-sitter').setup()
     end,
