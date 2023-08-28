@@ -8,7 +8,10 @@
     # configured.
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        neovim-flake.url = "github:neovim/neovim/nightly?dir=contrib";
+      };
     };
     # Utils for the mapping the system variable etc.
     flake-utils.url = "github:numtide/flake-utils";
