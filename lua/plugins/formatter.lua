@@ -94,6 +94,14 @@ local function formatter_config()
           return { exe = 'nixpkgs-fmt', args = {}, stdin = true }
         end,
       },
+      fish = {
+        function()
+          return {
+            exe = 'fish_indent',
+            stdin = true,
+          }
+        end,
+      },
     },
   })
 end
