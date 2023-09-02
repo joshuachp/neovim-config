@@ -11,12 +11,7 @@ return {
       '<leader>sf',
       function()
         local builtin = require('telescope.builtin')
-
-        local success = pcall(builtin.git_files, {
-          show_untracked = true,
-          git_command = { 'git', 'ls-files', '--exclude-standard', '--cached', '--deduplicate' },
-        })
-
+        local success = pcall(builtin.git_files)
         if not success then
           builtin.find_files()
         end
@@ -146,7 +141,22 @@ return {
         file_ignore_patterns = { 'node_modules', '.git/', '.yarn' },
         mappings = { i = { ['<esc>'] = actions.close } },
       },
-      pickers = { find_files = { find_command = { 'fd', '--type', 'f', '--hidden' } } },
+      pickers = {
+        find_files = {
+          find_command = { 'fd', '--type', 'f', '--hidden' },
+        },
+        git_files = {
+          show_untracked = true,
+          git_command = { 'git', 'ls-files', '--exclude-standard', '--cached', '--deduplicate' },
+        },
+        git_branches = {
+          theme = 'dropdown',
+        },
+        spell_suggest = {
+          theme = 'cursor',
+          layout_config = { width = 0.3 },
+        },
+      },
       extensions = {
         fzf = {
           -- False will only do exact matching
