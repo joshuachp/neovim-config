@@ -1,69 +1,20 @@
 --- Configures git plugins and keymaps
 return {
-  -- Fugitive - Git wrapper
-  {
-    'tpope/vim-fugitive',
-    cmd = { 'Git', 'Gvdiffsplit', 'Gclog' },
-    keys = {
-      {
-        '<leader>gg',
-        function()
-          vim.cmd.Git()
-        end,
-        mode = 'n',
-        desc = 'Open vim fuggitive',
-      },
-      {
-        '<leader>gd',
-        function()
-          vim.cmd.Gvdiffsplit()
-        end,
-        mode = 'n',
-        desc = 'Open git diff',
-      },
-      {
-        '<leader>gm',
-        function()
-          vim.cmd.Git('mergetool')
-        end,
-        mode = 'n',
-        desc = 'Open git merge-tool',
-      },
-      {
-        '<leader>gl',
-        function()
-          vim.cmd.Git('log')
-        end,
-        mode = 'n',
-        desc = 'Open git log',
-      },
-      {
-        '<leader>glg',
-        function()
-          vim.cmd.Gclog()
-        end,
-        mode = 'n',
-        desc = 'Open git commit log',
-      },
-    },
-  },
-
   -- Git-signs - Git diff in gutter
   {
     'lewis6991/gitsigns.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-      require('gitsigns').setup()
+      require('gitsigns').setup({})
     end,
   },
-
   -- Magit clone
   {
     'NeogitOrg/neogit',
     cmd = { 'Neogit' },
     keys = {
       {
-        '<leader>go',
+        '<leader>gg',
         function()
           require('neogit').open()
         end,
@@ -84,6 +35,7 @@ return {
         -- customize displayed signs
         signs = signs,
         integrations = {
+          telescope = true,
           diffview = true,
         },
       })
@@ -93,19 +45,18 @@ return {
         vim.fn.sign_define('NeogitClosed:' .. key, {
           text = value[1],
           texthl = 'GruvboxYellowSign',
+          icon = '',
         })
         vim.fn.sign_define('NeogitOpen:' .. key, {
           text = value[2],
           texthl = 'GruvboxYellowSign',
+          icon = '',
         })
       end
-
-      -- Set the parser for NeogitCommitMessage to gitcommit to have syntax
-      -- highlight for Common Commit messages.
-      vim.treesitter.language.register('gitcommit', 'NeogitCommitMessage')
     end,
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
       {
         'sindrets/diffview.nvim',
         keys = {
