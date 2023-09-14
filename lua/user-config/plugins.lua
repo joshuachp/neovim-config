@@ -26,20 +26,25 @@ function M.setup()
   end
 
   --- Include nix runtime paths
-  local tree_sitter = {}
   local nix_rtp = {}
+  local remove = {}
   --- Load all the tree-sitter parsers
-  for s in vim.o.rtp:gmatch('([^,]+vim%-pack%-dir),') do
-    local path = s .. '/pack/myNeovimPackages/start'
-
-    for dir in vim.fs.dir(path) do
-      if dir == 'nvim-treesitter' then
-        --- Set nvim-treesitter path
-        vim.g.tree_sitter_path = path .. '/' .. dir
-      else
-        -- Make parsers available in the runtime path
-        table.insert(nix_rtp, path .. '/' .. dir)
+  for _, rtp in pairs(vim.opt.rtp:get()) do
+    if rtp:match('vim%-pack%-dir') then
+      --  Nix path
+      local path = rtp .. '/pack/myNeovimPackages/start'
+      for dir in vim.fs.dir(path) do
+        if dir == 'nvim-treesitter' then
+          --- Set nvim-treesitter path
+          vim.g.tree_sitter_path = path .. '/' .. dir
+        else
+          -- Make parsers available in the runtime path
+          table.insert(nix_rtp, path .. '/' .. dir)
+        end
       end
+    elseif rtp:match('lib/nvim') then
+      -- Remove bundled treesitter parsers
+      table.insert(remove, rtp)
     end
   end
 
@@ -58,6 +63,10 @@ function M.setup()
       },
     },
   })
+
+  for _, rtp in pairs(remove) do
+    vim.opt.rtp:remove(rtp)
+  end
 end
 
 return M
