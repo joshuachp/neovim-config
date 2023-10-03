@@ -101,7 +101,13 @@ function M.setup()
   })
 
   -- Rust
-  ls.add_snippets('rust', { s('test', { t({ '#[cfg(test)]', 'mod test {', '' }), i(1), t('', '}') }) })
+  ls.add_snippets('rust', {
+    s('test', {
+      t({ '#[cfg(test)]', 'mod tests {', '' }),
+      i(0),
+      t({ '', '}' }),
+    }),
+  })
   ls.add_snippets('rust', { s('pubfn', { t('pub fn '), i(1), t('() {'), i(2), t('}') }) })
 
   -- Bash
