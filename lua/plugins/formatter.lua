@@ -76,13 +76,14 @@ local function formatter_config()
       typescript = { prettier },
       javascriptreact = { prettier },
       typescriptreact = { prettier },
+      yaml = { prettier },
 
       -- dprint
+      dockerfile = { dprint },
       json = { dprint, require('formatter.filetypes.json') },
       jsonc = { dprint },
       markdown = { dprint },
       toml = { dprint },
-      yaml = { dprint },
 
       sql = {
         function()
