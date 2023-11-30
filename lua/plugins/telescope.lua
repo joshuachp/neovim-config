@@ -5,6 +5,7 @@ return {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    'nvim-telescope/telescope-ui-select.nvim',
   },
   keys = {
     {
@@ -168,9 +169,13 @@ return {
           -- Make case sensitive only if uppercase letters are used
           case_mode = 'smart_case',
         },
+        ['ui-select'] = {
+          require('telescope.themes').get_cursor(),
+        },
       },
     })
     telescope.load_extension('fzf')
+    telescope.load_extension('ui-select')
   end,
   cmd = { 'Telescope' },
 }
