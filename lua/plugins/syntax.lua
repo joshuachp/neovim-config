@@ -15,6 +15,23 @@ return {
       },
     },
   },
+  {
+    'cshuaimin/ssr.nvim',
+    config = function()
+      require('ssr').setup()
+    end,
+    keys = {
+      {
+        '<leader>kr',
+        function()
+          require('ssr').open()
+        end,
+        mode = { 'n', 'x' },
+        desc = 'Structure search and replace',
+      },
+    },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  },
   -- Markdown
   { 'dkarter/bullets.vim', ft = { 'markdown', 'markdown.pandoc' } },
   -- Golang
