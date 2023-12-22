@@ -1,4 +1,4 @@
---- Formatter configuration for each file tipe
+--- Formatter configuration for each file type
 
 --- Prettier formatter function
 local function prettier()
