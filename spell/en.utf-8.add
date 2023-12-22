@@ -109,7 +109,7 @@ Sha256
 Sottofasi
 Specializzatore
 Structs
-Svelt
+Svelte
 TIMESTAMP
 TLDR
 TODO
@@ -485,3 +485,8 @@ xml
 yaml
 zsh
 zstd
+ContainerNode
+deserialized
+deserialize
+Deserializes
+structs
