@@ -79,12 +79,20 @@ function M.configure_cmp()
     formatting = {
       format = lsp_kind.cmp_format({
         mode = 'symbol', -- show only symbol annotations
-        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
         preset = 'codicons',
+        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 
-        -- The function below will be called before any actual modifications from lspkind
+        ellipsis_char = '...',
+
+        ---- The function below will be called before any actual modifications from lspkind
         -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-        -- before = function(entry, vim_item) return vim_item end,
+        before = function(_entry, vim_item)
+          local m = vim_item.menu and vim_item.menu or ''
+          if #m > 20 then
+            vim_item.menu = string.sub(m, 1, 20) .. '...'
+          end
+          return vim_item
+        end,
       }),
     },
   })
