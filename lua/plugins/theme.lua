@@ -3,13 +3,11 @@ return {
   'ellisonleao/gruvbox.nvim',
   priority = 1000,
   config = function()
-    require('gruvbox').setup({
+    local gruvbox = require('gruvbox')
+    gruvbox.setup({
       contrast = 'hard',
       overrides = {
-        NormalFloat = {
-          bg = '#1d2021',
-          default = true,
-        },
+        NormalFloat = { bg = gruvbox.palette.dark0_hard },
       },
     })
 
