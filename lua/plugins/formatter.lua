@@ -42,6 +42,16 @@ local function shell_format()
   return { exe = 'shfmt', args = { '-i', '4', '-ci' }, stdin = true }
 end
 
+-- terraform
+local function terraform_fmt()
+  return { exe = 'terraform', args = { 'fmt', '-' }, stdin = true }
+end
+
+-- rustfmt
+local function rustfmt()
+  return { exe = 'rustfmt', args = { '--emit=stdout' }, stdin = true }
+end
+
 --- Pass to formatter.nvim plugin config
 local function formatter_config()
   require('formatter').setup({
@@ -57,11 +67,7 @@ local function formatter_config()
       },
       sh = { shell_format },
       zsh = { shell_format },
-      rust = {
-        function()
-          return { exe = 'rustfmt', args = { '--emit=stdout' }, stdin = true }
-        end,
-      },
+      rust = { rustfmt },
       go = {
         function()
           return { exe = 'gofmt', args = {}, stdin = true }
@@ -69,6 +75,7 @@ local function formatter_config()
       },
       c = { clang_format },
       cpp = { clang_format },
+      terrafrom = { terraform_fmt },
 
       -- Prettier
       php = { prettier },
