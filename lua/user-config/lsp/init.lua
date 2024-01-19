@@ -59,6 +59,7 @@ function M.setup_servers()
     'phpactor',
     'pyright',
     'svelte',
+    'terraformls',
     'texlab',
     'tsserver',
     'vimls',
