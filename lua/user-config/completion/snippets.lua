@@ -93,6 +93,7 @@ function M.setup()
     --- Shebang
     s('#!', {
       c(1, {
+        t({ '#!/usr/bin/env bash', '', 'set -exEuo pipefail', '' }),
         t({ '#!/usr/bin/env bash', '', 'set -euo pipefail', '' }),
         t('#!/bin/sh', ''),
         t('#!/usr/bin/env python', ''),
