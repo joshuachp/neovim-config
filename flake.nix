@@ -24,9 +24,30 @@
     , flake-utils
     , neovim-nightly-overlay
     , nvimTreesitter
-    }@inputs: {
-      nixosModules = import ./nix/nixosModules.nix inputs;
-      homeManagerModules = import ./nix/homeManagerModules.nix inputs;
+    }:
+    {
+      nixosModules = {
+        neovim = {
+          imports = [
+            ./nix/nixosModules.nix
+          ];
+          config = {
+            nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
+          };
+        };
+        default = self.nixosModules.neovim;
+      };
+      homeManagerModules = {
+        neovim = {
+          imports = [
+            ./nix/homeManagerModules.nix
+          ];
+          config = {
+            nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
+          };
+        };
+        default = self.homeManagerModules.neovim;
+      };
     } // flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = import nixpkgs { inherit system; };
