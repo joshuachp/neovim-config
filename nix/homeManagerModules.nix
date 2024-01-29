@@ -1,21 +1,12 @@
-{ self
-, neovim-nightly-overlay
+{ pkgs
 , ...
-}: {
-  neovim-config =
-    { config
-    , pkgs
-    , lib
-    , ...
-    }: {
-      config = {
-        nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
-        programs.neovim = {
-          plugins = [
-            pkgs.vimPlugins.nvim-treesitter.withAllGrammars
-          ];
-        };
-      };
+}:
+{
+  config = {
+    programs.neovim = {
+      plugins = [
+        pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+      ];
     };
-  default = self.homeManagerModules.neovim-config;
+  };
 }
