@@ -44,6 +44,9 @@ function M.on_init_custom_settings(client)
 
   --- Read the settings file
   local json = require('user-config.utils').read_json(settings_file)
+  if json == nil then
+    return
+  end
 
   local path = client.workspace_folders[1].name
 
@@ -62,7 +65,7 @@ end
 --- @param features string[]
 function M.rust_analyzer_enable_features(features)
   -- Get the rust_analyzer LSP client
-  local clients = vim.lsp.get_active_clients({ name = 'rust_analyzer' })
+  local clients = vim.lsp.get_clients({ name = 'rust_analyzer' })
 
   -- Check if there is a client attached
   if clients == nil or #clients == 0 then

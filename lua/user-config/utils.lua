@@ -88,11 +88,15 @@ end
 
 --- Read a json file into a table
 --- @param path string
---- @return unknown
+--- @return table|nil
 function M.read_json(path)
   local utils = require('user-config.utils')
 
   local file_content = io.open(path, 'r'):read('*a')
+
+  if file_content == nil then
+    return nil
+  end
 
   return utils.json_decode(file_content)
 end
