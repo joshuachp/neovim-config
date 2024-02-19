@@ -245,7 +245,7 @@ vim.cmd('command -nargs=* -bang NoteSearch call utils#NoteSearch(<q-args>, <bang
 -- Open the Inbox note in a new tab, use drop to jump to an already open tab
 vim.keymap.set('n', '<leader>nn', [[<cmd>tab drop $NOTE_PATH/inbox.md<CR>]], { desc = 'Open inbox note' })
 vim.keymap.set('n', '<leader>np', function()
-  require('user-config/utils').float_term_cmd('note --sync')
+  require('user-config.utils').float_term_cmd('note --sync')
 end, { desc = 'Sync notes' })
 vim.keymap.set('n', '<leader>ns', function()
   vim.cmd.NoteSearch()

@@ -11,4 +11,4 @@ setl makeprg=cmake
 
 nmap <buffer> <silent> <leader>mm <cmd>make! --build build<CR>
 nmap <buffer> <silent> <leader>mc <cmd>make! -B build -G Ninja<CR>
-nmap <buffer> <silent> <leader>mt <cmd>lua require('user-config/utils').float_term_cmd('ctest --test-dir build', false)<CR>
+nmap <buffer> <silent> <leader>mt <cmd>lua require('user-config.utils').float_term_cmd('ctest --test-dir build', false)<CR>
