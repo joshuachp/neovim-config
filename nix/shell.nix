@@ -4,6 +4,7 @@
 , nodePackages
 , stylua
 , nixpkgs-fmt
+, luajitPackages
 }:
 mkShell {
   packages = [
@@ -13,5 +14,6 @@ mkShell {
     nodePackages.vim-language-server
     stylua
     nixpkgs-fmt
+    luajitPackages.luacheck
   ];
 }

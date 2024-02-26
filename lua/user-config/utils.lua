@@ -61,16 +61,15 @@ function M.read_file(path)
   local err, fd = a.uv.fs_open(path, 'r', 438)
   assert(not err, err)
 
-  ---@diagnostic disable-next-line: redefined-local
-  local err, stat = a.uv.fs_fstat(fd)
+  local stat
+  err, stat = a.uv.fs_fstat(fd)
   assert(not err, err)
 
-  ---@diagnostic disable-next-line: redefined-local
-  local err, data = a.uv.fs_read(fd, stat.size, 0)
+  local data
+  err, data = a.uv.fs_read(fd, stat.size, 0)
   assert(not err, err)
 
-  ---@diagnostic disable-next-line: redefined-local
-  local err = a.uv.fs_close(fd)
+  err = a.uv.fs_close(fd)
   assert(not err, err)
 
   return data
