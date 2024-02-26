@@ -92,7 +92,12 @@ end
 function M.read_json(path)
   local utils = require('user-config.utils')
 
-  local file_content = io.open(path, 'r'):read('*a')
+  local file = io.open(path, 'r')
+  if file == nil then
+    return nil
+  end
+
+  local file_content = file:read('*a')
 
   if file_content == nil then
     return nil
