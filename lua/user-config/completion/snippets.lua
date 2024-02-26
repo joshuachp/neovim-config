@@ -6,7 +6,7 @@ local M = {}
 --- Setups the snippets
 function M.setup()
   local ls = require('luasnip')
-  local fmt = require('luasnip.extras.fmt').fmt
+  -- local fmt = require('luasnip.extras.fmt').fmt
   local types = require('luasnip.util.types')
   local s = ls.snippet
   -- local sn = ls.snippet_node

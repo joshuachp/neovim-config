@@ -119,6 +119,7 @@ local function setup_autoformat()
   local augroup = vim.api.nvim_create_augroup('FormatAugroup', { clear = true })
 
   vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+    group = augroup,
     pattern = { '*.md' },
     callback = function()
       vim.cmd.FormatWrite()

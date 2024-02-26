@@ -49,7 +49,7 @@ function M:add_template(pattern, file, data, path)
           data = data(ev)
         end
 
-        content = self:compile_template(content, data)
+        content = self.compile_template(content, data)
       end
 
       vim.api.nvim_buf_set_lines(ev.buf, 0, -1, false, vim.split(content, '\n'))
@@ -61,7 +61,7 @@ end
 --- @param template string The template to compile
 --- @param data table The data to compile the template with
 --- @return string The compiled template
-function M:compile_template(template, data)
+function M.compile_template(template, data)
   local compiled = template
 
   for key, value in pairs(data) do
