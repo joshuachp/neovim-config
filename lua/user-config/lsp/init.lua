@@ -161,7 +161,7 @@ function M.setup_servers()
     settings = {
       ['rust-analyzer'] = {
         procMacro = { enable = true },
-        cargo = { buildScripts = { enable = true }, features = {} },
+        cargo = { buildScripts = { enable = true }, features = 'all' },
       },
     },
     -- standalone file support
