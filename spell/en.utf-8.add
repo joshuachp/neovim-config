@@ -25,6 +25,7 @@ DML
 Deque
 Deref
 Deserialize
+Deserializes
 Distro
 ENUM
 EOF
@@ -196,9 +197,12 @@ css
 csv
 cwd
 dap
+datastream
 db
 desc
 deserialization
+deserialize
+deserialized
 deserializing
 diff
 digitalizzatore
@@ -218,6 +222,7 @@ eng
 ennupla
 ennuple
 entity
+enum
 enums
 enuple
 env
@@ -422,6 +427,7 @@ stringify
 stringstream
 strlen
 struct
+structs
 styles
 subquery
 svg
@@ -438,6 +444,7 @@ terminal
 tex
 texlive
 thead
+timestamp
 titlebar
 titlebars
 tmp
@@ -485,8 +492,3 @@ xml
 yaml
 zsh
 zstd
-ContainerNode
-deserialized
-deserialize
-Deserializes
-structs
