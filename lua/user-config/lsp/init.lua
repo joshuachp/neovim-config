@@ -10,7 +10,7 @@ function M.on_attach(client, bufnr)
   local server_capabilities = client.server_capabilities
 
   if server_capabilities.inlayHintProvider then
-    vim.lsp.inlay_hint.enable(bufnr, true)
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
 
   require('user-config.lsp').register_keymaps(bufnr)

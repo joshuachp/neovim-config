@@ -24,16 +24,16 @@ return {
         end
       end
 
-      local gruvbox = require('lualine.themes.gruvbox_dark')
-      gruvbox.insert.c.bg = gruvbox.normal.c.bg
-      gruvbox.insert.c.fg = gruvbox.normal.c.fg
-      gruvbox.command.c.bg = gruvbox.normal.c.bg
-      gruvbox.command.c.fg = gruvbox.normal.c.fg
+      -- local gruvbox = require('lualine.themes.gruvbox_dark')
+      -- gruvbox.insert.c.bg = gruvbox.normal.c.bg
+      -- gruvbox.insert.c.fg = gruvbox.normal.c.fg
+      -- gruvbox.command.c.bg = gruvbox.normal.c.bg
+      -- gruvbox.command.c.fg = gruvbox.normal.c.fg
 
       lua_line.setup({
         options = {
           globalstatus = true,
-          theme = gruvbox,
+          theme = 'auto',
           component_separators = { left = '|', right = '|' },
           section_separators = { left = '', right = '' },
         },
@@ -46,12 +46,12 @@ return {
           lualine_z = { 'location' },
         },
         tabline = {
-          lualine_a = { 'buffers' },
+          lualine_a = { 'tabs' },
           lualine_b = { 'b:current_scope' },
           lualine_c = {},
           lualine_x = {},
           lualine_y = {},
-          lualine_z = { 'tabs' },
+          lualine_z = {},
         },
         inactive_section = {
           lualine_a = {},
