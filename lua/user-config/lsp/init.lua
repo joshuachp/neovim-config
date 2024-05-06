@@ -3,7 +3,7 @@ local M = {}
 
 --- Default on_attach for the lsp servers
 ---
---- @param client lsp.Client
+--- @param client vim.lsp.Client
 --- @param bufnr integer
 function M.on_attach(client, bufnr)
   --- @type lsp.ServerCapabilities
@@ -50,12 +50,10 @@ function M.setup_servers()
   local server_list = {
     'bashls',
     'cmake',
-    -- 'cssls',
-    -- 'emmet_ls',
     'gopls',
     'hls',
     'html',
-    'nil_ls',
+    'nixd',
     'phpactor',
     'pyright',
     'svelte',
@@ -64,7 +62,8 @@ function M.setup_servers()
     'tsserver',
     'vimls',
     -- "angularls",
-    -- 'rnix',
+    -- 'cssls',
+    -- 'emmet_ls',
   }
   for _, lsp in ipairs(server_list) do
     lsp_config[lsp].setup({ on_attach = on_attach, capabilities = capabilities })
@@ -233,7 +232,7 @@ function M.register_keymaps(bufnr)
     vim.lsp.buf.rename()
   end, { buffer = bufnr, desc = 'Rename symbol' })
   vim.keymap.set('n', '<leader>lf', function()
-    vim.lsp.buf.format({ async = bufnr })
+    vim.lsp.buf.format({ bufnr = bufnr, async = true })
   end, { buffer = bufnr, desc = 'Format buffer' })
   vim.keymap.set('v', '<leader>lf', function()
     vim.lsp.buf.range_formatting()
