@@ -50,6 +50,7 @@ function M.setup_servers()
   local server_list = {
     'bashls',
     'cmake',
+    'cssls',
     'gopls',
     'hls',
     'html',
@@ -62,7 +63,6 @@ function M.setup_servers()
     'tsserver',
     'vimls',
     -- "angularls",
-    -- 'cssls',
     -- 'emmet_ls',
   }
   for _, lsp in ipairs(server_list) do
