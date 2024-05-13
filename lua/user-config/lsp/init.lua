@@ -53,7 +53,6 @@ function M.setup_servers()
     'cssls',
     'gopls',
     'hls',
-    'html',
     'nixd',
     'phpactor',
     'pyright',
@@ -71,14 +70,14 @@ function M.setup_servers()
 
   -- Replace the offsetEncoding in the table with offsetEncoding = { 'utf-16' },
   -- to fix the issue with multiple language servers encodings
-  local utf16Cap = vim.tbl_extend('force', capabilities, {
-    offsetEncoding = { 'utf-16' },
-  })
+  -- local utf16Cap = vim.tbl_extend('force', capabilities, {
+  --   offsetEncoding = { 'utf-16' },
+  -- })
 
   -- Server specific settings
   lsp_config.clangd.setup({
     on_attach = on_attach,
-    capabilities = utf16Cap,
+    capabilities = capabilities,
   })
 
   -- lsp_config.ccls.setup({
@@ -96,6 +95,12 @@ function M.setup_servers()
     capabilities = capabilities,
     cmd = { '/usr/bin/jdtls' },
     cmd_env = {},
+  })
+
+  lsp_config.html.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { 'html', 'templ', 'htmldjango' },
   })
 
   lsp_config.jsonls.setup({
@@ -154,12 +159,12 @@ function M.setup_servers()
     cmd = { 'elixir-ls' },
   })
 
-  lsp_config.tailwindcss.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    -- Tailwind tend to lag wile editing simple markdown files
-    autostart = false,
-  })
+  -- lsp_config.tailwindcss.setup({
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  --   -- Tailwind tend to lag wile editing simple markdown files
+  --   autostart = false,
+  -- })
 
   lsp_config.rust_analyzer.setup({
     on_init = function(client)

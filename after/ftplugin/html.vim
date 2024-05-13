@@ -4,7 +4,6 @@ if exists("b:did_after_ftplugin")
 endif
 let b:did_after_ftplugin = 1
 
-setl omnifunc^=emmet#completeTag
-set textwidth=100 colorcolumn=100
+setl textwidth=100 colorcolumn=100
 
 nmap <buffer> <leader>ke <Plug>(emmet-expand-abbr)<CR>
