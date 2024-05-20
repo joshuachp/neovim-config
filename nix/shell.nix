@@ -5,6 +5,7 @@
 , stylua
 , nixpkgs-fmt
 , luajitPackages
+, nix-prefetch-git
 }:
 mkShell {
   packages = [
@@ -15,5 +16,7 @@ mkShell {
     stylua
     nixpkgs-fmt
     luajitPackages.luacheck
+    # Scripts
+    nix-prefetch-git
   ];
 }

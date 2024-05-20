@@ -51,13 +51,17 @@
     } // flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = import nixpkgs { inherit system; };
-      nvim-treesitter = callPackage ./nix/treesitter.nix { inherit nvimTreesitter; };
       inherit (pkgs) callPackage;
+      treesitter-lock = callPackage ./nix/pkgs/treesitter-lock.nix { inherit nvimTreesitter; };
+      nvim-treesitter = callPackage ./nix/pkgs/nvim-treesitter.nix { inherit nvimTreesitter treesitter-lock; };
     in
     {
       checks.check = callPackage ./nix/check.nix { };
       devShells.default = callPackage ./nix/shell.nix { };
-      packages.nvim-treesitter = nvim-treesitter;
+      packages = {
+        inherit treesitter-lock nvim-treesitter;
+        update-parsers = callPackage ./nix/pkgs/update-parsers.nix { inherit treesitter-lock; };
+      };
     }) // {
       overlays.nvim-treesitter = import ./nix/treesitterOverlay.nix nvimTreesitter;
     };
