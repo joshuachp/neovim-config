@@ -3,13 +3,6 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    # We import hear the neovim overlay so we can pin it in the flake.lock and know that it will #
-    # work with our config. We re-export a nixos module that can be imported and is already
-    # configured.
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # Utils for the mapping the system variable etc.
     flake-utils.url = "github:numtide/flake-utils";
     # nvim-treesitter to have access to the lock file
@@ -22,7 +15,6 @@
     { self
     , nixpkgs
     , flake-utils
-    , neovim-nightly-overlay
     , nvimTreesitter
     }:
     {
@@ -31,9 +23,6 @@
           imports = [
             ./nix/nixosModules.nix
           ];
-          config = {
-            nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
-          };
         };
         default = self.nixosModules.neovim;
       };
@@ -42,9 +31,6 @@
           imports = [
             ./nix/homeManagerModules.nix
           ];
-          config = {
-            nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
-          };
         };
         default = self.homeManagerModules.neovim;
       };
