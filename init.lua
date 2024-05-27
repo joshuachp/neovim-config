@@ -76,7 +76,8 @@ vim.o.smartcase = true
 -- Incremental show replace
 vim.o.inccommand = 'split'
 -- VimGrep
-vim.o.grepprg = 'rg --color=never --vimgrep'
+vim.o.grepprg = 'rg --color=never --smart-case --vimgrep'
+vim.o.grepformat = '%f:%l:%c:%m'
 vim.opt.wildignore:append({ 'node_modules/**' })
 
 --
