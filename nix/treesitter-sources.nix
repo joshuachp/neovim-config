@@ -1,6 +1,7 @@
-{ fetchFromGitHub
-, fetchFromGitLab
-, fetchFromSourcehut
+{
+  fetchFromGitHub,
+  fetchFromGitLab,
+  fetchFromSourcehut,
 }:
 {
   ada = fetchFromGitHub {

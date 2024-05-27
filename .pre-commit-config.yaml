@@ -9,12 +9,12 @@ repos:
       - id: check-added-large-files
       - id: detect-private-key
   - repo: https://github.com/joshuachp/pre-commit-hooks
-    rev: 0.1.35
+    rev: 0.1.38
     hooks:
       - id: typos
       - id: committed
       - id: lua-stylua
       - id: lua-check
-      - id: nix-nixpkgs-fmt
+      - id: nix-nixfmt
       - id: nix-statix
       - id: nix-flake-check

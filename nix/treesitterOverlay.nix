@@ -1,7 +1,6 @@
-nvimTreesitter:
-final: prev:
-{
-  vimPlugins = prev.vimPlugins.extend (final': prev':
+nvimTreesitter: final: prev: {
+  vimPlugins = prev.vimPlugins.extend (
+    final': prev':
     let
       nvim-treesitter = prev.callPackage ./treesitter.nix {
         vimPlugins = prev';
@@ -10,5 +9,6 @@ final: prev:
     in
     {
       inherit nvim-treesitter;
-    });
+    }
+  );
 }
