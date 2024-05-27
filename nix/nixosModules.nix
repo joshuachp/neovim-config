@@ -1,7 +1,5 @@
-{ pkgs
-, lib
-, ...
-}: {
+{ pkgs, lib, ... }:
+{
   options = {
     neovimWrapRc = lib.mkOption {
       default = false;
@@ -18,9 +16,7 @@
         '';
         packages = {
           nvim-treesitter = {
-            start = [
-              pkgs.vimPlugins.nvim-treesitter.withAllGrammars
-            ];
+            start = [ pkgs.vimPlugins.nvim-treesitter.withAllGrammars ];
           };
         };
       };

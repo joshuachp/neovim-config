@@ -1,11 +1,12 @@
-{ mkShell
-, pre-commit
-, sumneko-lua-language-server
-, nodePackages
-, stylua
-, nixpkgs-fmt
-, luajitPackages
-, nix-prefetch-git
+{
+  mkShell,
+  pre-commit,
+  sumneko-lua-language-server,
+  nodePackages,
+  stylua,
+  nixpkgs-fmt,
+  luajitPackages,
+  nix-prefetch-git,
 }:
 mkShell {
   packages = [

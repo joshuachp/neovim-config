@@ -99,7 +99,7 @@ local function formatter_config()
       },
       nix = {
         function()
-          return { exe = 'nixpkgs-fmt', args = {}, stdin = true }
+          return { exe = 'nixfmt', args = {}, stdin = true }
         end,
       },
       fish = {

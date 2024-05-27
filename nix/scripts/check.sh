@@ -16,7 +16,7 @@ fi
 find . -type f -name '*.sh' -exec shellcheck {} + || error=true
 
 # Nix
-nixpkgs-fmt --check . || error=true
+nixfmt --check ./**/*.nix || error=true
 statix check . || error=true
 
 # Lua

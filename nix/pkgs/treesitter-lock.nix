@@ -1,17 +1,16 @@
-{ lib
-, stdenvNoCC
-, vimPlugins
-, nvimTreesitter
-, neovim
+{
+  lib,
+  stdenvNoCC,
+  vimPlugins,
+  nvimTreesitter,
+  neovim,
 }:
 let
   nvim-treesitter = vimPlugins.nvim-treesitter.overrideAttrs {
     src = nvimTreesitter;
     version = "0.0.0+rev=" + nvimTreesitter.shortRev;
   };
-  nvim = neovim.override {
-    configure.packages.all.start = [ nvim-treesitter ];
-  };
+  nvim = neovim.override { configure.packages.all.start = [ nvim-treesitter ]; };
 in
 stdenvNoCC.mkDerivation {
   name = "treesitter-lock";
