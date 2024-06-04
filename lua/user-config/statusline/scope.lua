@@ -72,7 +72,7 @@ end
 --- Get the first client symbol
 --- @return boolean
 local function first_client_lsp_document_symbols()
-  local capabilities = vim.lsp.get_clients({ bufnr = 0, method = textDocumentSymbol })
+  local capabilities = vim.lsp.get_active_clients({ bufnr = 0, method = textDocumentSymbol })
 
   for _, client in pairs(capabilities) do
     --- @type lsp.ServerCapabilities
