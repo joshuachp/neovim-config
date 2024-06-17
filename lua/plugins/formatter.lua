@@ -78,11 +78,13 @@ local function formatter_config()
       terrafrom = { terraform_fmt },
 
       -- Prettier
-      php = { prettier },
+      html = { prettier },
+      css = { prettier },
       javascript = { prettier },
       typescript = { prettier },
       javascriptreact = { prettier },
       typescriptreact = { prettier },
+      php = { prettier },
       yaml = { prettier },
 
       -- dprint
