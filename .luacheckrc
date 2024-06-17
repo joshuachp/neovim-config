@@ -22,6 +22,10 @@ read_globals = {
         read_only = false,
         other_fields = true,
       },
+      opt_local = {
+        read_only = false,
+        other_fields = true,
+      },
       -- callbacks
       notify = {
         read_only = false,
