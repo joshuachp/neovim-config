@@ -79,6 +79,8 @@ local function formatter_config()
 
       -- Prettier
       html = { prettier },
+      -- Needs the jinja2 plugin
+      htmldjango = { prettier },
       css = { prettier },
       javascript = { prettier },
       typescript = { prettier },
