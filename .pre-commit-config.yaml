@@ -9,7 +9,7 @@ repos:
       - id: check-added-large-files
       - id: detect-private-key
   - repo: https://github.com/joshuachp/pre-commit-hooks
-    rev: 0.1.38
+    rev: 0.1.39
     hooks:
       - id: typos
       - id: committed
@@ -18,3 +18,8 @@ repos:
       - id: nix-nixfmt
       - id: nix-statix
       - id: nix-flake-check
+      - id: run-dprint
+        types_or: [markdown]
+      - id: run-prettier
+        types_or: [yaml, json]
+        exclude: "^lazy-lock.json$"
