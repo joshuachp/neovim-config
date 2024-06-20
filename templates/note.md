@@ -1,7 +1,7 @@
 ---
 title: "$1"
 description: "$2"
-date: "{{date}}"
+created: "{{date}}"
 tags: []
 language: "$3"
 ---
