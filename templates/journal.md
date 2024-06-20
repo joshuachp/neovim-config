@@ -1,6 +1,7 @@
 ---
 title: "Jouranl {{date}}"
-date: "{{date}}"
+description: "Daily notes for the {{date}}"
+created: "{{date}}"
 tags: ["journal"]
 language: "en"
 ---

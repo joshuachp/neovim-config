@@ -5,9 +5,10 @@ set -exEuo pipefail
 parser_names=$(jq --raw-output 'keys.[]' <"$LOCK_FILE")
 
 # Fetchers and open attribute set
-echo "{ fetchFromGitHub
-, fetchFromGitLab
-, fetchFromSourcehut
+echo "{
+  fetchFromGitHub,
+  fetchFromGitLab,
+  fetchFromSourcehut,
 }:
 {"
 for name in $parser_names; do
