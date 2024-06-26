@@ -29,10 +29,12 @@ function M.configure_cmp()
       ['<C-Space>'] = cmp.mapping.complete({}),
       ['<C-q>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping(function(fallback)
-        if luasnip.choice_active() then
-          luasnip.jump(1)
-        elseif cmp.visible() then
-          cmp.confirm({ select = true })
+        if cmp.visible() then
+          if luasnip.expandable() then
+            luasnip.expand()
+          else
+            cmp.confirm({ select = true })
+          end
         else
           fallback()
         end
@@ -46,11 +48,16 @@ function M.configure_cmp()
       end),
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
-          cmp.select_next_item()
+          -- Confirm if only one entry is shown
+          if #cmp.get_entries() == 1 then
+            cmp.config({ select = true })
+          else
+            cmp.select_next_item()
+          end
         elseif luasnip.choice_active() then
           luasnip.change_choice(1)
-        elseif luasnip.expand_or_jump() then
-          luasnip.expand_or_locally_jumpable()
+        elseif luasnip.locally_jupable(1) then
+          luasnip.jump(1)
         elseif has_words_before() then
           cmp.complete()
         else
@@ -62,7 +69,7 @@ function M.configure_cmp()
       ['<S-Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
+        elseif luasnip.locally_jumpable(-1) then
           luasnip.jump(-1)
         else
           fallback()
@@ -75,7 +82,7 @@ function M.configure_cmp()
       { name = 'luasnip' },
     }, {
       { name = 'path' },
-      { name = 'buffer' },
+      { name = 'buffer', keyword_length = 3 },
     }),
     formatting = {
       format = lsp_kind.cmp_format({
