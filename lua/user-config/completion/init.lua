@@ -56,7 +56,7 @@ function M.configure_cmp()
           end
         elseif luasnip.choice_active() then
           luasnip.change_choice(1)
-        elseif luasnip.locally_jupable(1) then
+        elseif luasnip.locally_jumpable(1) then
           luasnip.jump(1)
         elseif has_words_before() then
           cmp.complete()
