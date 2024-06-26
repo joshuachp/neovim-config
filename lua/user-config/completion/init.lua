@@ -50,7 +50,7 @@ function M.configure_cmp()
         if cmp.visible() then
           -- Confirm if only one entry is shown
           if #cmp.get_entries() == 1 then
-            cmp.config({ select = true })
+            cmp.confirm({ select = true })
           else
             cmp.select_next_item()
           end
