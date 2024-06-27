@@ -58,6 +58,7 @@ function M.setup_servers()
     'gopls',
     'hls',
     'nixd',
+    'nushell',
     'phpactor',
     'pyright',
     'svelte',
