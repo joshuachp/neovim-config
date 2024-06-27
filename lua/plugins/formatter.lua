@@ -114,6 +114,13 @@ local function formatter_config()
           }
         end,
       },
+      nu = {
+        function()
+          return {
+            exe = 'nufmt',
+          }
+        end,
+      },
     },
   })
 end
