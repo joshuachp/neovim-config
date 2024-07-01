@@ -11,7 +11,10 @@ return {
     },
   },
   -- Neovim development
-  { 'folke/neodev.nvim' },
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua', -- only load on lua files
+  },
   -- Language server status
   {
     'j-hui/fidget.nvim',
