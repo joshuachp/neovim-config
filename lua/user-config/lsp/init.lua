@@ -13,9 +13,9 @@ function M.on_attach(client, bufnr)
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
 
-  vim.api.nvim_buf_set_option_value('formatexpr', 'v:lua.vim.lsp.formatexpr()', { buf = bufnr })
-  vim.api.nvim_buf_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = bufnr })
-  vim.api.nvim_buf_set_option_value('tagfunc', 'v:lua.vim.lsp.tagfunc', { buf = bufnr })
+  vim.api.nvim_set_option_value('formatexpr', 'v:lua.vim.lsp.formatexpr()', { buf = bufnr })
+  vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = bufnr })
+  vim.api.nvim_set_option_value('tagfunc', 'v:lua.vim.lsp.tagfunc', { buf = bufnr })
 
   require('user-config.lsp').register_keymaps(bufnr)
   require('user-config.lsp').register_auto_cmd(bufnr, client)

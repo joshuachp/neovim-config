@@ -1,6 +1,7 @@
 --- Rust ftplugin
 vim.opt_local.colorcolumn = '100'
 vim.opt_local.textwidth = 100
+vim.opt_local.suffixesadd:append({ '.rs' })
 
 vim.api.nvim_buf_create_user_command(0, 'RustEnableFeature', function(cmd)
   if #cmd.fargs == 0 then
