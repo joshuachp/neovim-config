@@ -13,9 +13,9 @@ function M.on_attach(client, bufnr)
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
 
-  vim.api.nvim_buf_set_option_value('formatexpr', 'v:lua.vim.lsp.formatexpr()', { buf = bufnr })
-  vim.api.nvim_buf_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = bufnr })
-  vim.api.nvim_buf_set_option_value('tagfunc', 'v:lua.vim.lsp.tagfunc', { buf = bufnr })
+  vim.api.nvim_set_option_value('formatexpr', 'v:lua.vim.lsp.formatexpr()', { buf = bufnr })
+  vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = bufnr })
+  vim.api.nvim_set_option_value('tagfunc', 'v:lua.vim.lsp.tagfunc', { buf = bufnr })
 
   require('user-config.lsp').register_keymaps(bufnr)
   require('user-config.lsp').register_auto_cmd(bufnr, client)
@@ -134,11 +134,45 @@ function M.setup_servers()
     },
   })
 
+  -- these variables are set by nix
+  local lua_path = {}
+  for path in string.gmatch(vim.env.LUA_PATH, '([^;]+)') do
+    if path ~= '' or path ~= nil then
+      table.insert(lua_path, path)
+    end
+  end
+  for path in string.gmatch(vim.env.LUA_CPATH, '([^;]+)') do
+    if path ~= '' or path ~= nil then
+      table.insert(lua_path, path)
+    end
+  end
+
+  local runtime = {
+    vim.env.VIMRUNTIME,
+    vim.env.HOME .. '/.local/share/nvim/lazy',
+  }
+
+  for _, path in ipairs(runtime) do
+    table.insert(lua_path, path .. '/?.lua')
+    table.insert(lua_path, path .. '/?/init.lua')
+  end
+
+  table.insert(lua_path, vim.env.HOME .. '/.config/nvim/?/init.lua')
+  table.insert(lua_path, vim.env.HOME .. '/.config/nvim/?.lua')
+
   lsp_config.lua_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
       Lua = {
+        runtime = {
+          version = 'LuaJIT',
+          path = lua_path,
+        },
+        workspace = {
+          checkThirdParty = false,
+          library = runtime,
+        },
         format = {
           enable = true,
           defaultConfig = {
@@ -146,7 +180,6 @@ function M.setup_servers()
             indent_size = '4',
           },
         },
-        runtime = { version = 'LuaJIT' },
         completion = {
           callSnippet = 'Replace',
         },

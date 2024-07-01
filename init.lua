@@ -78,7 +78,9 @@ vim.o.inccommand = 'split'
 -- VimGrep
 vim.o.grepprg = 'rg --color=never --smart-case --vimgrep'
 vim.o.grepformat = '%f:%l:%c:%m'
-vim.opt.wildignore:append({ 'node_modules/**' })
+-- Wild
+vim.o.wildmode = 'list:longest,list:full'
+vim.opt.wildignore:append({ 'node_modules', '.git' })
 
 --
 -- Movement
