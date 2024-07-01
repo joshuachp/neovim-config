@@ -80,6 +80,7 @@ function M.configure_cmp()
       { name = 'nvim_lsp' },
       { name = 'nvim_lsp_signature_help' },
       { name = 'luasnip' },
+      { name = 'lazydev', group_index = 0 },
     }, {
       { name = 'path' },
       { name = 'buffer', keyword_length = 3 },

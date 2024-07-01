@@ -1,0 +1,6 @@
+vim.keymap.set('n', '<leader>kp', function()
+  vim.cmd.PlantumlOpen()
+end, { buffer = true, desc = 'Open plantuml preview' })
+vim.keymap.set('n', '<leader>ks', function()
+  vim.cmd.PlantumlSave()
+end, { buffer = true, desc = 'Export plantuml diagram' })

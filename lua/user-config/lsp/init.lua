@@ -13,9 +13,9 @@ function M.on_attach(client, bufnr)
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
 
-  vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-  vim.api.nvim_buf_set_option(bufnr, 'tagfunc', 'v:lua.vim.lsp.tagfunc')
+  vim.api.nvim_buf_set_option_value('formatexpr', 'v:lua.vim.lsp.formatexpr()', { buf = bufnr })
+  vim.api.nvim_buf_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = bufnr })
+  vim.api.nvim_buf_set_option_value('tagfunc', 'v:lua.vim.lsp.tagfunc', { buf = bufnr })
 
   require('user-config.lsp').register_keymaps(bufnr)
   require('user-config.lsp').register_auto_cmd(bufnr, client)
@@ -35,9 +35,6 @@ end
 --- Setup LPS servers
 -- Install an configures the packages needed for completion and LSP
 function M.setup_servers()
-  --- Setup nvim development help
-  require('neodev').setup({})
-
   -- LSP configuration
   local lsp_config = require('lspconfig')
 
