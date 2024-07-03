@@ -154,8 +154,9 @@ function M.setup()
         --- ISO 8601 date
         return os.date('%Y-%m-%d')
       end),
-      t({ '', 'tags: []', 'language: en', '---', '', '' }),
-      t('# '),
+      t({ '', 'tags: []', 'language: ' }),
+      c(3, { t('en'), t('it') }),
+      t({ '', '---', '' }),
     }),
   })
 

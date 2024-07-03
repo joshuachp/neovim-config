@@ -35,6 +35,8 @@ function M.configure_cmp()
           else
             cmp.confirm({ select = true })
           end
+        elseif luasnip.choice_active() then
+          luasnip.jump(1)
         else
           fallback()
         end
