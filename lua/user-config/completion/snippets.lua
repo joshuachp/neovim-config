@@ -105,7 +105,7 @@ function M.setup()
   ls.add_snippets('rust', {
     s('test', {
       t({ '#[cfg(test)]', 'mod tests {', '' }),
-      i(0),
+      i(1),
       t({ '', '}' }),
     }),
   })
@@ -133,6 +133,29 @@ function M.setup()
         '    echo "==="',
         '}',
       }),
+    }),
+  })
+
+  -- Md
+  ls.add_snippets('markdown', {
+    s({ trig = 'frontmatter', name = 'frontmatter', desc = 'Frontmatter for the note' }, {
+      t({
+        '---',
+        'title: "',
+      }),
+      i(1),
+      t({
+        '"',
+        'description: "',
+      }),
+      i(2),
+      t({ '"', 'created: ' }),
+      f(function()
+        --- ISO 8601 date
+        return os.date('%Y-%m-%d')
+      end),
+      t({ '', 'tags: []', 'language: en', '---', '', '' }),
+      t('# '),
     }),
   })
 
