@@ -18,6 +18,8 @@ repos:
       - id: nix-nixfmt
       - id: nix-statix
       - id: nix-flake-check
+      - id: sh-check
+      - id: sh-fmt
       - id: run-dprint
         types_or: [markdown]
       - id: run-prettier
