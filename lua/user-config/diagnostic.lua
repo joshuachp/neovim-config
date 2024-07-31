@@ -41,7 +41,7 @@ function M.setup()
   vim.diagnostic.config({
     virtual_text = { spacing = 8, source = 'if_many' },
     signs = true,
-    update_in_insert = true,
+    update_in_insert = false,
   })
 
   M.signs()
