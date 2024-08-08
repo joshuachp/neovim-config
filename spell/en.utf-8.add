@@ -6,6 +6,7 @@ ASFD
 AST
 AUR
 Alacritty
+Astarte
 BAT0
 BTree
 Base64
@@ -156,7 +157,6 @@ args
 argv
 ascii
 assert
-astarte
 async
 atob
 auth
