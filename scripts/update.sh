@@ -13,6 +13,12 @@ is_git_clean() {
 
 is_git_clean
 
+git switch main
+
+git pull
+
+git switch --create chore/update
+
 nix flake update
 
 git add flake.lock
@@ -36,3 +42,9 @@ nix run .#update-parsers >./nix/treesitter-sources.nix
 git add nix/treesitter-sources.nix
 
 git commit -m 'chore(treesitter): update parsers sources'
+
+git push
+
+gh pr create \
+    --title 'chore(deps): update dependencies' \
+    --body 'Update nix flake.lock, lazy-lock.json and tree-sitter parsers.'
