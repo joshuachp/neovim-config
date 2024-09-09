@@ -1,6 +1,17 @@
 --- Color theme and highlight configuration
 return {
   {
+    'RRethy/base16-nvim',
+    priority = 1000,
+    config = function()
+      require('base16-colorscheme').with_config({
+        telescope = false,
+      })
+
+      vim.cmd('colorscheme base16-black-metal-bathory')
+    end,
+  },
+  {
     'ellisonleao/gruvbox.nvim',
     enabled = false,
     priority = 1000,
@@ -29,6 +40,7 @@ return {
   },
   {
     'rebelot/kanagawa.nvim',
+    enabled = false,
     priority = 1000,
     config = function()
       require('kanagawa').setup({

@@ -61,7 +61,7 @@ function M.setup_servers()
     'svelte',
     'terraformls',
     'texlab',
-    'tsserver',
+    'ts_ls',
     'vimls',
     -- "angularls",
     -- 'emmet_ls',
