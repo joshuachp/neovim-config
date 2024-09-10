@@ -4,11 +4,31 @@ return {
     'RRethy/base16-nvim',
     priority = 1000,
     config = function()
-      require('base16-colorscheme').with_config({
+      local base16 = require('base16-colorscheme')
+
+      base16.with_config({
         telescope = false,
       })
 
       vim.cmd('colorscheme base16-black-metal-bathory')
+      base16.setup({
+        base00 = '#000000',
+        base01 = '#121212',
+        base02 = '#222222',
+        base03 = '#555555',
+        base04 = '#999999',
+        base05 = '#c1c1c1',
+        base06 = '#999999',
+        base07 = '#c1c1c1',
+        base08 = '#5f8787',
+        base09 = '#aaaaaa',
+        base0A = '#e78a53',
+        base0B = '#fbcb97',
+        base0C = '#aaaaaa',
+        base0D = '#888888',
+        base0E = '#999999',
+        base0F = '#444444',
+      })
     end,
   },
   {
