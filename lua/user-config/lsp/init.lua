@@ -135,44 +135,20 @@ function M.setup_servers()
     },
   })
 
-  -- these variables are set by nix
-  local lua_path = {}
-  for path in string.gmatch(vim.env.LUA_PATH, '([^;]+)') do
-    if path ~= '' or path ~= nil then
-      table.insert(lua_path, path)
-    end
-  end
-  for path in string.gmatch(vim.env.LUA_CPATH, '([^;]+)') do
-    if path ~= '' or path ~= nil then
-      table.insert(lua_path, path)
-    end
-  end
-
-  local runtime = {
-    vim.env.VIMRUNTIME,
-    vim.env.HOME .. '/.local/share/nvim/lazy',
-  }
-
-  for _, path in ipairs(runtime) do
-    table.insert(lua_path, path .. '/?.lua')
-    table.insert(lua_path, path .. '/?/init.lua')
-  end
-
-  table.insert(lua_path, vim.env.HOME .. '/.config/nvim/?/init.lua')
-  table.insert(lua_path, vim.env.HOME .. '/.config/nvim/?.lua')
-
   lsp_config.lua_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
       Lua = {
+        diagnostics = { globals = { 'vim' } },
         runtime = {
           version = 'LuaJIT',
-          path = lua_path,
         },
         workspace = {
           checkThirdParty = false,
-          library = runtime,
+          library = {
+            vim.env.VIMRUNTIME,
+          },
         },
         format = {
           enable = true,
