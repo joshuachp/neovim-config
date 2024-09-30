@@ -19,20 +19,20 @@
   angular = fetchFromGitHub {
     owner = "dlvandenberg";
     repo = "tree-sitter-angular";
-    rev = "c473dbc54ca27f95d8928cfdb2a1a79300e16951";
-    hash = "sha256-TEdHRcZKXeEbRPfyUJ9rZ6+OFZn24OvArSo4C31Pyl4=";
+    rev = "745d3c65c2294aca1110b6b6ad6805124be605c9";
+    hash = "sha256-4i1B4r+V5QgBIPVJepQ7V2pJDQfafLxRG1sk4XZVrco=";
   };
   apex = fetchFromGitHub {
     owner = "aheber";
     repo = "tree-sitter-sfapex";
-    rev = "45994a30c6e421995ebc61f8c4c61cf75d249e27";
-    hash = "sha256-BvTP+E015IIuttg941rVa6v3bBDljq0gX6IlOKuz4fU=";
+    rev = "69330ef89fb6b7b2dd16b639d86811e9262c7369";
+    hash = "sha256-OO+KttgnPk18EtYmxNphn3if2p3QRNRrXQTYZOmmglc=";
   };
   arduino = fetchFromGitHub {
     owner = "ObserverOfTime";
     repo = "tree-sitter-arduino";
-    rev = "ce02903e3ae74c729e9415dc32c276447b1c8afd";
-    hash = "sha256-16HGIOG0qPdxA4yNwwrMUQ59mzj3bH/PNu0dqjb5u2Q=";
+    rev = "415ebc8f75eb02a748faa03f5af199f08ced120f";
+    hash = "sha256-cgmlrAeuCnocdjI/zvafMxmXPmOE7GnrC+HlNJcT1Y0=";
   };
   asm = fetchFromGitHub {
     owner = "RubixDev";
@@ -109,8 +109,8 @@
   c = fetchFromGitHub {
     owner = "tree-sitter";
     repo = "tree-sitter-c";
-    rev = "bc85948c0bec746ebe921f72d2296d47e17d4ea7";
-    hash = "sha256-nwo4V6eliE4P5ub3jx9DSBjLRjfFViMZKXfP1RdSMM8=";
+    rev = "f4c21152f1952a99f4744e8c41d3ffb8038ae78c";
+    hash = "sha256-DcW6KZVTjJtPx0iNXvizeAXWW8iaShKGF4+sHrwXPvs=";
   };
   c_sharp = fetchFromGitHub {
     owner = "tree-sitter";
@@ -181,8 +181,8 @@
   cpp = fetchFromGitHub {
     owner = "tree-sitter";
     repo = "tree-sitter-cpp";
-    rev = "b53713a1194daf625fca185d1e54e6988d97ea1e";
-    hash = "sha256-6Mo0C9AaC7+iDmx4BX2sdJmbwSIZE47/kInThrYUVow=";
+    rev = "30d2fa385735378388a55917e2910965fce19748";
+    hash = "sha256-O7EVmGvkMCLTzoxNc+Qod6eCTWs6y8DYVpQqw+ziqGo=";
   };
   css = fetchFromGitHub {
     owner = "tree-sitter";
@@ -223,8 +223,8 @@
   devicetree = fetchFromGitHub {
     owner = "joelspadin";
     repo = "tree-sitter-devicetree";
-    rev = "296b3c294a8bcfca6673296d99f9cd37049b8026";
-    hash = "sha256-im3RhkaeG7cDd0FwkJzjrUZXjrpHR4q6sQH2waMumOI=";
+    rev = "07a647c8fb70e6b06379a60526721e3141aa2fd2";
+    hash = "sha256-2uJEItLwoBoiB49r2XuO216Dhu9AnAa0p7Plmm4JNY8=";
   };
   dhall = fetchFromGitHub {
     owner = "jbellerb";
@@ -307,8 +307,8 @@
   elixir = fetchFromGitHub {
     owner = "elixir-lang";
     repo = "tree-sitter-elixir";
-    rev = "2c6e93171477973b38de4b1d2be427cc99f990a6";
-    hash = "sha256-WBvpJ0r7cp/xWvnqSk6q4mpyfLAAdIR//2ju6Xri3EY=";
+    rev = "ef124b83a3f3572b0af23db4efae3f8de06a15e1";
+    hash = "sha256-5fZK8dP+ldw3Uvi1wbD5Wq4jOK3CH/iUSGsQVjik2CI=";
   };
   elm = fetchFromGitHub {
     owner = "elm-tooling";
@@ -391,14 +391,20 @@
   fortran = fetchFromGitHub {
     owner = "stadelmanma";
     repo = "tree-sitter-fortran";
-    rev = "c52e978afadf3faed52bb3c8082cc472c915f4e7";
-    hash = "sha256-MQmS6IR/fyTo9qyYxt+g5kO4eToR6URrOHMN47rQ8kk=";
+    rev = "4a593dda9cbc050a6686187249f8350ceea292ce";
+    hash = "sha256-HsGDyjUymJHpaQ7ZlcTOg/fg4avVicnPf3zF9OoWQes=";
   };
   fsh = fetchFromGitHub {
     owner = "mgramigna";
     repo = "tree-sitter-fsh";
     rev = "fad2e175099a45efbc98f000cc196d3674cc45e0";
     hash = "sha256-91r1FCQTocDkhS5Tx0vnFliitMStVzNTpf6BwPyaqVM=";
+  };
+  fsharp = fetchFromGitHub {
+    owner = "ionide";
+    repo = "tree-sitter-fsharp";
+    rev = "f920105eec2d574eb911d7a25c81cdaa079a3f72";
+    hash = "sha256-iBuxpTtVkd9KiVLiTWrPgTbkZP7Go5V8KhZVsCCUimE=";
   };
   func = fetchFromGitHub {
     owner = "amaanq";
@@ -469,8 +475,8 @@
   gleam = fetchFromGitHub {
     owner = "gleam-lang";
     repo = "tree-sitter-gleam";
-    rev = "9586f38658da115c90e2d01099c83479eb0eea99";
-    hash = "sha256-EfuYnfz0E1I5F+9nFvp/uB+S4p6/9evlDlEEbWXCfBc=";
+    rev = "57c9951b290c8084d7c60b0aee7a2b30986ea031";
+    hash = "sha256-ieOvtZvOUwiJwJN6AtHVK91GTh+RKge9FMo+mYCtisk=";
   };
   glimmer = fetchFromGitHub {
     owner = "ember-tooling";
@@ -691,8 +697,8 @@
   inko = fetchFromGitHub {
     owner = "inko-lang";
     repo = "tree-sitter-inko";
-    rev = "3a8887ca16dd8add3905216ce63796d4097c7a6f";
-    hash = "sha256-kJ3xJGlLdvvcJIOoooOMf0BGpk88etQJhRS74enVmNQ=";
+    rev = "6f9c072d023c3886aabcd8012274461b35d2d0a9";
+    hash = "sha256-yZ4F5tREEgoiI7Q9MFVH9HIM6bYxb/qdd0lqZREZkIo=";
   };
   ispc = fetchFromGitHub {
     owner = "fab4100";
@@ -787,8 +793,8 @@
   koto = fetchFromGitHub {
     owner = "koto-lang";
     repo = "tree-sitter-koto";
-    rev = "d4109879ba1387d19095269a7473bd7d274ab848";
-    hash = "sha256-PKbxUSlLHBQBhOzQpaGpP24zmfxjRD9rO5I4OIeeL4g=";
+    rev = "cbf637e5163065934c827d254b293f4d2f08f523";
+    hash = "sha256-/yeC7pAk0QsPcuMfdp2l1MLGZlQ7CwgdMWNZe/hCfXU=";
   };
   kusto = fetchFromGitHub {
     owner = "Willem-J-an";
@@ -883,14 +889,14 @@
   markdown = fetchFromGitHub {
     owner = "MDeiml";
     repo = "tree-sitter-markdown";
-    rev = "d9287a6f36347064e55c36858e9e522eb652c1ad";
-    hash = "sha256-QFHPlvoJMTMepV1KxKXKjpiKMMmGzBO5mxxNcWKLO7s=";
+    rev = "b7eba93e6a3e588e259e831416ac11abdaa8616a";
+    hash = "sha256-lOLLHHMmNAtK+RLOSIt0GpeNRiMj3eu9jhSKS0HT370=";
   };
   markdown_inline = fetchFromGitHub {
     owner = "MDeiml";
     repo = "tree-sitter-markdown";
-    rev = "d9287a6f36347064e55c36858e9e522eb652c1ad";
-    hash = "sha256-QFHPlvoJMTMepV1KxKXKjpiKMMmGzBO5mxxNcWKLO7s=";
+    rev = "b7eba93e6a3e588e259e831416ac11abdaa8616a";
+    hash = "sha256-lOLLHHMmNAtK+RLOSIt0GpeNRiMj3eu9jhSKS0HT370=";
   };
   matlab = fetchFromGitHub {
     owner = "acristoffers";
@@ -967,8 +973,8 @@
   nix = fetchFromGitHub {
     owner = "cstrahan";
     repo = "tree-sitter-nix";
-    rev = "01bc5b18693055aab7a863d7608f4b3f85843cf8";
-    hash = "sha256-hzHCcKl3T+zEHhK5U4Ym+puvOjgr+etdDHNpuCbOSzU=";
+    rev = "fcf1857e254ab654e0fb73fe9706e33c52e79a5c";
+    hash = "sha256-ayiScuocBvhus3OUbQCSTxCdm/7+a61ATMpl3jFvCfY=";
   };
   norg = fetchFromGitHub {
     owner = "nvim-neorg";
@@ -997,14 +1003,14 @@
   ocaml = fetchFromGitHub {
     owner = "tree-sitter";
     repo = "tree-sitter-ocaml";
-    rev = "19639e5dcd68a34f7704ea2e39a5730308c2234c";
-    hash = "sha256-aG1Kf514T/MOQuUY3u9N7FStJXao6q3h9OPbCbLauNk=";
+    rev = "5f7a97e9757d8afe6c0b0b5dd8734cf59f35456e";
+    hash = "sha256-jBWNJpLtBHJ13g4c30W6YqGN9O7UoX7iqvz7ThtHi5A=";
   };
   ocaml_interface = fetchFromGitHub {
     owner = "tree-sitter";
     repo = "tree-sitter-ocaml";
-    rev = "19639e5dcd68a34f7704ea2e39a5730308c2234c";
-    hash = "sha256-aG1Kf514T/MOQuUY3u9N7FStJXao6q3h9OPbCbLauNk=";
+    rev = "5f7a97e9757d8afe6c0b0b5dd8734cf59f35456e";
+    hash = "sha256-jBWNJpLtBHJ13g4c30W6YqGN9O7UoX7iqvz7ThtHi5A=";
   };
   ocamllex = fetchFromGitHub {
     owner = "atom-ocaml";
@@ -1015,8 +1021,8 @@
   odin = fetchFromGitHub {
     owner = "amaanq";
     repo = "tree-sitter-odin";
-    rev = "d37b8f24f653378b268ec18404e9c14ad355b128";
-    hash = "sha256-QZn+XgVQXEaMZF4XkMfS4bHf/tQIersI8982JQyiXms=";
+    rev = "3fee7964bbfb2554deef12c224344f3870d15375";
+    hash = "sha256-skMbtAjulJXGpaAfi1Q/WgeiimWE/qlwsWmq6lWXaU8=";
   };
   org = fetchFromGitHub {
     owner = "milisims";
@@ -1045,8 +1051,8 @@
   perl = fetchFromGitHub {
     owner = "tree-sitter-perl";
     repo = "tree-sitter-perl";
-    rev = "458e694f63d59edc72a9fb321443f70f740e04e8";
-    hash = "sha256-WrIpkOyuCx0Tp3XjL10z41GXLEaZjYYzeqzxoISpZow=";
+    rev = "81c57e274c541c30d6c204c8dbceb90ec647ed8d";
+    hash = "sha256-xtsLJx9tzj3KNhlCDuXnAGBz3EYnJ/J+EJ0UKHVN4g4=";
   };
   php = fetchFromGitHub {
     owner = "tree-sitter";
@@ -1099,8 +1105,8 @@
   powershell = fetchFromGitHub {
     owner = "airbus-cert";
     repo = "tree-sitter-powershell";
-    rev = "fc15514b2f1dbba9c58528d15a3708f89eda6a01";
-    hash = "sha256-StVnRNM0HPevLSRDIDr+Sakjo+NqXYWPPUFjI29Cowo=";
+    rev = "ebe2ab2f642eda2072c68c8de02e83973c26f33c";
+    hash = "sha256-zWJUB0lbjJGGhi3ko4fSzay9n9P8nYhVOkKLrkyr0G0=";
   };
   printf = fetchFromGitHub {
     owner = "ObserverOfTime";
@@ -1243,8 +1249,8 @@
   re2c = fetchFromGitHub {
     owner = "amaanq";
     repo = "tree-sitter-re2c";
-    rev = "47aa19cf5f7aba2ed30e2b377f7172df76e819a6";
-    hash = "sha256-Mwnm8kN0xfAdGG00aUYrqPU0zyWbc6QH9Zlgb4on+do=";
+    rev = "c18a3c2f4b6665e35b7e50d6048ea3cff770c572";
+    hash = "sha256-2htX4730fNAO2NKEurDOXH1OIXFd0OfuIbH1ou3a20A=";
   };
   readline = fetchFromGitHub {
     owner = "ribru17";
@@ -1351,8 +1357,8 @@
   sflog = fetchFromGitHub {
     owner = "aheber";
     repo = "tree-sitter-sfapex";
-    rev = "45994a30c6e421995ebc61f8c4c61cf75d249e27";
-    hash = "sha256-BvTP+E015IIuttg941rVa6v3bBDljq0gX6IlOKuz4fU=";
+    rev = "69330ef89fb6b7b2dd16b639d86811e9262c7369";
+    hash = "sha256-OO+KttgnPk18EtYmxNphn3if2p3QRNRrXQTYZOmmglc=";
   };
   slang = fetchFromGitHub {
     owner = "theHamsta";
@@ -1393,14 +1399,14 @@
   soql = fetchFromGitHub {
     owner = "aheber";
     repo = "tree-sitter-sfapex";
-    rev = "45994a30c6e421995ebc61f8c4c61cf75d249e27";
-    hash = "sha256-BvTP+E015IIuttg941rVa6v3bBDljq0gX6IlOKuz4fU=";
+    rev = "69330ef89fb6b7b2dd16b639d86811e9262c7369";
+    hash = "sha256-OO+KttgnPk18EtYmxNphn3if2p3QRNRrXQTYZOmmglc=";
   };
   sosl = fetchFromGitHub {
     owner = "aheber";
     repo = "tree-sitter-sfapex";
-    rev = "45994a30c6e421995ebc61f8c4c61cf75d249e27";
-    hash = "sha256-BvTP+E015IIuttg941rVa6v3bBDljq0gX6IlOKuz4fU=";
+    rev = "69330ef89fb6b7b2dd16b639d86811e9262c7369";
+    hash = "sha256-OO+KttgnPk18EtYmxNphn3if2p3QRNRrXQTYZOmmglc=";
   };
   sourcepawn = fetchFromGitHub {
     owner = "nilshelmig";
@@ -1471,8 +1477,8 @@
   swift = fetchFromGitHub {
     owner = "alex-pinkus";
     repo = "tree-sitter-swift";
-    rev = "032930d6218d8ae23bde074cf29ce8d276b87533";
-    hash = "sha256-VhQ+OwkqOVJH9/R2eDVkCJbmh50EmZjVGX8Pk4uMGBw=";
+    rev = "4bff50b78b4d3c0517e4d0f0a344aca165f00146";
+    hash = "sha256-HNbYq9DFlSJjygMN5SlEHDA9WVPbLqWcYsBjySzsVxU=";
   };
   sxhkdrc = fetchFromGitHub {
     owner = "RaafatTurki";
@@ -1507,8 +1513,8 @@
   tact = fetchFromGitHub {
     owner = "tact-lang";
     repo = "tree-sitter-tact";
-    rev = "b3710fe2723bd9b285de7f3d0c0717bebf3f17bd";
-    hash = "sha256-FJj9kAPHyk0ZenwrwbPJJD+4rs5QTrh6KFIa4tmBr3w=";
+    rev = "09c57b6b9759560b4d067e0546c9953ee0e065da";
+    hash = "sha256-WyCBuWPTYzNEApxtACTNt7StYoaSXIR9oqrOUlIquOY=";
   };
   tcl = fetchFromGitHub {
     owner = "tree-sitter-grammars";
@@ -1525,8 +1531,8 @@
   templ = fetchFromGitHub {
     owner = "vrischmann";
     repo = "tree-sitter-templ";
-    rev = "0524da9e1f14b9b7d7d6d36608293f85a550b263";
-    hash = "sha256-4KFJpMZfJP9I66HGMSP5MsZU9dYN95enz4cCoMytt9M=";
+    rev = "80d1a04e6bf3ced1c924bcb05527aa2eaf3f6239";
+    hash = "sha256-BY+j+0kMWxGbtwFk96SWHZA9ugRz6E7pRZOOM5j1XKA=";
   };
   terraform = fetchFromGitHub {
     owner = "MichaHoffmann";
@@ -1555,8 +1561,8 @@
   tlaplus = fetchFromGitHub {
     owner = "tlaplus-community";
     repo = "tree-sitter-tlaplus";
-    rev = "a9f9c136baa9b73c63850be92301fb5f1fc9b2fd";
-    hash = "sha256-BakN8qW6IyEK2GfSpPDogiJXTZXGjRiHN0LNyVH7Z2Q=";
+    rev = "da9cf9793686e236327aadfbad449414c895bf84";
+    hash = "sha256-VlYgKg9K/veFqxHWqF3nEYsrRGub2xK9txFK71Kn9JA=";
   };
   tmux = fetchFromGitHub {
     owner = "Freed-Wu";
@@ -1657,8 +1663,8 @@
   v = fetchFromGitHub {
     owner = "vlang";
     repo = "v-analyzer";
-    rev = "4f93826aeb31066eb241f4ccbca61f052239803f";
-    hash = "sha256-Tl4q6QksNu7Pm0Pt8rJka6o55LNN2GN6zK732XmLXb8=";
+    rev = "bc5b3caa85f7a8d4597f51aeaf92b83162ed6b33";
+    hash = "sha256-44WUptfNjp4hsHa3BQLdzjRIiCyppzNNOqoqU/rJGNA=";
   };
   vala = fetchFromGitHub {
     owner = "vala-lang";
@@ -1777,7 +1783,7 @@
   zig = fetchFromGitHub {
     owner = "tree-sitter-grammars";
     repo = "tree-sitter-zig";
-    rev = "21e2218e0ec7f4e3c0640d16bf8c67e6f0a61e18";
-    hash = "sha256-BJ7rexbUbi92FRg5rhXTUpips4T9YtkEA/hVtd1tBFY=";
+    rev = "eb7d58c2dc4fbeea4745019dee8df013034ae66b";
+    hash = "sha256-iyb79SiMsV94RrWH/1Oi2aKBiX5io0Dp+zZf8qWZHwg=";
   };
 }
