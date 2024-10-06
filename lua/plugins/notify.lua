@@ -7,6 +7,18 @@ local severity = {
   vim.log.levels.TRACE,
 }
 
+local last_message = nil
+
+--- @type lsp.Handler
+--- @param params lsp.ShowMessageParams
+local function showMessage(_, params, _, _)
+  if params.message == last_message then
+    return
+  end
+
+  vim.notify(params.message, severity[params.type])
+end
+
 return {
   {
     'rcarriga/nvim-notify',
@@ -20,9 +32,7 @@ return {
 
       vim.notify = notify
 
-      vim.lsp.handlers['window/showMessage'] = vim.lsp.with(function(_, method, params, _)
-        vim.notify(method.message, severity[params.type])
-      end, {})
+      vim.lsp.handlers['window/showMessage'] = vim.lsp.with(showMessage, {})
     end,
   },
 }
