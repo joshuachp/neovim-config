@@ -32,14 +32,8 @@ fi
 
 is_git_clean
 
-nix flake update
-
-if ! git diff --quiet flake.lock; then
-    git add flake.lock
-    git commit -m 'chore(nix): update flake.lock'
-
-    changed+=', flake.lock'
-fi
+nix flake update --commit-lock-file
+changed+=', flake.lock'
 
 is_git_clean
 
