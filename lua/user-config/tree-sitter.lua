@@ -25,14 +25,10 @@ function M.setup()
 
         keymaps = {
           -- You can use the capture groups defined in textobjects.scm
-          ['af'] = '@function.outer',
-          ['if'] = '@function.inner',
-          ['ac'] = '@class.outer',
-          -- You can optionally set descriptions to the mappings (used in the desc parameter of
-          -- nvim_buf_set_keymap) which plugins like which-key display
+          ['af'] = { query = '@function.outer', desc = 'Select around a function' },
+          ['if'] = { query = '@function.inner', desc = 'Select inner part of function' },
+          ['ac'] = { query = '@class.outer', desc = 'Select around a class' },
           ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
-          -- You can also use captures from other query groups like `locals.scm`
-          ['as'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
         },
         -- You can choose the select mode (default is charwise 'v')
         --
@@ -56,6 +52,24 @@ function M.setup()
         -- * selection_mode: eg 'v'
         -- and should return true of false
         include_surrounding_whitespace = true,
+      },
+      swap = {
+        enable = true,
+        swap_next = {
+          ['<leader>rp'] = '@parameter.inner',
+        },
+        swap_previous = {
+          ['<leader>rP'] = '@parameter.inner',
+        },
+      },
+      lsp_interop = {
+        enable = true,
+        border = 'rounded',
+        floating_preview_opts = {},
+        peek_definition_code = {
+          ['<leader>df'] = '@function.outer',
+          ['<leader>dF'] = '@class.outer',
+        },
       },
     },
     -- Update the comment string options for embedded languages
