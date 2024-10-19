@@ -34,7 +34,7 @@ is_git_clean
 
 nix flake update
 
-if ! git diff --quiet lazy-lock.json; then
+if ! git diff --quiet flake.lock; then
     git add flake.lock
     git commit -m 'chore(nix): update flake.lock'
 
