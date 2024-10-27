@@ -55,7 +55,7 @@ local function handler(position, err, result)
 end
 
 --- Get the lsp_scope from the client
---- @param client lsp.Client
+--- @param client vim.lsp.Client
 --- @return boolean
 local function get_lsp_scope(client)
   local params = vim.lsp.util.make_position_params()
@@ -72,16 +72,17 @@ end
 --- Get the first client symbol
 --- @return boolean
 local function first_client_lsp_document_symbols()
-  local capabilities = vim.lsp.get_active_clients({ bufnr = 0, method = textDocumentSymbol })
+  local capabilities = vim.lsp.get_clients({ bufnr = 0, method = textDocumentSymbol })
 
   for _, client in pairs(capabilities) do
-    --- @type lsp.ServerCapabilities
     local server_capabilities = client.server_capabilities
 
-    if server_capabilities.documentSymbolProvider then
-      -- Return if we successfully got the scope
-      if get_lsp_scope(client) then
-        return true
+    if server_capabilities ~= nil then
+      if server_capabilities.documentSymbolProvider then
+        -- Return if we successfully got the scope
+        if get_lsp_scope(client) then
+          return true
+        end
       end
     end
   end
