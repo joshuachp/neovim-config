@@ -45,6 +45,10 @@ local function handler(position, err, result)
     return
   end
 
+  if result == nil then
+    return
+  end
+
   local scope = {}
   for _, value in pairs(result) do
     scope = visit_value(scope, position, value)
