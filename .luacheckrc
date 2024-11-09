@@ -18,6 +18,10 @@ read_globals = {
         read_only = false,
         other_fields = true,
       },
+      bo = {
+        read_only = false,
+        other_fields = true,
+      },
       o = {
         read_only = false,
         other_fields = true,

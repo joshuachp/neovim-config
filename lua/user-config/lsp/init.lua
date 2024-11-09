@@ -63,6 +63,7 @@ function M.setup_servers()
     'texlab',
     'ts_ls',
     'vimls',
+    'wgsl_analyzer',
     -- "angularls",
     -- 'emmet_ls',
   }

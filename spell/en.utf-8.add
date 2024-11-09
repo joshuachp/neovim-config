@@ -494,3 +494,6 @@ xml
 yaml
 zsh
 zstd
+WGPU
+shader
+shader

@@ -15,6 +15,14 @@ function M.setup()
       end
     end,
   })
+
+  -- custom filetype for wgsl
+  vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+    pattern = '*.wgsl',
+    callback = function()
+      vim.bo.filetype = 'wgsl'
+    end,
+  })
 end
 
 return M
