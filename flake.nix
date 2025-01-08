@@ -2,7 +2,7 @@
   description = "Neovim configuration";
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     # Utils for the mapping the system variable etc.
     flake-utils.url = "github:numtide/flake-utils";
     # nvim-treesitter to have access to the lock file
