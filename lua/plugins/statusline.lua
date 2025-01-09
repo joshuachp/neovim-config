@@ -13,6 +13,18 @@ return {
 
       lsp_scope.register_cursor_change()
 
+      -- macro recording
+      vim.api.nvim_create_autocmd({ 'RecordingEnter', 'RecordingLeave' }, {
+        group = vim.api.nvim_create_augroup('LualineRecordingSection', { clear = true }),
+        callback = function(e)
+          if e.event == 'RecordingLeave' then
+            vim.b.lualine_macro_recording = nil
+          else
+            vim.b.lualine_macro_recording = 'recording @' .. vim.fn.reg_recording()
+          end
+        end,
+      })
+
       local function diff_source()
         local gitsigns = vim.b.gitsigns_status_dict
         if gitsigns then
@@ -42,7 +54,7 @@ return {
           lualine_b = { 'filename' },
           lualine_c = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
           lualine_x = { { 'diff', source = diff_source }, 'encoding', 'fileformat', 'filetype' },
-          lualine_y = { 'progress' },
+          lualine_y = { 'b:lualine_macro_recording', 'progress' },
           lualine_z = { 'location' },
         },
         tabline = {
