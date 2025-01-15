@@ -118,6 +118,7 @@ local function formatter_config()
         function()
           return {
             exe = 'buldifier',
+            stdin = true,
           }
         end,
       },
