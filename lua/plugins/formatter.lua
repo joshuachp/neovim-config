@@ -114,6 +114,13 @@ local function formatter_config()
           }
         end,
       },
+      bzl = {
+        function()
+          return {
+            exe = 'buldifier',
+          }
+        end,
+      },
       nu = {
         function()
           return {
