@@ -117,7 +117,7 @@ local function formatter_config()
       bzl = {
         function()
           return {
-            exe = 'buldifier',
+            exe = 'buildifier',
             stdin = true,
           }
         end,
