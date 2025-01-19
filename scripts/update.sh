@@ -65,7 +65,9 @@ fi
 jj bookmark create chore/update -r '@-'
 jj git push --bookmark chore/update --allow-new
 
+# gh cannot determine the jj bookmark or git branch so passing head is necessary
 gh pr create \
+    --head "chore/update" \
     --title 'chore(deps): update dependencies' \
     --body "Update $changed."
 
