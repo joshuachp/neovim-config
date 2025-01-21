@@ -20,9 +20,6 @@ local function dprint()
   local prefix = path:sub(1, #wd)
   if prefix == wd then
     path = path:sub(#wd + 1)
-  else
-    local msg = ("Prefix doesn't match, expected `%s` but got `%s`"):format(wd, prefix)
-    vim.notify(msg, vim.log.levels.ERROR, { title = 'dprint' })
   end
 
   return {
