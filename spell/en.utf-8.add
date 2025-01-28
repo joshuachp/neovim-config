@@ -179,7 +179,6 @@ checkbox
 chr
 chrono
 clippy
-clonable
 cmd
 cmp
 coc
@@ -497,3 +496,4 @@ zstd
 WGPU
 shader
 shader
+MQTT
