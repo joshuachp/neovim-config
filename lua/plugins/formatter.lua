@@ -46,7 +46,7 @@ end
 
 -- rustfmt
 local function rustfmt()
-  return { exe = 'rustfmt', args = { '--emit=stdout' }, stdin = true }
+  return { exe = 'cargo', args = { 'fmt', '--' } }
 end
 
 --- Pass to formatter.nvim plugin config

@@ -131,6 +131,7 @@ VSR
 Vue
 WAL
 WASM
+WGPU
 WSDL
 Wi
 XDG
@@ -406,6 +407,7 @@ serde
 serializer
 serializzabile
 serializzabili
+shader
 sizeof
 snprintf
 sprintf
@@ -493,7 +495,3 @@ xml
 yaml
 zsh
 zstd
-WGPU
-shader
-shader
-MQTT
