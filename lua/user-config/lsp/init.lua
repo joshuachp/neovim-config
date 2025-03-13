@@ -185,13 +185,12 @@ function M.setup_servers()
   -- })
 
   lsp_config.rust_analyzer.setup({
-    on_init = function(client)
-      require('user-config.lsp.utils').on_init_custom_settings(client)
-
-      return true
-    end,
     on_attach = on_attach,
-    capabilities = capabilities,
+    capabilities = vim.tbl_extend('force', capabilities, {
+      experimental = {
+        serverStatusNotification = true,
+      },
+    }),
     settings = {
       ['rust-analyzer'] = {
         procMacro = { enable = true },

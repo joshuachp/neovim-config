@@ -62,6 +62,10 @@ function M.setup()
         paths = nix_rtp,
       },
     },
+    rocks = {
+      enabled = false,
+      hererocks = false,
+    },
   })
 
   for _, rtp in pairs(remove) do
