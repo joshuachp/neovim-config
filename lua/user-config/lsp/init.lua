@@ -193,6 +193,10 @@ function M.setup_servers()
     }),
     settings = {
       ['rust-analyzer'] = {
+        imports = {
+          granularity = { group = 'module' },
+          prefix = 'self',
+        },
         procMacro = { enable = true },
         cargo = { buildScripts = { enable = true }, features = 'all' },
       },
