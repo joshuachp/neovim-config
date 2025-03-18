@@ -131,10 +131,11 @@ function M.setup_servers()
         schemas = {
           ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
           kubernetes = {
-            '/infra/*',
+            '/**/infra/*',
             '/*deployment.yaml',
             '/*namespace.yaml',
             '/*storage.yaml',
+            'kubectl-edit-*.yaml',
           },
         },
       },
