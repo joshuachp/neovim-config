@@ -49,6 +49,7 @@ function M.setup_servers()
   -- Language servers
   --  List of the servers that only need to attach the process
   local server_list = {
+    'ansiblels',
     'bashls',
     'cmake',
     'cssls',
