@@ -110,7 +110,7 @@ function M.setup_servers()
   lsp_config.jsonls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
-    filetypes = { 'json', 'jsonc' },
+    cmd = { 'vscode-json-languageserver', '--stdio' },
     settings = {
       json = {
         schemas = {
@@ -119,6 +119,12 @@ function M.setup_servers()
             url = 'https://json.schemastore.org/prettierrc',
           },
           { fileMatch = { 'tsconfig.json' }, url = 'https://json.schemastore.org/tsconfig.json' },
+          { fileMatch = { 'tsconfig.json' }, url = 'https://json.schemastore.org/tsconfig.json' },
+          {
+            fileMatch = { '*.json' },
+            folderUri = '/home/joshuachp/share/repos/seco',
+            url = 'https://raw.githubusercontent.com/astarte-platform/astarte_core/refs/heads/master/specs/interface.json',
+          },
         },
       },
     },
