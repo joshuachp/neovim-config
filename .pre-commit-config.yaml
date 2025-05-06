@@ -15,9 +15,6 @@ repos:
       - id: committed
       - id: lua-stylua
       - id: lua-check
-      - id: nix-nixfmt
-      - id: nix-statix
-      - id: nix-flake-check
       - id: sh-check
       - id: sh-fmt
       - id: run-dprint

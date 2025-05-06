@@ -30,14 +30,6 @@ if has_changed; then
     changed+=', pre-commit-config.yaml'
 fi
 
-# Nix flake
-nix flake update
-if has_changed; then
-    jj commit -m 'chore(nix): update flake.lock'
-
-    changed+=', flake.lock'
-fi
-
 # Update Lazy packages
 nvim --headless "+Lazy! sync" +qa
 pre-commit run --files lazy-lock.json
@@ -45,14 +37,6 @@ if has_changed; then
     jj commit -m 'chore(lazy): update lazy-lock.json'
 
     changed+=', lazy-lock.json'
-fi
-
-# Tree-sitter parsers
-nix run .#update-parsers >./nix/treesitter-sources.nix
-if has_changed; then
-    jj commit -m 'chore(treesitter): update parsers sources'
-
-    changed+=', tree-sitter parsers'
 fi
 
 # PR message

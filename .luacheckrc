@@ -4,6 +4,11 @@ cache = true
 std = luajit
 codes = true
 
+exclude_files = {
+  -- WIP
+  'colors/custom.lua',
+}
+
 -- Global objects defined by the C code
 read_globals = {
   vim = {

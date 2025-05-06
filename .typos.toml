@@ -1,7 +1,2 @@
-[files]
-extend-exclude = [
-  "nix/treesitter-sources.nix",
-]
-
 [default.extend-words]
 opend = "opend"
