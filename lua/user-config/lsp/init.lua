@@ -107,6 +107,7 @@ function M.setup_servers()
     filetypes = { 'html', 'templ', 'htmldjango' },
   })
 
+  local url = 'https://raw.githubusercontent.com/astarte-platform/astarte_core/refs/heads/master/specs/interface.json'
   lsp_config.jsonls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
@@ -122,8 +123,8 @@ function M.setup_servers()
           { fileMatch = { 'tsconfig.json' }, url = 'https://json.schemastore.org/tsconfig.json' },
           {
             fileMatch = { '*.json' },
-            folderUri = '/home/joshuachp/share/repos/seco',
-            url = 'https://raw.githubusercontent.com/astarte-platform/astarte_core/refs/heads/master/specs/interface.json',
+            folderUri = '/var/home/j/oshuachp/share/repos/seco',
+            url = url,
           },
         },
       },

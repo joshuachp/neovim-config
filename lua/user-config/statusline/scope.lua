@@ -62,7 +62,7 @@ end
 --- @param client vim.lsp.Client
 --- @return boolean
 local function get_lsp_scope(client)
-  local params = vim.lsp.util.make_position_params()
+  local params = vim.lsp.util.make_position_params(0, 'utf-8')
 
   local position = params['position']
 
