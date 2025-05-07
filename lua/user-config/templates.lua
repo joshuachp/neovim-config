@@ -79,6 +79,9 @@ function M:note_template()
     return
   end
 
+  -- On Fedora SilverBlue the home is a link
+  note_path = vim.fn.resolve(note_path)
+
   local data = {
     date = os.date('%Y-%m-%d'),
   }
