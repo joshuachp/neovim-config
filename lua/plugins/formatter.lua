@@ -85,6 +85,7 @@ local function formatter_config()
       typescriptreact = { prettier },
       php = { prettier },
       yaml = { prettier },
+      ['yaml.ansible'] = { prettier },
 
       -- dprint
       dockerfile = { dprint },
