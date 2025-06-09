@@ -1,11 +1,14 @@
 --- LSP configuration
 local M = {}
 
---- Default on_attach for the lsp servers
----
---- @param client vim.lsp.Client
+--- On attach callback
 --- @param bufnr integer
-function M.on_attach(client, bufnr)
+--- @param client vim.lsp.Client
+function M.on_attach(bufnr, client)
+  vim.bo[bufnr].formatexpr = 'v:lua.vim.lsp.formatexpr()'
+  vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc()'
+  vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc()'
+
   --- @type lsp.ServerCapabilities
   local server_capabilities = client.server_capabilities
 
@@ -13,80 +16,53 @@ function M.on_attach(client, bufnr)
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
 
-  vim.api.nvim_set_option_value('formatexpr', 'v:lua.vim.lsp.formatexpr()', { buf = bufnr })
-  vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = bufnr })
-  vim.api.nvim_set_option_value('tagfunc', 'v:lua.vim.lsp.tagfunc', { buf = bufnr })
-
   require('user-config.lsp').register_keymaps(bufnr)
   require('user-config.lsp').register_auto_cmd(bufnr, client)
 end
 
---- Setup LPS servers
--- Install an configures the packages needed for completion and LSP
-function M.setup_servers()
-  -- LSP configuration
-  local lsp_config = require('lspconfig')
+--- Register on attach autocmds and capabilities
+function M.register_on_attach()
+  local group = vim.api.nvim_create_augroup('NeovimLSPUser', { clear = false })
 
-  local on_attach = M.on_attach
+  vim.api.nvim_create_autocmd('LspAttach', {
+    group = group,
+    callback = function(args)
+      local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+      local bufnr = args.buf
 
-  -- Handlers
-
-  ---
-  -- Language servers
-  --  List of the servers that only need to attach the process
-  local server_list = {
-    'ansiblels',
-    'bashls',
-    'clangd',
-    'cmake',
-    'cssls',
-    'gopls',
-    'hls',
-    'nixd',
-    'nushell',
-    'phpactor',
-    'pyright',
-    'svelte',
-    'terraformls',
-    'texlab',
-    'ts_ls',
-    'vimls',
-    'wgsl_analyzer',
-  }
-  for _, lsp in ipairs(server_list) do
-    lsp_config[lsp].setup({ on_attach = on_attach })
-  end
-
-  -- Replace the offsetEncoding in the table with offsetEncoding = { 'utf-16' },
-  -- to fix the issue with multiple language servers encodings
-  -- local utf16Cap = vim.tbl_extend('force', capabilities, {
-  --   offsetEncoding = { 'utf-16' },
-  -- })
-
-  -- lsp_config.ccls.setup({
-  --   on_attach = on_attach,
-  --   capabilities = capabilities,
-  --   init_options = {
-  --     compilationDatabaseDirectory = 'build',
-  --     index = { threads = 0 },
-  --     cache = { directory = '/tmp/ccls-cache' },
-  --   },
-  -- })
-
-  lsp_config.jdtls.setup({
-    on_attach = on_attach,
-    cmd = { '/usr/bin/jdtls' },
-    cmd_env = {},
+      M.on_attach(bufnr, client)
+    end,
   })
 
-  lsp_config.html.setup({
-    on_attach = on_attach,
+  -- Dynamic capabilities registration
+  vim.lsp.handlers['client/registerCapability'] = (function(overridden)
+    return function(err, res, ctx)
+      local result = overridden(err, res, ctx)
+      local client = vim.lsp.get_client_by_id(ctx.client_id)
+      if not client then
+        return
+      end
+
+      local bufnr = vim.api.nvim_get_current_buf()
+
+      M.on_attach(bufnr, client)
+
+      return result
+    end
+  end)(vim.lsp.handlers['client/registerCapability'])
+end
+
+--- Setup LPS servers
+-- Install an configures the packages needed for completion and LSP
+function M.setup()
+  M.register_on_attach()
+
+  vim.lsp.config('html', {
     filetypes = { 'html', 'templ', 'htmldjango' },
   })
 
   local url = 'https://raw.githubusercontent.com/astarte-platform/astarte_core/refs/heads/master/specs/interface.json'
-  lsp_config.jsonls.setup({
-    on_attach = on_attach,
+  vim.lsp.config('jsonls', {
     cmd = { 'vscode-json-languageserver', '--stdio' },
     settings = {
       json = {
@@ -107,8 +83,7 @@ function M.setup_servers()
     },
   })
 
-  lsp_config.yamlls.setup({
-    on_attach = on_attach,
+  vim.lsp.config('yamlls', {
     settings = {
       yaml = {
         schemas = {
@@ -125,49 +100,59 @@ function M.setup_servers()
     },
   })
 
-  lsp_config.lua_ls.setup({
-    on_attach = on_attach,
-    settings = {
-      Lua = {
-        diagnostics = { globals = { 'vim' } },
+  vim.lsp.config('lua_ls', {
+    on_init = function(client)
+      if client.workspace_folders then
+        local path = client.workspace_folders[1].name
+        if
+          path ~= vim.fn.stdpath('config')
+          and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+        then
+          return
+        end
+      end
+
+      client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
         runtime = {
+          -- Tell the language server which version of Lua you're using (most
+          -- likely LuaJIT in the case of Neovim)
           version = 'LuaJIT',
+          -- Tell the language server how to find Lua modules same way as Neovim
+          -- (see `:h lua-module-load`)
+          path = {
+            'lua/?.lua',
+            'lua/?/init.lua',
+          },
         },
+        -- Make the server aware of Neovim runtime files
         workspace = {
           checkThirdParty = false,
           library = {
             vim.env.VIMRUNTIME,
+            -- Depending on the usage, you might want to add additional paths
+            -- here.
+            '${3rd}/luv/library',
+            '${3rd}/busted/library',
+            '~/.local/share/nvim/lazy/',
           },
+          -- Or pull in all of 'runtimepath'.
+          -- NOTE: this is a lot slower and will cause issues when working on
+          -- your own configuration.
+          -- See https://github.com/neovim/nvim-lspconfig/issues/3189
+          -- library = {
+          --   vim.api.nvim_get_runtime_file('', true),
+          -- }
         },
-        format = {
-          enable = true,
-          defaultConfig = {
-            indent_style = 'space',
-            indent_size = '4',
-          },
-        },
-        completion = {
-          callSnippet = 'Replace',
-        },
+      })
+    end,
+    settings = {
+      Lua = {
         telemetry = { enable = false },
       },
     },
   })
 
-  lsp_config.elixirls.setup({
-    on_attach = on_attach,
-    cmd = { 'elixir-ls' },
-  })
-
-  -- lsp_config.tailwindcss.setup({
-  --   on_attach = on_attach,
-  --   capabilities = capabilities,
-  --   -- Tailwind tend to lag wile editing simple markdown files
-  --   autostart = false,
-  -- })
-
-  lsp_config.rust_analyzer.setup({
-    on_attach = on_attach,
+  vim.lsp.config('rust_analyzer', {
     settings = {
       ['rust-analyzer'] = {
         imports = {
@@ -181,6 +166,32 @@ function M.setup_servers()
     -- standalone file support
     -- setting it to false may improve startup time
     standalone = false,
+  })
+
+  vim.lsp.enable({
+    'ansiblels',
+    'bashls',
+    'clangd',
+    'cmake',
+    'cssls',
+    'elixir-ls',
+    'gopls',
+    'hls',
+    'html',
+    'jdtls',
+    'jsonls',
+    'lua_ls',
+    'nixd',
+    'nushell',
+    'phpactor',
+    'pyright',
+    'rust_analyzer',
+    'svelte',
+    'terraformls',
+    'texlab',
+    'ts_ls',
+    'vimls',
+    'wgsl_analyzer',
   })
 end
 
@@ -251,18 +262,23 @@ function M.register_keymaps(bufnr)
 end
 
 --- Register LSP autocmds
---- @param bufnr integer
---- @param client table
+--- @param client vim.lsp.Client
 function M.register_auto_cmd(bufnr, client)
-  local group = vim.api.nvim_create_augroup('NeovimLSPUser', { clear = true })
-
-  vim.api.nvim_create_autocmd('BufWritePre', {
-    group = group,
-    pattern = { '*.rs', '*.java', '*.c', '*.cpp' },
-    callback = function()
-      vim.lsp.buf.format({ async = false })
-    end,
-  })
+  local group = vim.api.nvim_create_augroup('NeovimLSPUser', { clear = false })
+  -- Auto-format ("lint") on save.
+  -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
+  if
+    not client:supports_method('textDocument/willSaveWaitUntil')
+    and client:supports_method('textDocument/formatting')
+  then
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      group = group,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ bufnr = bufnr, id = client.id, timeout_ms = 1000 })
+      end,
+    })
+  end
 
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_autocmd('CursorHold', {
