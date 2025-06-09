@@ -25,14 +25,15 @@ return {
     config = function()
       local notify = require('notify')
 
-      notify.setup({
-        timeout = 2000,
-        render = 'compact',
-      })
-
       vim.notify = notify
 
       vim.lsp.handlers['window/showMessage'] = showMessage
     end,
+    --- @type notify.Config
+    opts = {
+      merge_duplicates = true,
+      timeout = 2000,
+      render = 'compact',
+    },
   },
 }

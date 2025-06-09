@@ -2,9 +2,8 @@
 return {
   {
     'neovim/nvim-lspconfig',
-    priority = 50,
     config = function()
-      require('user-config.lsp').setup_servers()
+      require('user-config.lsp').setup()
     end,
   },
   -- Neovim development

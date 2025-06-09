@@ -4,7 +4,7 @@ local M = {}
 --- Setup tree-sitter
 function M.setup()
   require('nvim-treesitter.configs').setup({
-    -- ensure_installed = "maintained",
+    auto_install = false,
     highlight = { enable = true },
     incremental_selection = {
       enable = true,
@@ -38,9 +38,12 @@ function M.setup()
         -- and should return the mode ('v', 'V', or '<c-v>') or a table
         -- mapping query_strings to modes.
         selection_modes = {
-          ['@parameter.outer'] = 'v', -- charwise
-          ['@function.outer'] = 'V', -- linewise
-          ['@class.outer'] = '<c-v>', -- blockwise
+          -- charwise
+          ['@parameter.outer'] = 'v',
+          -- linewise
+          ['@function.outer'] = 'V',
+          -- blockwise
+          ['@class.outer'] = '<c-v>',
         },
         -- If you set this to `true` (default is `false`) then any textobject is
         -- extended to include preceding or succeeding whitespace. Succeeding
@@ -76,6 +79,11 @@ function M.setup()
     context_commentstring = {
       enable = true,
     },
+    -- Defaults
+    ensure_installed = {},
+    sync_install = false,
+    ignore_install = {},
+    modules = {},
   })
 
   -- Fold based on treesitter

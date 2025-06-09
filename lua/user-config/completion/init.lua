@@ -32,7 +32,7 @@ function M.configure_cmp()
       ['<CR>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           if luasnip.expandable() then
-            luasnip.expand()
+            luasnip.expand({})
           else
             cmp.confirm({ select = true })
           end
