@@ -115,10 +115,10 @@ vim.o.timeoutlen = 500
 --
 -- Providers
 --
-vim.g.loaded_python_provider = false -- disable Python 2 support
-vim.g.python3_host_prog = 'python'
-vim.g.loaded_perl_provider = false
-vim.g.loaded_ruby_provider = false
+vim.g.python3_host_prog = 'python3'
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python_provider = 0 -- disable Python 2 support
+vim.g.loaded_ruby_provider = 0
 
 --
 -- Commands

@@ -1,32 +1,23 @@
 --- Telescope plugin configuration
 return {
   'nvim-telescope/telescope.nvim',
+  tag = '0.1.8',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'nvim-tree/nvim-web-devicons',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    'nvim-tree/nvim-web-devicons',
     'nvim-telescope/telescope-ui-select.nvim',
   },
+  cmd = { 'Telescope' },
+  module = { 'telescope' },
   keys = {
     {
       '<leader>sf',
       function()
-        local builtin = require('telescope.builtin')
-        local success = pcall(builtin.git_files)
-        if not success then
-          builtin.find_files()
-        end
-      end,
-      mode = 'n',
-      desc = 'Find files in git repo',
-    },
-    {
-      '<leader>saf',
-      function()
         require('telescope.builtin').find_files()
       end,
       mode = 'n',
-      desc = 'Find in all files',
+      desc = 'Find in files',
     },
     {
       '<leader>sr',
@@ -85,9 +76,17 @@ return {
       mode = 'n',
       desc = 'Search git branches',
     },
+    {
+      '<leader>sgf',
+      function()
+        require('telescope.builtin').git_files()
+      end,
+      mode = 'n',
+      desc = 'Find in git files',
+    },
     -- Lsp
     {
-      '<leader>sld',
+      '<leader>sls',
       function()
         require('telescope.builtin').lsp_document_symbols()
       end,
@@ -113,9 +112,8 @@ return {
       desc = 'Search marks',
     },
     --- Spell suggest
-    --- Overwrite the default suggest with the telescope menu
     {
-      'z=',
+      '<leader>sS',
       function()
         require('telescope.builtin').spell_suggest()
       end,
@@ -129,26 +127,30 @@ return {
 
     telescope.setup({
       defaults = {
-        vimgrep_arguments = {
-          'rg',
-          '--color=never',
-          '--no-heading',
-          '--with-filename',
-          '--line-number',
-          '--column',
-          '--smart-case',
-          '--hidden',
-        },
-        file_ignore_patterns = { 'node_modules', '.git/', '.yarn' },
         mappings = { i = { ['<esc>'] = actions.close } },
+        file_ignore_patterns = {
+          '^.git/',
+          '^.jj/',
+          '^node_modules/',
+          '^target/',
+        },
       },
       pickers = {
+        live_grep = {
+          additional_args = {
+            '--hidden',
+          },
+        },
+        grep_string = {
+          additional_args = {
+            '--hidden',
+          },
+        },
         find_files = {
-          find_command = { 'fd', '--type', 'f', '--hidden' },
+          hidden = true,
         },
         git_files = {
           show_untracked = true,
-          git_command = { 'git', 'ls-files', '--exclude-standard', '--cached', '--deduplicate' },
         },
         git_branches = {
           theme = 'dropdown',
@@ -177,5 +179,4 @@ return {
     telescope.load_extension('fzf')
     telescope.load_extension('ui-select')
   end,
-  cmd = { 'Telescope' },
 }

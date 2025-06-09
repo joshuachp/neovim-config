@@ -21,17 +21,6 @@ function M.on_attach(client, bufnr)
   require('user-config.lsp').register_auto_cmd(bufnr, client)
 end
 
---- Generates the LSP client capabilities
---- @return table
-function M.default_capabilities()
-  -- Client capabilities
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  -- Setup capabilities for nvim-cmp
-  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-  return capabilities
-end
-
 --- Setup LPS servers
 -- Install an configures the packages needed for completion and LSP
 function M.setup_servers()
@@ -39,11 +28,8 @@ function M.setup_servers()
   local lsp_config = require('lspconfig')
 
   local on_attach = M.on_attach
-  local capabilities = M.default_capabilities()
 
   -- Handlers
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
-  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
 
   ---
   -- Language servers
@@ -51,6 +37,7 @@ function M.setup_servers()
   local server_list = {
     'ansiblels',
     'bashls',
+    'clangd',
     'cmake',
     'cssls',
     'gopls',
@@ -65,11 +52,9 @@ function M.setup_servers()
     'ts_ls',
     'vimls',
     'wgsl_analyzer',
-    -- "angularls",
-    -- 'emmet_ls',
   }
   for _, lsp in ipairs(server_list) do
-    lsp_config[lsp].setup({ on_attach = on_attach, capabilities = capabilities })
+    lsp_config[lsp].setup({ on_attach = on_attach })
   end
 
   -- Replace the offsetEncoding in the table with offsetEncoding = { 'utf-16' },
@@ -77,12 +62,6 @@ function M.setup_servers()
   -- local utf16Cap = vim.tbl_extend('force', capabilities, {
   --   offsetEncoding = { 'utf-16' },
   -- })
-
-  -- Server specific settings
-  lsp_config.clangd.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-  })
 
   -- lsp_config.ccls.setup({
   --   on_attach = on_attach,
@@ -96,21 +75,18 @@ function M.setup_servers()
 
   lsp_config.jdtls.setup({
     on_attach = on_attach,
-    capabilities = capabilities,
     cmd = { '/usr/bin/jdtls' },
     cmd_env = {},
   })
 
   lsp_config.html.setup({
     on_attach = on_attach,
-    capabilities = capabilities,
     filetypes = { 'html', 'templ', 'htmldjango' },
   })
 
   local url = 'https://raw.githubusercontent.com/astarte-platform/astarte_core/refs/heads/master/specs/interface.json'
   lsp_config.jsonls.setup({
     on_attach = on_attach,
-    capabilities = capabilities,
     cmd = { 'vscode-json-languageserver', '--stdio' },
     settings = {
       json = {
@@ -133,7 +109,6 @@ function M.setup_servers()
 
   lsp_config.yamlls.setup({
     on_attach = on_attach,
-    capabilities = capabilities,
     settings = {
       yaml = {
         schemas = {
@@ -152,7 +127,6 @@ function M.setup_servers()
 
   lsp_config.lua_ls.setup({
     on_attach = on_attach,
-    capabilities = capabilities,
     settings = {
       Lua = {
         diagnostics = { globals = { 'vim' } },
@@ -182,7 +156,6 @@ function M.setup_servers()
 
   lsp_config.elixirls.setup({
     on_attach = on_attach,
-    capabilities = capabilities,
     cmd = { 'elixir-ls' },
   })
 
@@ -195,11 +168,6 @@ function M.setup_servers()
 
   lsp_config.rust_analyzer.setup({
     on_attach = on_attach,
-    capabilities = vim.tbl_extend('force', capabilities, {
-      experimental = {
-        serverStatusNotification = true,
-      },
-    }),
     settings = {
       ['rust-analyzer'] = {
         imports = {
@@ -227,23 +195,26 @@ function M.register_keymaps(bufnr)
 
   -- Symbols
   vim.keymap.set('n', 'K', function()
-    vim.lsp.buf.hover()
+    vim.lsp.buf.hover({ border = 'rounded' })
   end, { buffer = bufnr, desc = 'Hover' })
   vim.keymap.set('n', '<leader>lk', function()
     vim.lsp.buf.hover()
   end, { buffer = bufnr, desc = 'Hover' })
-  vim.keymap.set('n', '<leader>ls', function()
-    vim.lsp.buf.signature_help()
+  vim.keymap.set('n', '<leader>lK', function()
+    vim.lsp.buf.signature_help({ border = 'rounded' })
   end, { buffer = bufnr, desc = 'Signature help' })
-  vim.keymap.set('n', '<leader>lS', function()
+  vim.keymap.set('n', '<leader>ls', function()
     vim.lsp.buf.document_symbol()
   end, { buffer = bufnr, desc = 'Document symbols' })
-  vim.keymap.set('n', '<leader>lw', function()
+  vim.keymap.set('n', '<leader>ls', function()
     vim.lsp.buf.workspace_symbol()
   end, { buffer = bufnr, desc = 'Query workspace symbols' })
   vim.keymap.set('n', '<leader>lx', function()
     vim.lsp.buf.references()
   end, { buffer = bufnr, desc = 'Show references' })
+  vim.keymap.set('n', '<leader>li', function()
+    vim.lsp.buf.implementation()
+  end, { buffer = bufnr, desc = 'Show implementations' })
 
   -- Navigation
   vim.keymap.set('n', 'gd', function()
@@ -255,11 +226,8 @@ function M.register_keymaps(bufnr)
   vim.keymap.set('n', '<leader>lgd', function()
     vim.lsp.buf.definition()
   end, { buffer = bufnr, desc = 'Go to definition' })
-  vim.keymap.set('n', '<leader>lgi', function()
-    vim.lsp.buf.implementation()
-  end, { buffer = bufnr, desc = 'Go to implementation' })
-  vim.keymap.set('n', '<leader>lgt', function()
-    vim.lsp.buf.type_definition()
+  vim.keymap.set('n', '<leader>lgD', function()
+    vim.lsp.buf.declaration()
   end, { buffer = bufnr, desc = 'Go to type definition' })
 
   -- Refactor

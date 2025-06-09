@@ -1,4 +1,5 @@
 --- Configure completion
+--- TODO: remove
 local M = {}
 
 local function has_words_before()

@@ -32,7 +32,7 @@ return {
 
       vim.notify = notify
 
-      vim.lsp.handlers['window/showMessage'] = vim.lsp.with(showMessage, {})
+      vim.lsp.handlers['window/showMessage'] = showMessage
     end,
   },
 }
