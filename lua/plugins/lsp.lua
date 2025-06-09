@@ -6,9 +6,6 @@ return {
     config = function()
       require('user-config.lsp').setup_servers()
     end,
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-    },
   },
   -- Neovim development
   {

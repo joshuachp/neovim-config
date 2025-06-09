@@ -2,26 +2,35 @@
 return {
   -- Auto completion
   {
-    'hrsh7th/nvim-cmp',
-    config = function()
-      require('user-config.completion').configure_cmp()
-    end,
+    'saghen/blink.cmp',
+    version = '1.*',
+    build = 'cargo build --release',
     dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
-      'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      -- Completion icons
-      'onsails/lspkind.nvim',
+      {
+        'L3MON4D3/LuaSnip',
+        build = 'make install_jsregexp',
+        config = function()
+          require('user-config.completion.snippets').setup()
+        end,
+      },
     },
-  },
-  -- Snippets
-  {
-    'L3MON4D3/LuaSnip',
-    run = 'make install_jsregexp',
-    config = function()
-      require('user-config.completion.snippets').setup()
-    end,
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      keymap = {
+        preset = 'super-tab',
+        ['<Enter>'] = { 'accept', 'fallback' },
+      },
+      appearance = {
+        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+        -- Adjusts spacing to ensure icons are aligned
+        nerd_font_variant = 'mono',
+      },
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+      },
+      snippets = { preset = 'luasnip' },
+      signature = { enabled = true },
+    },
   },
 }

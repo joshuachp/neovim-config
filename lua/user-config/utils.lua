@@ -48,7 +48,7 @@ function M.float_term_cmd(cmd, close_win, callback)
     end
   end
 
-  return vim.fn.termopen(cmd, options)
+  return vim.fn.jobstart(cmd, { term = true })
 end
 
 --- Read file using plenary and libuv
