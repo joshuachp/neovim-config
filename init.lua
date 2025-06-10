@@ -135,7 +135,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
   group = initVimGroup,
   callback = function()
-    vim.highlight.on_yank()
+    vim.hl.on_yank()
   end,
 })
 -- vim.api.nvim_create_autocmd("BufEnter", {
