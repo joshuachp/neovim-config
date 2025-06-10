@@ -18,8 +18,25 @@ return {
     ---@type blink.cmp.Config
     opts = {
       keymap = {
-        preset = 'super-tab',
-        ['<Enter>'] = { 'accept', 'fallback' },
+        preset = 'enter',
+        ['<Tab>'] = {
+          function(cmp)
+            if not cmp.snippet_active() then
+              return cmp.select_next()
+            end
+          end,
+          'snippet_forward',
+          'fallback',
+        },
+        ['<S-Tab>'] = {
+          function(cmp)
+            if not cmp.snippet_active() then
+              return cmp.select_prev()
+            end
+          end,
+          'snippet_backward',
+          'fallback',
+        },
       },
       appearance = {
         -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
