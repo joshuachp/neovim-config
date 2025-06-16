@@ -192,6 +192,7 @@ function M.setup()
     'ts_ls',
     'vimls',
     'wgsl_analyzer',
+    'yamlls',
   })
 end
 
