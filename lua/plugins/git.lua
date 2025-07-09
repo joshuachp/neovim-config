@@ -8,77 +8,27 @@ return {
       require('gitsigns').setup({})
     end,
   },
-  -- Magit clone
+  -- Diff viewer
   {
-    'NeogitOrg/neogit',
-    cmd = { 'Neogit' },
+    'sindrets/diffview.nvim',
     keys = {
       {
-        '<leader>gg',
+        '<leader>gdo',
         function()
-          require('neogit').open()
+          vim.cmd.DiffviewOpen()
         end,
         mode = 'n',
-        desc = 'Open neogit',
+        desc = 'Open diff-view',
       },
     },
-    config = function()
-      local signs = {
-        -- { CLOSED, OPENED }
-        section = { '', '' },
-        item = { '', '' },
-        hunk = { '', '' },
-      }
-
-      require('neogit').setup({
-        disable_builtin_notifications = true,
-        -- customize displayed signs
-        signs = signs,
-        integrations = {
-          telescope = true,
-          diffview = true,
-        },
-      })
-
-      -- Set color to the signs
-      for key, value in pairs(signs) do
-        vim.fn.sign_define('NeogitClosed:' .. key, {
-          text = value[1],
-          texthl = 'GruvboxYellowSign',
-          icon = '',
-        })
-        vim.fn.sign_define('NeogitOpen:' .. key, {
-          text = value[2],
-          texthl = 'GruvboxYellowSign',
-          icon = '',
-        })
-      end
-    end,
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
-      {
-        'sindrets/diffview.nvim',
-        keys = {
-          {
-            '<leader>gdo',
-            function()
-              vim.cmd.DiffviewOpen()
-            end,
-            mode = 'n',
-            desc = 'Open diff-view',
-          },
-        },
-        cmd = {
-          'DiffviewClose',
-          'DiffviewFileHistory',
-          'DiffviewFocusFiles',
-          'DiffviewOpen',
-          'DiffviewRefresh',
-          'DiffviewToggleFiles',
-        },
-        dependencies = 'nvim-lua/plenary.nvim',
-      },
+    cmd = {
+      'DiffviewClose',
+      'DiffviewFileHistory',
+      'DiffviewFocusFiles',
+      'DiffviewOpen',
+      'DiffviewRefresh',
+      'DiffviewToggleFiles',
     },
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
 }

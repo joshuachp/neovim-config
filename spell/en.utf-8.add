@@ -1,16 +1,12 @@
 ACK
 AMD
 ANTLR
-APIs
-ASFD
 AST
 AUR
 Alacritty
 BAT0
 BTree
 Base64
-BlackBerry
-Bleggi
 Bool
 Buf
 CDPATH
@@ -48,6 +44,7 @@ Gruvbox
 HASHMAP
 HDMI
 HashSet
+Hetzner
 ICMP
 IDE
 IResult
@@ -327,7 +324,6 @@ multivalore
 mut
 naersk
 nav
-neogit
 neomuttrc
 netrw
 new
@@ -494,4 +490,3 @@ xml
 yaml
 zsh
 zstd
-Hetzner
