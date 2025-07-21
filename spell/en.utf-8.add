@@ -162,12 +162,14 @@ awful
 axum
 backend
 backlight
+bindgen
 bindsym
 blockquote
 blog
 bluetooth
 btoa
 bufnr
+buildtime
 cachix
 calloc
 campionatore
