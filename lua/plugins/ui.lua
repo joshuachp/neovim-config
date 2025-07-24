@@ -20,17 +20,15 @@ return {
   },
   {
     'nvim-tree/nvim-web-devicons',
-    config = function()
-      require('nvim-web-devicons').setup({
-        override = {
-          ['.envrc'] = {
-            icon = '',
-            color = '#faf743',
-            cterm_color = '226',
-            name = 'EnvRc',
-          },
+    opts = {
+      override = {
+        ['.envrc'] = {
+          icon = '',
+          color = '#faf743',
+          cterm_color = '226',
+          name = 'EnvRc',
         },
-      })
-    end,
+      },
+    },
   },
 }

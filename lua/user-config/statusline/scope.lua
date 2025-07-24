@@ -7,7 +7,7 @@ local textDocumentSymbol = 'textDocument/documentSymbol'
 local KindIcons = require('lspkind').presets.codicons
 
 --- Recursively visits a value and it children
---- @param position lsp.TextDocumentPositionParams
+--- @param position lsp.Position
 --- @param value lsp.SymbolInformation|lsp.DocumentSymbol
 --- @return table
 local function visit_value(scope, position, value)
@@ -36,7 +36,7 @@ local function visit_value(scope, position, value)
 end
 
 --- Handler for the document symbol
---- @param position lsp.TextDocumentPositionParams
+--- @param position lsp.Position
 --- @param err lsp.ResponseError|nil
 --- @param result lsp.SymbolInformation[]|lsp.DocumentSymbol[] document symbol is preferred
 local function handler(position, err, result)
@@ -66,7 +66,7 @@ local function get_lsp_scope(client)
 
   local position = params['position']
 
-  local status, _ = client.request(textDocumentSymbol, params, function(err, result)
+  local status, _ = client:request(textDocumentSymbol, params, function(err, result)
     handler(position, err, result)
   end, 0)
 
