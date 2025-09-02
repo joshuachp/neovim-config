@@ -5,11 +5,6 @@ function M.setup_dap()
   local dap = require('dap')
   local dap_config = require('user-config.debug')
 
-  vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'debugBreakpoint', linehl = '', numhl = '' })
-  vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = 'debugBreakpoint', linehl = '', numhl = '' })
-  vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'debugBreakpoint', linehl = '', numhl = '' })
-  vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'debugBreakpoint', linehl = '', numhl = '' })
-
   -- Configure debuggers
   dap.adapters.lldb = { type = 'executable', command = 'lldb-vscode', name = 'lldb' }
 

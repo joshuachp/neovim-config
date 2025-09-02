@@ -1,14 +1,6 @@
 --- Diagnostic setup
 local M = {}
 
---- Defines the signs for each level
-function M.signs()
-  vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = '' })
-  vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn', linehl = '', numhl = '' })
-  vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo', linehl = '', numhl = '' })
-  vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint', linehl = '', numhl = '' })
-end
-
 --- Keybindings for diagnostics
 function M.key_bindings()
   -- Diagnostic
@@ -40,11 +32,18 @@ end
 function M.setup()
   vim.diagnostic.config({
     virtual_text = { spacing = 8, source = 'if_many' },
-    signs = true,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.HINT] = '',
+        [vim.diagnostic.severity.INFO] = '',
+        [vim.diagnostic.severity.WARN] = '',
+        [vim.diagnostic.severity.ERROR] = '',
+      },
+    },
+    severity_sort = true,
     update_in_insert = false,
   })
 
-  M.signs()
   M.key_bindings()
 end
 
