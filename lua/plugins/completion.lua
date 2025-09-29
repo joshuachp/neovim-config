@@ -1,40 +1,49 @@
 --- Setup completion packages.
+
+--- If the snippet popup menu is visible it will feed the provided key
+--- @param key string
+local function snippet_popup(key)
+  if vim.fn.pumvisible() == 0 then
+    return false
+  end
+  local feedkey = vim.api.nvim_replace_termcodes(key, true, false, true)
+  vim.api.nvim_feedkeys(feedkey, 'n', false)
+  return true
+end
+
 return {
   -- Auto completion
   {
     'saghen/blink.cmp',
     version = '1.*',
     build = 'cargo build --release',
-    dependencies = {
-      {
-        'L3MON4D3/LuaSnip',
-        build = 'make install_jsregexp',
-        config = function()
-          require('user-config.completion.snippets').setup()
-        end,
-      },
-    },
+    dependencies = {},
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
       keymap = {
         preset = 'enter',
         ['<Tab>'] = {
-          function(cmp)
-            if not cmp.snippet_active() then
-              return cmp.select_next()
-            end
+          function()
+            return snippet_popup('<C-n>')
           end,
+          'select_next',
           'snippet_forward',
           'fallback',
         },
         ['<S-Tab>'] = {
-          function(cmp)
-            if not cmp.snippet_active() then
-              return cmp.select_prev()
-            end
+          function()
+            return snippet_popup('<C-p>')
           end,
+          'select_prev',
           'snippet_backward',
+          'fallback',
+        },
+        ['<CR>'] = {
+          function()
+            return snippet_popup('<C-y>')
+          end,
+          'accept',
           'fallback',
         },
       },
@@ -46,7 +55,9 @@ return {
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
       },
-      snippets = { preset = 'luasnip' },
+      snippets = {
+        preset = 'default',
+      },
       signature = { enabled = true },
     },
   },
