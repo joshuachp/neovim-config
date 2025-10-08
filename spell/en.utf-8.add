@@ -312,6 +312,7 @@ memcpy
 metadata
 meterpreter
 middleware
+midori
 mit
 mk
 modesetting
@@ -492,4 +493,3 @@ xml
 yaml
 zsh
 zstd
-midori

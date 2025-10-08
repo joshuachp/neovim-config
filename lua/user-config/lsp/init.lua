@@ -61,7 +61,8 @@ function M.setup()
     filetypes = { 'html', 'templ', 'htmldjango' },
   })
 
-  local url = 'https://raw.githubusercontent.com/astarte-platform/astarte_core/refs/heads/master/specs/interface.json'
+  local astarte_schema =
+    'https://raw.githubusercontent.com/astarte-platform/astarte_core/refs/heads/master/specs/interface.json'
   vim.lsp.config('jsonls', {
     cmd = { 'vscode-json-languageserver', '--stdio' },
     settings = {
@@ -74,9 +75,8 @@ function M.setup()
           { fileMatch = { 'tsconfig.json' }, url = 'https://json.schemastore.org/tsconfig.json' },
           { fileMatch = { 'tsconfig.json' }, url = 'https://json.schemastore.org/tsconfig.json' },
           {
-            fileMatch = { '*.json' },
-            folderUri = '/var/home/j/oshuachp/share/repos/seco',
-            url = url,
+            fileMatch = { 'interfaces/*.json' },
+            url = astarte_schema,
           },
         },
       },
