@@ -4,7 +4,7 @@
     "body": [
       "$LINE_COMMENT This file is part of ${1|Astarte,Edgehog|}.",
       "$LINE_COMMENT",
-      "$LINE_COMMENT Copyright ${CURRENT_YEAR} Seco Mind Srl",
+      "$LINE_COMMENT Copyright ${CURRENT_YEAR} SECO Mind Srl",
       "$LINE_COMMENT Licensed under the Apache License, Version 2.0 (the \"License\");",
       "$LINE_COMMENT you may not use this file except in compliance with the License.",
       "$LINE_COMMENT You may obtain a copy of the License at",
