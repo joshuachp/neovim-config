@@ -55,7 +55,8 @@ vim.o.backup = false
 -- Text
 --
 -- Conceal
-vim.o.conceallevel = 2
+vim.opt.listchars:append('conceal:·')
+vim.o.conceallevel = 1
 vim.o.concealcursor = 'c'
 -- Text width
 vim.o.colorcolumn = '100'
