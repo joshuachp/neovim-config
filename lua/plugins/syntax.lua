@@ -23,16 +23,4 @@ return {
       require('rust-coverage').setup()
     end,
   },
-  -- Tex/LaTex
-  {
-    'lervag/vimtex',
-    ft = { 'tex' },
-    config = function()
-      vim.g.tex_flavor = 'latex'
-      vim.g.tex_conceal = 'amgs'
-      vim.g.vimtex_compiler_progname = 'nvr'
-      vim.g.vimtex_view_method = 'zathura'
-      vim.g.vimtex_syntax_conceal = { math_bounds = 0 }
-    end,
-  },
 }
