@@ -174,7 +174,7 @@ function M.setup()
     'clangd',
     'cmake',
     'cssls',
-    'elixir-ls',
+    'elixirls',
     'gopls',
     'hls',
     'html',
