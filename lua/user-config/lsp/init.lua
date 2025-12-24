@@ -64,7 +64,6 @@ function M.setup()
   local astarte_schema =
     'https://raw.githubusercontent.com/astarte-platform/astarte_core/refs/heads/master/specs/interface.json'
   vim.lsp.config('jsonls', {
-    cmd = { 'vscode-json-languageserver', '--stdio' },
     settings = {
       json = {
         schemas = {
