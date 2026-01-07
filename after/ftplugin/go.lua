@@ -1,3 +1,5 @@
+vim.opt_local.formatprg = 'gofmt'
+
 vim.keymap.set('n', '<leader>mm', function()
   vim.cmd('make!')
 end, { desc = 'Make default', buffer = true })

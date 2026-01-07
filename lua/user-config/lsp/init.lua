@@ -185,6 +185,7 @@ function M.setup()
     'phpactor',
     'pyright',
     'rust_analyzer',
+    'starlark_rust',
     'svelte',
     'terraformls',
     'texlab',
