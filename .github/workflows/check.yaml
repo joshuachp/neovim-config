@@ -30,7 +30,7 @@ jobs:
       # checkout
       - uses: actions/checkout@v6.0.1
       # install pre-commit
-      - uses: actions/setup-python@v6.1.0
+      - uses: actions/setup-python@v6.2.0
         with:
           python-version: 3
       - name: install pre-commit
