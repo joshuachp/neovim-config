@@ -28,7 +28,7 @@ jobs:
       # install npm deps
       - run: npm install --global prettier
       # checkout
-      - uses: actions/checkout@v6.0.1
+      - uses: actions/checkout@v6.0.2
       # install pre-commit
       - uses: actions/setup-python@v6.2.0
         with:
