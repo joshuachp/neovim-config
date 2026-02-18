@@ -105,6 +105,11 @@ vim.o.termguicolors = true
 vim.o.title = true
 vim.o.cmdheight = 0
 
+---
+--- Formatting
+---
+vim.o.formatprg = 'fmt --uniform-spacing'
+
 --
 -- Time
 --
@@ -223,8 +228,11 @@ vim.keymap.set('n', '<leader>te', '<cmd>Explore<CR>', { desc = 'Open file explor
 vim.keymap.set('n', '<leader>t<CR>', '<cmd>ToggleCheckBox<CR>', { desc = 'Toggle checkbox' })
 
 -- Move selection
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection down' })
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
+-- vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection down' })
+-- vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
+
+-- Format file
+vim.keymap.set('n', '<leader>kf', 'gg=G``', { desc = 'Format the whole file' })
 
 --
 -- Magic
