@@ -164,7 +164,7 @@ function M.setup()
     },
     -- standalone file support
     -- setting it to false may improve startup time
-    standalone = false,
+    standalone = true,
   })
 
   vim.lsp.enable({
