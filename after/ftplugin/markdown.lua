@@ -1,3 +1,5 @@
+vim.opt_local.formatprg = 'dprint fmt --stdin ' .. vim.fn.expand('%')
+
 --- Markdown ftplugin
 vim.opt_local.tabstop = 2
 vim.opt_local.softtabstop = 2
