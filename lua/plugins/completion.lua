@@ -16,7 +16,7 @@ return {
   {
     'saghen/blink.cmp',
     version = '1.*',
-    build = 'cargo build --release',
+    build = 'cargo +nightly build --release',
     dependencies = {},
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
