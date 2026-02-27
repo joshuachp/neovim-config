@@ -28,6 +28,8 @@ vim.o.splitright = true
 vim.o.list = true
 -- Global statusline
 vim.o.laststatus = 3
+-- Load .nvim.lua
+vim.o.exrc = true
 
 --
 -- Buffers

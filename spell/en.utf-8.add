@@ -93,6 +93,7 @@ README
 REPO
 Rc
 Realtek
+Rebase
 SAB
 SECO
 SHA
@@ -111,6 +112,7 @@ Svelte
 TIMESTAMP
 TLDR
 TODO
+TPM
 TdF
 Thunderbird
 Toml
@@ -381,6 +383,7 @@ pulseaudio
 rclone
 readonly
 realloc
+rebasing
 recv
 refactor
 refactored
@@ -406,6 +409,7 @@ serializer
 serializzabile
 serializzabili
 shader
+silverblue
 sizeof
 snprintf
 sprintf
@@ -493,9 +497,3 @@ xml
 yaml
 zsh
 zstd
-#eplace_opt/!
-replace_opt/!
-TPM
-rebasing
-Rebase
-silverblue
