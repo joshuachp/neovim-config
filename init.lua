@@ -234,7 +234,7 @@ vim.keymap.set('n', '<leader>t<CR>', '<cmd>ToggleCheckBox<CR>', { desc = 'Toggle
 -- vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
 
 -- Format file
-vim.keymap.set('n', '<leader>kf', 'gggqG``', { desc = 'Format the whole file' })
+vim.keymap.set('n', '<leader>kf', 'gggqGg`"', { desc = 'Format the whole file' })
 
 --
 -- Magic
