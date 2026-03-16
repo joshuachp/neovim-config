@@ -22,7 +22,7 @@ jobs:
       - run: |
           sudo apt-get install -y shfmt shellcheck lua-check
       # install rust tools
-      - uses: taiki-e/install-action@v2.68.25
+      - uses: taiki-e/install-action@v2.68.34
         with:
           tool: dprint,typos-cli,committed,stylua
       # install npm deps
