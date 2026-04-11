@@ -42,7 +42,7 @@ return {
         filters = { dotfiles = false },
         git = { ignore = false },
         renderer = {
-          highlight_git = true,
+          highlight_git = 'all',
         },
       })
     end,
