@@ -234,7 +234,18 @@ vim.keymap.set('n', '<leader>t<CR>', '<cmd>ToggleCheckBox<CR>', { desc = 'Toggle
 -- vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
 
 -- Format file
-vim.keymap.set('n', '<leader>kf', 'gggqGg`"', { desc = 'Format the whole file' })
+local function format_file()
+  local view = vim.fn.winsaveview()
+  local success, err = pcall(function()
+    vim.cmd('keepjumps normal! gggqG')
+  end)
+  if not success then
+    vim.notify('Format error: ' .. err, vim.log.levels.ERROR)
+  end
+  vim.fn.winrestview(view)
+end
+
+vim.keymap.set('n', '<leader>kf', format_file, { desc = 'Format the whole file' })
 
 --
 -- Magic
