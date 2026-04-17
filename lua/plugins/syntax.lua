@@ -3,15 +3,19 @@ return {
   -- Tree-sitter
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
+    lazy = false,
+    build = ':TSUpdate',
     config = function()
       require('user-config.tree-sitter').setup()
     end,
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      {
-        'nvim-treesitter/playground',
-        cmd = { 'TSPlaygroundToggle' },
-      },
+      { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
+      -- {
+      --   'nvim-treesitter/playground',
+      --   branch = "main",
+      --   cmd = { 'TSPlaygroundToggle' },
+      -- },
     },
   },
   -- Rust

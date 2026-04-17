@@ -1,7 +1,7 @@
 --- Telescope plugin configuration
 return {
   'nvim-telescope/telescope.nvim',
-  tag = '0.1.8',
+  version = '0.2.1',
   dependencies = {
     'nvim-lua/plenary.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
