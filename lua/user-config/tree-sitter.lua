@@ -3,94 +3,113 @@ local M = {}
 
 --- Setup tree-sitter
 function M.setup()
-  require('nvim-treesitter.configs').setup({
-    auto_install = false,
-    highlight = { enable = true },
-    incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = 'gnn',
-        node_incremental = 'grn',
-        scope_incremental = 'grc',
-        node_decremental = 'grm',
-      },
-    },
-    indent = { enable = true },
-    textobjects = {
-      select = {
-        enable = true,
+  local nvim_treesitter = require('nvim-treesitter')
 
-        -- Automatically jump forward to textobj, similar to targets.vim
-        lookahead = true,
+  local ft = { 'rust', 'markdown' }
 
-        keymaps = {
-          -- You can use the capture groups defined in textobjects.scm
-          ['af'] = { query = '@function.outer', desc = 'Select around a function' },
-          ['if'] = { query = '@function.inner', desc = 'Select inner part of function' },
-          ['ac'] = { query = '@class.outer', desc = 'Select around a class' },
-          ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
-        },
-        -- You can choose the select mode (default is charwise 'v')
-        --
-        -- Can also be a function which gets passed a table with the keys
-        -- * query_string: eg '@function.inner'
-        -- * method: eg 'v' or 'o'
-        -- and should return the mode ('v', 'V', or '<c-v>') or a table
-        -- mapping query_strings to modes.
-        selection_modes = {
-          -- charwise
-          ['@parameter.outer'] = 'v',
-          -- linewise
-          ['@function.outer'] = 'V',
-          -- blockwise
-          ['@class.outer'] = '<c-v>',
-        },
-        -- If you set this to `true` (default is `false`) then any textobject is
-        -- extended to include preceding or succeeding whitespace. Succeeding
-        -- whitespace has priority in order to act similarly to eg the built-in
-        -- `ap`.
-        --
-        -- Can also be a function which gets passed a table with the keys
-        -- * query_string: eg '@function.inner'
-        -- * selection_mode: eg 'v'
-        -- and should return true of false
-        include_surrounding_whitespace = true,
-      },
-      swap = {
-        enable = true,
-        swap_next = {
-          ['<leader>rp'] = '@parameter.inner',
-        },
-        swap_previous = {
-          ['<leader>rP'] = '@parameter.inner',
-        },
-      },
-      lsp_interop = {
-        enable = true,
-        border = 'rounded',
-        floating_preview_opts = {},
-        peek_definition_code = {
-          ['<leader>dp'] = '@function.outer',
-          ['<leader>dP'] = '@class.outer',
-        },
-      },
-    },
-    -- Update the comment string options for embedded languages
-    context_commentstring = {
-      enable = true,
-    },
-    -- Defaults
-    ensure_installed = {},
-    sync_install = false,
-    ignore_install = {},
-    modules = {},
+  nvim_treesitter.setup()
+  nvim_treesitter.install(ft)
+
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = ft,
+    callback = function()
+      -- syntax highlighting, provided by Neovim
+      vim.treesitter.start()
+      -- folds, provided by Neovim
+      vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      vim.wo.foldmethod = 'expr'
+      -- indentation, provided by nvim-treesitter
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
   })
 
-  -- Fold based on treesitter
-  -- https://github.com/nvim-treesitter/nvim-treesitter#folding
-  vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
-  vim.o.foldmethod = 'expr'
-  vim.o.foldenable = false
+  -- {
+  --   highlight = { enable = true },
+  --   incremental_selection = {
+  --     enable = true,
+  --     keymaps = {
+  --       init_selection = 'gnn',
+  --       node_incremental = 'grn',
+  --       scope_incremental = 'grc',
+  --       node_decremental = 'grm',
+  --     },
+  --   },
+  --   indent = { enable = true },
+  --   textobjects = {
+  --     select = {
+  --       enable = true,
+
+  --       -- Automatically jump forward to textobj, similar to targets.vim
+  --       lookahead = true,
+
+  --       keymaps = {
+  --         -- You can use the capture groups defined in textobjects.scm
+  --         ['af'] = { query = '@function.outer', desc = 'Select around a function' },
+  --         ['if'] = { query = '@function.inner', desc = 'Select inner part of function' },
+  --         ['ac'] = { query = '@class.outer', desc = 'Select around a class' },
+  --         ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
+  --       },
+  --       -- You can choose the select mode (default is charwise 'v')
+  --       --
+  --       -- Can also be a function which gets passed a table with the keys
+  --       -- * query_string: eg '@function.inner'
+  --       -- * method: eg 'v' or 'o'
+  --       -- and should return the mode ('v', 'V', or '<c-v>') or a table
+  --       -- mapping query_strings to modes.
+  --       selection_modes = {
+  --         -- charwise
+  --         ['@parameter.outer'] = 'v',
+  --         -- linewise
+  --         ['@function.outer'] = 'V',
+  --         -- blockwise
+  --         ['@class.outer'] = '<c-v>',
+  --       },
+  --       -- If you set this to `true` (default is `false`) then any textobject is
+  --       -- extended to include preceding or succeeding whitespace. Succeeding
+  --       -- whitespace has priority in order to act similarly to eg the built-in
+  --       -- `ap`.
+  --       --
+  --       -- Can also be a function which gets passed a table with the keys
+  --       -- * query_string: eg '@function.inner'
+  --       -- * selection_mode: eg 'v'
+  --       -- and should return true of false
+  --       include_surrounding_whitespace = true,
+  --     },
+  --     swap = {
+  --       enable = true,
+  --       swap_next = {
+  --         ['<leader>rp'] = '@parameter.inner',
+  --       },
+  --       swap_previous = {
+  --         ['<leader>rP'] = '@parameter.inner',
+  --       },
+  --     },
+  --     lsp_interop = {
+  --       enable = true,
+  --       border = 'rounded',
+  --       floating_preview_opts = {},
+  --       peek_definition_code = {
+  --         ['<leader>dp'] = '@function.outer',
+  --         ['<leader>dP'] = '@class.outer',
+  --       },
+  --     },
+  --   },
+  --   -- Update the comment string options for embedded languages
+  --   context_commentstring = {
+  --     enable = true,
+  --   },
+  --   -- Defaults
+  --   ensure_installed = {},
+  --   sync_install = false,
+  --   ignore_install = {},
+  --   modules = {},
+  -- })
+
+  -- -- Fold based on treesitter
+  -- -- https://github.com/nvim-treesitter/nvim-treesitter#folding
+  -- vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+  -- vim.o.foldmethod = 'expr'
+  -- vim.o.foldenable = false
 end
 
 return M

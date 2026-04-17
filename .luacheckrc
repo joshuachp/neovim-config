@@ -35,6 +35,10 @@ read_globals = {
         read_only = false,
         other_fields = true,
       },
+      wo = {
+        read_only = false,
+        other_fields = true,
+      },
       -- callbacks
       notify = {
         read_only = false,
