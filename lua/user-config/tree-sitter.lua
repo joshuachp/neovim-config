@@ -5,13 +5,11 @@ local M = {}
 function M.setup()
   local nvim_treesitter = require('nvim-treesitter')
 
-  local ft = { 'rust', 'markdown' }
-
   nvim_treesitter.setup()
-  nvim_treesitter.install(ft)
+  nvim_treesitter.install('stable')
 
   vim.api.nvim_create_autocmd('FileType', {
-    pattern = ft,
+    pattern = nvim_treesitter.get_installed(),
     callback = function()
       -- syntax highlighting, provided by Neovim
       vim.treesitter.start()
@@ -20,6 +18,7 @@ function M.setup()
       vim.wo.foldmethod = 'expr'
       -- indentation, provided by nvim-treesitter
       vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      vim.wo.foldenable = false
     end,
   })
 
