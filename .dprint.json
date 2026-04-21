@@ -7,5 +7,8 @@
     "textWrap": "always"
   },
   "excludes": [],
-  "plugins": ["https://plugins.dprint.dev/markdown-0.18.0.wasm"]
+  "plugins": [
+    "https://plugins.dprint.dev/markdown-0.21.1.wasm",
+    "https://plugins.dprint.dev/json-0.21.3.wasm"
+  ]
 }

@@ -57,10 +57,6 @@ end
 function M.setup()
   M.register_on_attach()
 
-  vim.lsp.config('html', {
-    filetypes = { 'html', 'templ', 'htmldjango' },
-  })
-
   local astarte_schema =
     'https://raw.githubusercontent.com/astarte-platform/astarte_core/refs/heads/master/specs/interface.json'
   vim.lsp.config('jsonls', {
@@ -170,13 +166,13 @@ function M.setup()
   vim.lsp.enable({
     'ansiblels',
     'bashls',
+    'biome',
     'clangd',
     'cmake',
     'cssls',
     'elixirls',
     'gopls',
     'hls',
-    'html',
     'jdtls',
     'jsonls',
     'lua_ls',
