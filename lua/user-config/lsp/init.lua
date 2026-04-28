@@ -155,7 +155,10 @@ function M.setup()
           prefix = 'self',
         },
         procMacro = { enable = true },
-        cargo = { buildScripts = { enable = true }, features = 'all' },
+        cargo = {
+          buildScripts = { enable = true },
+          features = 'all',
+        },
       },
     },
     -- standalone file support
@@ -170,6 +173,7 @@ function M.setup()
     'clangd',
     'cmake',
     'cssls',
+    'denols',
     'elixirls',
     'gopls',
     'hls',
