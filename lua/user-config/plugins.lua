@@ -27,9 +27,7 @@ function M.setup()
 
   --- Lazy.nvim configuration
   lazy.setup('plugins', {
-    ui = {
-      border = 'rounded',
-    },
+    ui = {},
     rocks = {
       enabled = false,
       hererocks = false,

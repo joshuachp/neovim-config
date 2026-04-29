@@ -1,1 +1,1 @@
-vim.opt_local.formatprg = 'sqlformat -r -'
+vim.opt_local.formatprg = 'sqlfluff -r -'

@@ -105,8 +105,8 @@ function M.update_current_scope()
   --- TODO: tree sitter scope
 end
 
---- Register the CursorHold autocmd
--- Register the autocmd to update the scope
+-- --- Register the CursorHold autocmd
+-- -- Register the autocmd to update the scope
 function M.register_cursor_change()
   local group = vim.api.nvim_create_augroup('CurrentScope', {})
   vim.api.nvim_create_autocmd('CursorHold', { group = group, callback = M.update_current_scope })
