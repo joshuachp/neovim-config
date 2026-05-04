@@ -187,6 +187,7 @@ function M.setup()
     'rust_analyzer',
     'starlark_rust',
     'svelte',
+    'tombi',
     'terraformls',
     'texlab',
     'ts_ls',
