@@ -1,13 +1,5 @@
 --- Configures git plugins and keymaps
 return {
-  -- Git-signs - Git diff in gutter
-  {
-    'lewis6991/gitsigns.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require('gitsigns').setup({})
-    end,
-  },
   -- Diff viewer
   {
     'sindrets/diffview.nvim',
