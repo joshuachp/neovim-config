@@ -91,6 +91,9 @@ function M.setup()
             'kubectl-edit-*.yaml',
           },
         },
+        format = {
+          printWidth = 150,
+        },
       },
     },
   })
@@ -208,13 +211,13 @@ function M.register_keymaps(bufnr)
 
   -- Symbols
   vim.keymap.set('n', 'K', function()
-    vim.lsp.buf.hover({ border = 'rounded' })
+    vim.lsp.buf.hover()
   end, { buffer = bufnr, desc = 'Hover' })
   vim.keymap.set('n', '<leader>lk', function()
     vim.lsp.buf.hover()
   end, { buffer = bufnr, desc = 'Hover' })
   vim.keymap.set('n', '<leader>lK', function()
-    vim.lsp.buf.signature_help({ border = 'rounded' })
+    vim.lsp.buf.signature_help()
   end, { buffer = bufnr, desc = 'Signature help' })
   vim.keymap.set('n', '<leader>ls', function()
     vim.lsp.buf.document_symbol()
