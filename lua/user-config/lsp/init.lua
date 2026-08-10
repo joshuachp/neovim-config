@@ -173,6 +173,7 @@ function M.setup()
     'ansiblels',
     'bashls',
     'biome',
+    'buf_ls',
     'clangd',
     'cmake',
     'cssls',
