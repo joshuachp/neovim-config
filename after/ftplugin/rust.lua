@@ -16,28 +16,10 @@ end, {
   desc = 'Enable a rust-analyzer feature',
 })
 
-vim.g.cargo_makeprg_params = '--all-targets --all-features --workspace'
-
 vim.cmd.compiler('cargo')
 
+vim.g.cargo_makeprg_params = 'clippy --all-features --workspace --all-targets'
+
 vim.keymap.set('n', '<leader>mm', function()
-  vim.cmd('make! check')
+  vim.cmd('make!')
 end, { desc = 'Run cargo check', buffer = true })
-vim.keymap.set('n', '<leader>mb', function()
-  vim.cmd('make! build')
-end, { desc = 'Run cargo build', buffer = true })
-vim.keymap.set('n', '<leader>mc', function()
-  vim.cmd('make! clippy')
-end, { desc = 'Run cargo clippy', buffer = true })
-vim.keymap.set('n', '<leader>mt', function()
-  vim.cmd('make! test')
-end, { desc = 'Run cargo test', buffer = true })
-vim.keymap.set('n', '<leader>mn', function()
-  vim.cmd('make! nextest run')
-end, { desc = 'Run cargo nextest', buffer = true })
-vim.keymap.set('n', '<leader>mb', function()
-  vim.cmd('make! bench')
-end, { desc = 'Run cargo bench', buffer = true })
-vim.keymap.set('n', '<leader>md', function()
-  vim.cmd('make! doc --no-deps')
-end, { desc = 'Run cargo doc', buffer = true })
