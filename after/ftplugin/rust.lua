@@ -16,10 +16,10 @@ end, {
   desc = 'Enable a rust-analyzer feature',
 })
 
+vim.g.cargo_makeprg_params = 'clippy --all-targets --all-features --workspace'
+
 vim.cmd.compiler('cargo')
 
-vim.g.cargo_makeprg_params = 'clippy --all-features --workspace --all-targets'
-
 vim.keymap.set('n', '<leader>mm', function()
-  vim.cmd('make!')
-end, { desc = 'Run cargo check', buffer = true })
+  vim.cmd('make')
+end, { desc = 'Run clippy check', buffer = true })
